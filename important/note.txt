@@ -4,6 +4,8 @@
         npm install --save express
         npm install -g nodemon
         "start": "nodemon index.js"(npm start)
+         npm install --save uuid//help to generate new id
+          g++ filename.cpp
 
 
   const language = req.body.language;
@@ -12,3 +14,9 @@
   const {language='cpp',code} = req.body;
 
   return res.json(req.body)
+
+if(code === undefined){
+     return res.status(400).json({success:false, error:"Empty code body!"});
+   }
+//need to generate a c++ file with content from the request 
+// we need to run the file and send the response
