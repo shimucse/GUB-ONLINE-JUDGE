@@ -6,6 +6,8 @@
         "start": "nodemon index.js"(npm start)
          npm install --save uuid//help to generate new id
           g++ filename.cpp
+          ./a .out
+          shell command inside nodejs
 
 
   const language = req.body.language;
@@ -20,3 +22,8 @@ if(code === undefined){
    }
 //need to generate a c++ file with content from the request 
 // we need to run the file and send the response
+
+const {exec} = require("child_process");
+   return new Promise((resolve, reject) =>{
+            exec(`g++ ${filepath} -o ${outPath} && cd ${outputPath}&& ./${jobId} .out`)
+        });
