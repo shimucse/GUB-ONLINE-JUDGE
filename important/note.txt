@@ -3,6 +3,8 @@
         npm init
         npm install --save express
         npm install -g nodemon
+        npm install --save axios
+        npm install --save cors
         "start": "nodemon index.js"(npm start)
          npm install --save uuid//help to generate new id
           g++ filename.cpp

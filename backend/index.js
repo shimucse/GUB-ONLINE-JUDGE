@@ -1,9 +1,13 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
 const {generateFile} = require('./generateFile');
 const {executeCpp} = require('./executeCpp')
+
+app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
 
 
 app.get('/',(req,res)=>{
@@ -13,12 +17,12 @@ app.get('/',(req,res)=>{
 app.post ('/run',async (req,res)=>{ 
 
    const {language='cpp',code} = req.body;
+  
    
-
-   if(code === undefined){
+  if(code === undefined){
      return res.status(400).json({success:false, error:"Empty code body!"});
    }
-   try{
+    try{
         //need to generate a c++ file with content from the request 
         const filepath = await generateFile(language,code);
         // we need to run the file and send the response
