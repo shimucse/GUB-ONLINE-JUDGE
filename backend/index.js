@@ -28,9 +28,9 @@ app.post ('/run',async (req,res)=>{
         // we need to run the file and send the response
         let output;
         if(language === "cpp"){
-           output = await executeCpp(filepath);
+           output = await executeCpp(filepath,'222');
         }else{
-          output = await executePy(filepath);
+          output = await executePy(filepath, "shima");
         }
           return res.json({filepath,output})
    }catch(err){
