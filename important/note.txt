@@ -24,8 +24,10 @@ if(code === undefined){
    }
 //need to generate a c++ file with content from the request 
 // we need to run the file and send the response
+//Message queue {redis}
+ redis-cli
+127.0.0.1:6379> ping
+PONG
 
-const {exec} = require("child_process");
-   return new Promise((resolve, reject) =>{
-            exec(`g++ ${filepath} -o ${outPath} && cd ${outputPath}&& ./${jobId} .out`)
-        });
+npm install  bull --save
+npm install  bull --save

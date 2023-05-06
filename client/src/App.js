@@ -1,11 +1,16 @@
 import './App.css';
 import React,{useState} from 'react';
 import Axios from 'axios';
+import axios from 'axios';
 
 function App() {
   const[code,setCode] = useState('');
   const[output, setOutput] = useState('');
   const [language,setlanguage] = useState("cpp");
+  const [status, setStatus] = useState("");
+  const [jobId, setJobId] = useState("");
+
+
   
   const handleSubmit = async() =>{
       const payload = {
@@ -13,9 +18,45 @@ function App() {
         code:code 
       };
   try{
+  setJobId("");
+  setStatus("");
+  setOutput("");
+
   const {data} = await Axios.post("http://localhost:5000/run", payload)
-  setOutput(data.output);
+  console.log("data"+data);
+  setJobId(data.jobId);
+  let intervalId;
+
+  
+  intervalId = setInterval(async()=>{
+
+      const{data:dataRes} = await axios.get('http://localhost:5000/status', {params: {id:data.jobId}});
+
+      const {success, job, error} = dataRes;
+      console.log(dataRes);
+
+      if(success){
+
+        const {status: jobStatus, output: jobOutput} = job;
+        setStatus(jobStatus);
+
+        if(jobStatus === "pending") return ;
+
+        setOutput(jobOutput);
+        clearInterval(intervalId);
+
+      }else{
+        setStatus("Error : Please retry !");
+         console.error(error);
+         clearInterval(intervalId);
+         setOutput(error);
+      }
+  },1000);
+
+
   }
+
+
   catch({response}){
     if(response){
       const errMsg = response.data.err.stderr;
@@ -54,6 +95,8 @@ function App() {
       </textarea>
      <br/>
      <button onClick={handleSubmit}>Submit</button>
+     <p>{status}</p>
+     <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{output}</p>
     </div>
   );
