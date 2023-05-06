@@ -5,8 +5,8 @@ const mongoose = require('mongoose');
 
 
 const {generateFile} = require('./generateFile');
-const {executeCpp} = require('./executeCpp');
-const { executePy } = require('./executePy');
+
+const {addJobToQueue} = require('./jobQueue');
 const Job = require("./models/job");
 
 mongoose.connect('mongodb://localhost/GubOJ',
@@ -32,10 +32,11 @@ app.get('/status',async(req,res)=>{
             .json({success : false, error: "missing id quory "})
    }
    try{
-       const job = await  Job.findById(jobId);
-         if(job === undefined){
 
-               return res.status(404).json({success:false,error:"invalied job id"});
+       const job = await  Job.findById(jobId);
+
+         if(job === undefined){
+            return res.status(404).json({success:false,error:"invalied job id"});
          }else{
             return res.status(200).json({success:true,job});
 
@@ -63,36 +64,13 @@ app.post ('/run',async (req,res)=>{
 
          job = await new Job({language,filepath}).save();
         const jobId = job["_id"];
-
+        addJobToQueue(jobId);
        res.status(201).json({success:true,jobId});
-        console.log(job);
         
-        let output;
-        job['startedAt'] = new Date();
-
-
-        if(language === "cpp"){
-           output = await executeCpp(filepath,'222');
-        }else{
-          output = await executePy(filepath, "shima");
-        }
-
-         
-        job['completedAt'] = new Date();
-        job['status'] = "success";
-        job['output'] = output;
-
-        await job.save();
-
-        console.log(job);
-          //return res.json({filepath,output})
-   }catch(err){
-      job['completedAt'] = new Date();
-      job['status'] = "error";
-      job['output'] = JSON.stringify(err);
-      await job.save
-      console.log(job);
-   }
+    }catch(err){
+       return res.status(500).json({success:false, err: JSON.stringify(err)});
+    }
+       
 });
 
 
