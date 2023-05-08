@@ -17,9 +17,9 @@ stubs.cpp=`
 `;
 
 stubs.py = `
-   // username = input("Enter username:")
-    //print("Username is: " + username)
-    print("Username is Shima");
+username = input("Enter username:")
+print("Username is: " + username)
+
 `;
 
 export default stubs;

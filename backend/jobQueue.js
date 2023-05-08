@@ -22,6 +22,7 @@ try{
         output = await executeCpp(job.filepath,'222');
         }else if (job.language === 'py'){
         output = await executePy(job.filepath, "shima");
+        console.log(output);
         }        
         job['completedAt'] = new Date();
         job['status'] = "success";

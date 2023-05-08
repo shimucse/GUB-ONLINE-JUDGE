@@ -3,6 +3,7 @@ import React,{useState, useEffect} from 'react';
 import Axios from 'axios';
 import axios from 'axios';
 import stubs from './defaultStubs';
+import moment from 'moment';
 
 function App() {
   const[code,setCode] = useState('');
@@ -10,11 +11,31 @@ function App() {
   const [language,setlanguage] = useState("cpp");
   const [status, setStatus] = useState("");
   const [jobId, setJobId] = useState("");
+  const [jobDetails,setJobDetails ] = useState(null);
 
  useEffect(()=> {
     setCode(stubs[language]);
  },[language]);
   
+ const renderTimeDetailse = ()=>{
+    if(!jobDetails){
+       return " ";
+    }
+    
+    let result = '';
+    let {submittedAt, completedAt, startedAt} = jobDetails;
+    submittedAt = moment(submittedAt).toString();
+    result += `submitted At: ${submittedAt}`;
+    if(!completedAt || !startedAt){
+       return result;
+    }
+    const start = moment(startedAt);
+    const  end = moment(completedAt);
+    const executionTime = end.diff(start,'second',true);
+    result = `execution Time : ${executionTime}s`
+    return result;
+ }
+
   const handleSubmit = async() =>{
       const payload = {
         language : language,
@@ -24,6 +45,7 @@ function App() {
   setJobId("");
   setStatus("");
   setOutput("");
+  setJobDetails(null);
 
   const {data} = await Axios.post("http://localhost:5000/run", payload)
   setJobId(data.jobId);
@@ -39,7 +61,10 @@ function App() {
       if(success){
 
           const {status: jobStatus, output: jobOutput} = job;
+          
           setStatus(jobStatus);
+          setJobDetails(job);
+
           setOutput(jobOutput);
           clearInterval(intervalId);
 
@@ -76,8 +101,13 @@ function App() {
           value={language}
           onChange={
              (e)=>{
+              let response = window.confirm("WARNING:Switching the language,will remove your code"
+              );
+              if(response)
+              {
                setlanguage(e.target.value);
                console.log(e.target.value);
+              }
              }
           }
         >
@@ -98,6 +128,8 @@ function App() {
      <button onClick={handleSubmit}>Submit</button>
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
+     <p>{renderTimeDetailse()}</p>
+
      <p>{output}</p>
     </div>
   );

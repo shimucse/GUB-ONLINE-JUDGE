@@ -25,8 +25,11 @@ if(code === undefined){
 //need to generate a c++ file with content from the request 
 // we need to run the file and send the response
 //Message queue {redis}(install redis)
+start server:redis-sever
  redis-cli
 127.0.0.1:6379> ping
 PONG
 
 npm install  bull --save
+
+npm i moment
