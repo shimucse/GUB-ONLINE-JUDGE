@@ -56,16 +56,17 @@ app.post ('/run',async (req,res)=>{
   if(code === undefined){
      return res.status(400).json({success:false, error:"Empty code body!"});
    }
-   let job;
+   
     try{
         //need to generate a c++ file with content from the request 
         const filepath = await generateFile(language,code);
         // we need to run the file and send the response
 
-         job = await new Job({language,filepath}).save();
+         const job = await new Job({language,filepath}).save();
         const jobId = job["_id"];
         addJobToQueue(jobId);
        res.status(201).json({success:true,jobId});
+       
         
     }catch(err){
        return res.status(500).json({success:false, err: JSON.stringify(err)});

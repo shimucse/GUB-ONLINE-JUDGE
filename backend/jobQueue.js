@@ -1,6 +1,5 @@
 const Queue = require("bull");
-const jobQueue = new Queue('job-queue');
-
+const jobQueue = new Queue("job-runner-queue");
 const {executeCpp} = require('./executeCpp');
 const { executePy } = require('./executePy');
 const Job = require('./models/job');
@@ -14,29 +13,30 @@ jobQueue.process(Num_WORKERS, async({data})=>{
     const job = await Job.findById(jobId);
     if(job === undefined){
         throw Error("job not found")
-    }
-    console.log("Fetched Job", job);
-    job['startedAt'] = new Date();
+    } 
 
 try{
+       let output;
         job["startedAt"]= new Date();
         if(job.language === "cpp"){
         output = await executeCpp(job.filepath,'222');
-        }else{
+        }else if (job.language === 'py'){
         output = await executePy(job.filepath, "shima");
-        }
-
-        
+        }        
         job['completedAt'] = new Date();
         job['status'] = "success";
         job['output'] = output;
-        await job.save();    
+        await job.save();  
+        return ;  
    }catch(err){
         job['completedAt'] = new Date();
         job['status'] = "error";
         job['output'] = JSON.stringify(err);
         await job.save;
-}});
+        throw Error(JSON.stringify(err));
+
+    }
+});
 jobQueue.on('failed',(error)=>{
 
      console.log(error.data.id, "failed", error.failedReason);
@@ -44,7 +44,9 @@ jobQueue.on('failed',(error)=>{
 
 
 const addJobToQueue = async(jobId) =>{
-    await jobQueue.add({id: jobId});
+    await jobQueue.add({
+        id: jobId,
+    });
 
 };
 

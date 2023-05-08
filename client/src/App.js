@@ -1,7 +1,8 @@
 import './App.css';
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Axios from 'axios';
 import axios from 'axios';
+import stubs from './defaultStubs';
 
 function App() {
   const[code,setCode] = useState('');
@@ -10,7 +11,9 @@ function App() {
   const [status, setStatus] = useState("");
   const [jobId, setJobId] = useState("");
 
-
+ useEffect(()=> {
+    setCode(stubs[language]);
+ },[language]);
   
   const handleSubmit = async() =>{
       const payload = {
@@ -23,7 +26,6 @@ function App() {
   setOutput("");
 
   const {data} = await Axios.post("http://localhost:5000/run", payload)
-  console.log("data"+data);
   setJobId(data.jobId);
   let intervalId;
 
@@ -33,17 +35,16 @@ function App() {
       const{data:dataRes} = await axios.get('http://localhost:5000/status', {params: {id:data.jobId}});
 
       const {success, job, error} = dataRes;
-      console.log(dataRes);
 
       if(success){
 
-        const {status: jobStatus, output: jobOutput} = job;
-        setStatus(jobStatus);
+          const {status: jobStatus, output: jobOutput} = job;
+          setStatus(jobStatus);
+          setOutput(jobOutput);
+          clearInterval(intervalId);
 
-        if(jobStatus === "pending") return ;
-
-        setOutput(jobOutput);
-        clearInterval(intervalId);
+          if(jobStatus === "pending")  return ;    
+          
 
       }else{
         setStatus("Error : Please retry !");
