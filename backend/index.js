@@ -70,7 +70,7 @@ app.post ('/run',async (req,res)=>{
 
          const job = await new Job({language,filepath}).save();
         const jobId = job["_id"];
-        addJobToQueue(jobId);
+        addJobToQueue(jobId,filepath);
        res.status(201).json({success:true,jobId});
        
         

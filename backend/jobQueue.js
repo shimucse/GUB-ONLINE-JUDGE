@@ -3,10 +3,12 @@ const jobQueue = new Queue("job-runner-queue");
   const {executeCpp} = require('./executeCpp');
 const { executePy } = require('./executePy');
 const Job = require('./models/job');
+const {deleteFile} = require('./generateFile');
+
 
 
 const Num_WORKERS = 5;
-
+let filepath;
 jobQueue.process(Num_WORKERS, async({data})=>{
    // console.log(data);
     const{id:jobId}= data;
@@ -37,6 +39,10 @@ try{
         console.log("total Memory used:"+(Memoryused2-Memoryused1) ); 
         let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100)*1000000;
         console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"byte");
+        
+        //deleting executed file cpp & .out 
+        console.log('filepath'+filepath);
+        await deleteFile(filepath);
 
 
         job['completedAt'] = new Date();
@@ -61,7 +67,8 @@ jobQueue.on('failed',(error)=>{
 })
 
 
-const addJobToQueue = async(jobId) =>{
+const addJobToQueue = async(jobId, filePath) =>{
+   filepath = filePath;
     await jobQueue.add({
         id: jobId,
     });
