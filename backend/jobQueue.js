@@ -1,7 +1,7 @@
 const Queue = require("bull");
 const jobQueue = new Queue("job-runner-queue");
-  const {executeCpp} = require('./executeCpp');
-const { executePy } = require('./executePy');
+  const {executeCpp,deleteForDotOut} = require('./executeCpp');
+const { executePy,deleteForDotPy} = require('./executePy');
 const Job = require('./models/job');
 const {deleteFile} = require('./generateFile');
 
@@ -28,9 +28,16 @@ try{
 
 
         if(job.language === "cpp"){
-        output = await executeCpp(job.filepath,'222');
+
+            output = await executeCpp(job.filepath,'222');
+            await deleteFile(filepath);
+            await deleteForDotOut();
+
+
         }else {
-        output = await executePy(job.filepath, "ruma");
+           // console.log("Py file path"+job.filePath);
+            output = await executePy(job.filepath, "safwan");
+            await deleteForDotPy();
         }    
         
         //Memory2
@@ -40,9 +47,7 @@ try{
         let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100)*1000000;
         console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"byte");
         
-        //deleting executed file cpp & .out 
-        console.log('filepath'+filepath);
-        await deleteFile(filepath);
+        
 
 
         job['completedAt'] = new Date();
