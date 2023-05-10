@@ -1,6 +1,6 @@
 const Queue = require("bull");
 const jobQueue = new Queue("job-runner-queue");
-const {executeCpp} = require('./executeCpp');
+  const {executeCpp} = require('./executeCpp');
 const { executePy } = require('./executePy');
 const Job = require('./models/job');
 
@@ -18,23 +18,40 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 try{
        let output;
         job["startedAt"]= new Date();
+        
+        
+        //Memory1
+        let Memoryused1 = process.memoryUsage().heapUsed; 
+        console.log("memory1 :"+Memoryused1);
+
+
         if(job.language === "cpp"){
         output = await executeCpp(job.filepath,'222');
-        }else if (job.language === 'py'){
-        output = await executePy(job.filepath, "shima");
-        console.log(output);
-        }        
+        }else {
+        output = await executePy(job.filepath, "ruma");
+        }    
+        
+        //Memory2
+        let Memoryused2 = process.memoryUsage().heapUsed;
+        console.log("memory2 :"+Memoryused2);
+        console.log("total Memory used:"+(Memoryused2-Memoryused1) ); 
+        let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100)*1000000;
+        console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"byte");
+
+
         job['completedAt'] = new Date();
         job['status'] = "success";
         job['output'] = output;
         await job.save();  
-        return ;  
+        
    }catch(err){
         job['completedAt'] = new Date();
         job['status'] = "error";
-        job['output'] = JSON.stringify(err);
-        await job.save;
-        throw Error(JSON.stringify(err));
+        //job['output'] = JSON.stringify(err);
+        job['output'] = err;
+
+        
+        await job.save();     
 
     }
 });

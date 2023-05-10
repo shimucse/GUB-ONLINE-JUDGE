@@ -13,10 +13,12 @@ function App() {
   const [jobId, setJobId] = useState("");
   const [jobDetails,setJobDetails ] = useState(null);
 
+
  useEffect(()=> {
     setCode(stubs[language]);
  },[language]);
-  
+ 
+
  const renderTimeDetailse = ()=>{
     if(!jobDetails){
        return " ";
@@ -35,6 +37,7 @@ function App() {
     result = `execution Time : ${executionTime}s`
     return result;
  }
+
 
   const handleSubmit = async() =>{
       const payload = {
@@ -129,6 +132,7 @@ function App() {
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{renderTimeDetailse()}</p>
+
 
      <p>{output}</p>
     </div>

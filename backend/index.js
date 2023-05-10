@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 const mongoose = require('mongoose');
+const os = require('os');
+
 
 
 const {generateFile} = require('./generateFile');
@@ -52,6 +54,10 @@ app.get('/status',async(req,res)=>{
 app.post ('/run',async (req,res)=>{ 
 
    const {language='cpp',code} = req.body;
+
+      //console.log('total memory : ' + os.totalmem() + " bytes.");
+     // console.log('free memory : ' + os.freemem() + " bytes.");
+
    
   if(code === undefined){
      return res.status(400).json({success:false, error:"Empty code body!"});
