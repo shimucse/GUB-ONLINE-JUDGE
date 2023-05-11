@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require('mongoose');
 const os = require('os');
+const mongodb = require('mongodb');
 
 
 
@@ -50,11 +51,35 @@ app.get('/status',async(req,res)=>{
    }
 
 });
+app.delete('/delete', async(req,res)=>{
+   const jobId = req.query.id;
+   console.log("jobId: "+ jobId);
+   if(jobId == undefined){
+      console.log("job id not undefined")
+       
+   }try{  
+      const job = await  Job.findById(jobId);
+
+           console.log("delete start")  
+           console.log(job['_id'])
+           const result = await Job.deleteOne({"_id": new mongodb.ObjectId(jobId)});
+           console.log(result);
+           console.log(job['_id']+"nothing")
+
+
+
+        }        
+     catch(err){
+     //return res.status(400).json({success:false, error:JSON.stringify(err)});
+  }
+
+});
+
 
 app.post ('/submit',async (req,res)=>{ 
 
    const {language='cpp',code} = req.body;
-
+   const submitType = req.body.SubmitType;
       //console.log('total memory : ' + os.totalmem() + " bytes.");
      // console.log('free memory : ' + os.freemem() + " bytes.");
 
@@ -68,7 +93,8 @@ app.post ('/submit',async (req,res)=>{
         const filepath = await generateFile(language,code);
         // we need to run the file and send the response
 
-         const job = await new Job({language,filepath}).save();
+         const job = await new Job({language,filepath,submitType}).save();
+        
         const jobId = job["_id"];
         addJobToQueue(jobId,filepath);
        res.status(201).json({success:true,jobId});

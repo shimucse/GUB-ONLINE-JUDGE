@@ -34,6 +34,9 @@ const JobSchema = mongoose.Schema({
     memorySpace:{
         type:Number
 
+    },
+    submitType:{
+        type:String
     }
 
 

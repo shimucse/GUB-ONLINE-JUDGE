@@ -45,67 +45,76 @@ const handleCustomInputSubmit = ()=>{
  }
 
 
-  const handleSubmit = async() =>{
-      const payload = {
-        language : language,
-        code:code 
-      };
-  try{
-  setJobId("");
-  setStatus("");
-  setOutput("");
-  setJobMemory("");
-  setJobDetails(null);
+  const handleSubmit = async(SubmitType) =>{
+               
+               console.log("callType:"+SubmitType);
+               let deleteId;
+                     const payload = {
+                     language : language,
+                     code:code ,
+                     SubmitType:SubmitType
+                     };
+               try{
+                     setJobId("");
+                     setStatus("");
+                     setOutput("");
+                     setJobMemory("");
+                     setJobDetails(null);
 
-  const {data} = await Axios.post("http://localhost:5000/submit", payload)
-  setJobId(data.jobId);
-  let intervalId;
+                     const {data} = await Axios.post("http://localhost:5000/submit", payload)
+                     setJobId(data.jobId);
+                     let intervalId;
 
-  
-  intervalId = setInterval(async()=>{
+                     
+                     intervalId = setInterval(async()=>{
 
-      const{data:dataRes} = await axios.get('http://localhost:5000/status', {params: {id:data.jobId}});
+                           const{data:dataRes} = await axios.get('http://localhost:5000/status', {params: {id:data.jobId}});
+                           deleteId=data.jobId;
+                           const {success, job, error} = dataRes;
 
-      const {success, job, error} = dataRes;
+                           if(success){
 
-      if(success){
+                              // const {status: jobStatus, output: jobOutput,  jobMemory:memorySpace} = job;
+                              const jobStatus = job.status;
+                              const jobOutput = job.output;
+                              const memory = job.memorySpace;
+                              
+                              setStatus(jobStatus);
+                              setJobDetails(job);
 
-         // const {status: jobStatus, output: jobOutput,  jobMemory:memorySpace} = job;
-         const jobStatus = job.status;
-         const jobOutput = job.output;
-         const memory = job.memorySpace;
-          
-          setStatus(jobStatus);
-          setJobDetails(job);
+                              setOutput(jobOutput);
+                              setJobMemory(memory);
+                              clearInterval(intervalId);
+                             
+                              if(SubmitType === 'run'){
+                                 console.log("run will call the delete method"+ deleteId);
+                                 await axios.delete('http://localhost:5000/delete', {params: {id:data.jobId}});
+               
+                             }
 
-          setOutput(jobOutput);
-          setJobMemory(memory);
-          clearInterval(intervalId);
+                              if(jobStatus === "pending")  return ;    
+                              
 
+                           }else{
+                           setStatus("Error : Please retry !");
+                              console.error(error);
+                              clearInterval(intervalId);
+                              setOutput(error);
+                           }
+                     },1000);
 
-          if(jobStatus === "pending")  return ;    
-          
-
-      }else{
-        setStatus("Error : Please retry !");
-         console.error(error);
-         clearInterval(intervalId);
-         setOutput(error);
-      }
-  },1000);
-
-
-  }
-
-
-  catch({response}){
-    if(response){
-      const errMsg = response.data.err.stderr;
-      setOutput(errMsg);
-  }else{
-     setOutput("Error connecting to server!");
-  }
-  }
+                    
+               }
+               catch({response}){
+                     if(response){
+                        const errMsg = response.data.err.stderr;
+                        setOutput(errMsg);
+                  }else{
+                     setOutput("Error connecting to server!");
+                  }
+               }
+              
+               
 }
 
   return (
@@ -162,8 +171,9 @@ const handleCustomInputSubmit = ()=>{
       >
       </textarea>
       <br/>
-      <button onClick={handleCustomInputSubmit}>Run</button> 
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={()=>handleSubmit("run")}>Run</button> 
+      <button onClick={()=>handleSubmit("submit")}>Submit</button> 
+
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{renderTimeDetailse()}</p>
