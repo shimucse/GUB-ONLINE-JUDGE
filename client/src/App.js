@@ -11,14 +11,20 @@ function App() {
   const [language,setlanguage] = useState("cpp");
   const [status, setStatus] = useState("");
   const [jobId, setJobId] = useState("");
+  const [jobMemory, setJobMemory]= useState('');
   const [jobDetails,setJobDetails ] = useState(null);
+  const [customInput, setCustomInput] = useState(['']);
+  const [customOutput, setCustomOutput] = useState(['']);
+
 
 
  useEffect(()=> {
     setCode(stubs[language]);
  },[language]);
  
-
+const handleCustomInputSubmit = ()=>{
+   setCustomOutput(customInput);
+}
  const renderTimeDetailse = ()=>{
     if(!jobDetails){
        return " ";
@@ -48,9 +54,10 @@ function App() {
   setJobId("");
   setStatus("");
   setOutput("");
+  setJobMemory("");
   setJobDetails(null);
 
-  const {data} = await Axios.post("http://localhost:5000/run", payload)
+  const {data} = await Axios.post("http://localhost:5000/submit", payload)
   setJobId(data.jobId);
   let intervalId;
 
@@ -63,13 +70,18 @@ function App() {
 
       if(success){
 
-          const {status: jobStatus, output: jobOutput} = job;
+         // const {status: jobStatus, output: jobOutput,  jobMemory:memorySpace} = job;
+         const jobStatus = job.status;
+         const jobOutput = job.output;
+         const memory = job.memorySpace;
           
           setStatus(jobStatus);
           setJobDetails(job);
 
           setOutput(jobOutput);
+          setJobMemory(memory);
           clearInterval(intervalId);
+
 
           if(jobStatus === "pending")  return ;    
           
@@ -128,13 +140,36 @@ function App() {
       >
       </textarea>
      <br/>
-     <button onClick={handleSubmit}>Submit</button>
+    
+
+    
+     <h3>Test against Custom Input</h3>
+     <textarea
+         rows ='8'
+          cols='75'
+          value={customInput}
+          onChange={(e)=>{setCustomInput(e.target.value)}}
+         
+      >
+      </textarea>
+      <h3>Output</h3>
+      <textarea
+         rows ='8'
+          cols='75'
+          value={customOutput}
+          
+         
+      >
+      </textarea>
+      <br/>
+      <button onClick={handleCustomInputSubmit}>Run</button> 
+      <button onClick={handleSubmit}>Submit</button>
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{renderTimeDetailse()}</p>
-
-
      <p>{output}</p>
+     <p>Memory space :{jobMemory}MB</p>
+
     </div>
   );
 }

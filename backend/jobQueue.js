@@ -44,8 +44,8 @@ try{
         let Memoryused2 = process.memoryUsage().heapUsed;
         console.log("memory2 :"+Memoryused2);
         console.log("total Memory used:"+(Memoryused2-Memoryused1) ); 
-        let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100)*1000000;
-        console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"byte");
+        let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100);
+        console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"MB");
         
         
 
@@ -53,6 +53,8 @@ try{
         job['completedAt'] = new Date();
         job['status'] = "success";
         job['output'] = output;
+        job['memorySpace'] = memoryUsedForCompilation;
+        console.log("job memorySpace"+job.memorySpace);
         await job.save();  
         
    }catch(err){

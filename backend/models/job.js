@@ -30,6 +30,10 @@ const JobSchema = mongoose.Schema({
         enum:["pending","success","error"]
 
 
+    },
+    memorySpace:{
+        type:Number
+
     }
 
 

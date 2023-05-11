@@ -51,7 +51,7 @@ app.get('/status',async(req,res)=>{
 
 });
 
-app.post ('/run',async (req,res)=>{ 
+app.post ('/submit',async (req,res)=>{ 
 
    const {language='cpp',code} = req.body;
 
