@@ -13,17 +13,23 @@ function App() {
   const [jobId, setJobId] = useState("");
   const [jobMemory, setJobMemory]= useState('');
   const [jobDetails,setJobDetails ] = useState(null);
-  const [customInput, setCustomInput] = useState(['']);
-  const [customOutput, setCustomOutput] = useState(['']);
+  const [customInput, setCustomInput] = useState([]);
+  const [customInputFirst, setCustomInputFirst ] = useState("");
+
 
 
 
  useEffect(()=> {
     setCode(stubs[language]);
  },[language]);
- 
+
+
+
+
 const handleCustomInputSubmit = ()=>{
-   setCustomOutput(customInput);
+   setCustomInput(customInputFirst.split(' '));
+   console.log("customInput"+ customInput);;
+  
 }
  const renderTimeDetailse = ()=>{
     if(!jobDetails){
@@ -89,6 +95,8 @@ const handleCustomInputSubmit = ()=>{
                               if(SubmitType === 'run'){
                                  console.log("run will call the delete method"+ deleteId);
                                  await axios.delete('http://localhost:5000/delete', {params: {id:data.jobId}});
+                                 clearInterval(intervalId);
+
                
                              }
 
@@ -156,8 +164,8 @@ const handleCustomInputSubmit = ()=>{
      <textarea
          rows ='8'
           cols='75'
-          value={customInput}
-          onChange={(e)=>{setCustomInput(e.target.value)}}
+          value={customInputFirst}
+          onChange={(e)=>{setCustomInputFirst(e.target.value)}}
          
       >
       </textarea>
@@ -165,21 +173,28 @@ const handleCustomInputSubmit = ()=>{
       <textarea
          rows ='8'
           cols='75'
-          value={customOutput}
-          
+          value={customInput}   
          
       >
       </textarea>
       <br/>
-      <button onClick={()=>handleSubmit("run")}>Run</button> 
-      <button onClick={()=>handleSubmit("submit")}>Submit</button> 
+    
 
+      <button onClick={handleCustomInputSubmit}>Run</button> 
+      <button onClick={()=>handleSubmit("submit")}>Submit</button> 
+     
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{renderTimeDetailse()}</p>
      <p>{output}</p>
      <p>Memory space :{jobMemory}MB</p>
-
+     <div>
+        {Array.isArray(customInput)
+          ?customInput.map( (item) =>
+             <p>{ item}</p>
+          )
+         :console.log("empty")}
+    </div>    
     </div>
   );
 }

@@ -53,21 +53,12 @@ app.get('/status',async(req,res)=>{
 });
 app.delete('/delete', async(req,res)=>{
    const jobId = req.query.id;
-   console.log("jobId: "+ jobId);
    if(jobId == undefined){
       console.log("job id not undefined")
        
    }try{  
-      const job = await  Job.findById(jobId);
-
-           console.log("delete start")  
-           console.log(job['_id'])
            const result = await Job.deleteOne({"_id": new mongodb.ObjectId(jobId)});
            console.log(result);
-           console.log(job['_id']+"nothing")
-
-
-
         }        
      catch(err){
      //return res.status(400).json({success:false, error:JSON.stringify(err)});

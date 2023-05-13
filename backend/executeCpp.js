@@ -33,7 +33,7 @@ const deleteForDotOut = async()=>{
            // other errors, e.g. maybe we don't have enough permission
            console.error("Error occurred while trying to remove file");
        } else {
-           console.info(`removed`);
+           console.info(`removed out`);
        }
    });
 };
