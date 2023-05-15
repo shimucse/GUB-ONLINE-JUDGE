@@ -27,6 +27,7 @@ app.use(express.json());
 
 
 app.get('/status',async(req,res)=>{
+   //localhost:5000/status?id=
    const jobId = req.query.id;
    if(jobId == undefined){
       console.log("job id not undefined")
@@ -71,6 +72,8 @@ app.post ('/submit',async (req,res)=>{
 
    const {language='cpp',code} = req.body;
    const submitType = req.body.SubmitType;
+   const userInput = req.body.userInput;
+   console.log("userInput: "+ userInput);
       //console.log('total memory : ' + os.totalmem() + " bytes.");
      // console.log('free memory : ' + os.freemem() + " bytes.");
 
@@ -84,7 +87,8 @@ app.post ('/submit',async (req,res)=>{
         const filepath = await generateFile(language,code);
         // we need to run the file and send the response
 
-         const job = await new Job({language,filepath,submitType}).save();
+         const job = await new Job({language,filepath,submitType,userInput}).save();
+        // console.log("job from index :" + job);
         
         const jobId = job["_id"];
         addJobToQueue(jobId,filepath);

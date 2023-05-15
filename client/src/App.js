@@ -24,13 +24,16 @@ function App() {
  },[language]);
 
 
+/*
+1 
+2 1
+1 2
+2 2
+1 1
+
+ */
 
 
-const handleCustomInputSubmit = ()=>{
-   setCustomInput(customInputFirst.split(' '));
-   console.log("customInput"+ customInput);;
-  
-}
  const renderTimeDetailse = ()=>{
     if(!jobDetails){
        return " ";
@@ -51,14 +54,21 @@ const handleCustomInputSubmit = ()=>{
  }
 
 
-  const handleSubmit = async(SubmitType) =>{
+  const handleSubmit = async(SubmitType,userInput) =>{
+              
+              let inputSplice= (customInputFirst.split(/[/n\s]/))          
+               setCustomInput(inputSplice);
+
                
+
+               console.log(customInput);
                console.log("callType:"+SubmitType);
                let deleteId;
                      const payload = {
                      language : language,
                      code:code ,
-                     SubmitType:SubmitType
+                     SubmitType:SubmitType,
+                     userInput:customInput
                      };
                try{
                      setJobId("");
@@ -92,7 +102,8 @@ const handleCustomInputSubmit = ()=>{
                               setJobMemory(memory);
                               clearInterval(intervalId);
                              
-                              if(SubmitType === 'run'){
+                              if(SubmitType === 'run'){                                
+
                                  console.log("run will call the delete method"+ deleteId);
                                  await axios.delete('http://localhost:5000/delete', {params: {id:data.jobId}});
                                  clearInterval(intervalId);
@@ -180,7 +191,7 @@ const handleCustomInputSubmit = ()=>{
       <br/>
     
 
-      <button onClick={handleCustomInputSubmit}>Run</button> 
+      <button onClick={ ()=>handleSubmit("run",customInputFirst)}>Run</button> 
       <button onClick={()=>handleSubmit("submit")}>Submit</button> 
      
      <p>{status}</p>
@@ -188,13 +199,7 @@ const handleCustomInputSubmit = ()=>{
      <p>{renderTimeDetailse()}</p>
      <p>{output}</p>
      <p>Memory space :{jobMemory}MB</p>
-     <div>
-        {Array.isArray(customInput)
-          ?customInput.map( (item) =>
-             <p>{ item}</p>
-          )
-         :console.log("empty")}
-    </div>    
+     
     </div>
   );
 }

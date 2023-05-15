@@ -37,7 +37,13 @@ const JobSchema = mongoose.Schema({
     },
     submitType:{
         type:String
+    },
+    userInput : { 
+        type : Array, 
+        default : [] 
     }
+
+
 
 
 });
