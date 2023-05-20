@@ -39,8 +39,7 @@ const JobSchema = mongoose.Schema({
         type:String
     },
     userInput : { 
-        type : Array, 
-        default : [] 
+        type : String
     }
 
 

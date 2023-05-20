@@ -53,15 +53,22 @@ function App() {
     return result;
  }
 
+ useEffect(()=> {
+     let inputTrim = (customInputFirst.trim());
+
+  // let inputSplice= (inputTrim.split(/\n/))  
+ 
+
+ 
+   setCustomInput(inputTrim);
+   
+},[customInputFirst]);
 
   const handleSubmit = async(SubmitType,userInput) =>{
-              
-              let inputSplice= (customInputFirst.split(/[/n\s]/))          
-               setCustomInput(inputSplice);
-
                
 
                console.log(customInput);
+               console.log(customInput.length)
                console.log("callType:"+SubmitType);
                let deleteId;
                      const payload = {
@@ -136,6 +143,8 @@ function App() {
                
 }
 
+
+
   return (
     <div className="App">
      <h1>Online Code Compiler</h1>
@@ -180,20 +189,12 @@ function App() {
          
       >
       </textarea>
-      <h3>Output</h3>
-      <textarea
-         rows ='8'
-          cols='75'
-          value={customInput}   
-         
-      >
-      </textarea>
-      <br/>
-    
+      <br/><br/>
 
-      <button onClick={ ()=>handleSubmit("run",customInputFirst)}>Run</button> 
+      <button onClick={ ()=>handleSubmit("run",customInputFirst)}>Run</button>
       <button onClick={()=>handleSubmit("submit")}>Submit</button> 
-     
+     <br/><br/>
+     <p>{customInput}</p>
      <p>{status}</p>
      <p>{jobId && `JobId: ${jobId}`}</p>
      <p>{renderTimeDetailse()}</p>

@@ -12,7 +12,6 @@ let filepath;
 const executCpp_and_executePy = async(job,item)=>{
     let output;
     if(job.language === "cpp"){
-        console.log('execute cpp'+ job.filepath)
         output = await executeCpp(job.filepath,item);
         await deleteFile(job.filepath);
         await deleteForDotOut();
@@ -45,11 +44,12 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
             //execute 
             Array.isArray(job.userInput)
-            ?job.userInput.map( async(item) => {
+            /*?job.userInput.map( async(item) => {
                 console.log("item: "+ item)
                 job['output'] = await executCpp_and_executePy(job,item);
                  
-                }):( job['output'] = await executCpp_and_executePy(job,item))
+                }):( job['output'] = await executCpp_and_executePy(job,item))*/
+                job['output'] = await executCpp_and_executePy(job,job.userInput)   
 
             
             //Memory2
