@@ -4,6 +4,12 @@ import Axios from 'axios';
 import axios from 'axios';
 import stubs from './defaultStubs';
 import moment from 'moment';
+import CodeMirror from '@uiw/react-codemirror';
+import 'codemirror/theme/dracula.css';
+
+import "codemirror/theme/idea.css";
+import "codemirror/addon/edit/closetag";
+import "codemirror/addon/edit/closebrackets";
 
 function App() {
   const[code,setCode] = useState('');
@@ -24,14 +30,6 @@ function App() {
  },[language]);
 
 
-/*
-1 
-2 1
-1 2
-2 2
-1 1
-
- */
 
 
  const renderTimeDetailse = ()=>{
@@ -168,14 +166,24 @@ function App() {
             <option value="py">Python</option>
         </select>
      </div>
-     <textarea
-         rows ='20'
-          cols='75'
-          value ={code}
-           onChange={(e)=>{setCode(e.target.value)
+     <CodeMirror
+          height='200px'
+          width='600px'
+          options={{
+            theme: 'dracula',
+            tabSize: 2,
+            mode: language,
+            autoCloseBrackets: true,
+            lineNumbers: true,
+            tabSize: 2,
+            tabindex: 2,
+            indentWithTabs: true,
           }}
-      >
-      </textarea>
+          value ={code}
+           onChange={(editor,viewUpdate)=>{
+            setCode(editor.getValue())
+          }}
+      />
      <br/>
     
 
