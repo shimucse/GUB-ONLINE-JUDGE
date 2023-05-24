@@ -1,0 +1,16 @@
+problem slug:add
+
+problemName: Add Two lineNumber
+
+Description : Print the sum of two number
+
+Problem Statement :You are given two integer numbers, Print the sum of those two numbers.
+
+Input format : The first line contains integar ***a*** and ***b***
+
+Constraints:-1<=a, b<=1000
+
+Add Custom Testcase
+Input       output
+ 2 3         5
+
