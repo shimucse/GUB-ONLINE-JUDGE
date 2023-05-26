@@ -22,7 +22,7 @@ app.use(express.json());
 
 app.use('/codeSubmit',require('./routes/codeSubmit'));
 
-
+app.use('/problemAdd', require('./routes/problemAdd'));
 
 app.listen(5000,()=>{
     console.log("listening on port 5000")

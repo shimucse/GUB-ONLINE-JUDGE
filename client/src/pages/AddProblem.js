@@ -1,4 +1,5 @@
 import MDEditor from "@uiw/react-md-editor";
+import Axios from 'axios';
 import React,{useState} from "react";
 
 
@@ -17,6 +18,22 @@ export default function AddProblem() {
   const [ problemSetterAllOutput, setProblemSetterAllOutput] = useState();
   const [problemTimeLimit, setProblemTimeLimit] = useState();
   const [ problemMemoryLimit, setProblemMemoryLimit] = useState();
+
+  const addButtonHandlser = ()=>{
+      console.log("hi from addProblem click");
+      const problemDetailse = {
+          id: problemId
+      }
+      try{
+        const {data} =  Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
+       // const {data}  =  axios.get('http://localhost:5000/problemAdd');
+        console.log("data from problem add"+data);
+
+      }
+      catch(errMsg){
+          console.log(errMsg);
+      }
+  }
   return (
     <>
       <div className="">
@@ -185,27 +202,12 @@ export default function AddProblem() {
           
           </div>
           </div>          
-         <button>Add Problem</button>
-         <button>Edit Problem</button>
-         <button>Delete Problem</button>
+         <button onClick={addButtonHandlser}>Add Problem</button>
+        
 
         </div>
 
-       <p>{problemId}</p>
-       <p>{problemTitle}</p>
-       <p>{problemDescription}</p>
-       <p>{problemInputFormat}</p>
-       <p>{problemOutputFormat}</p>
-       <p>{FirstSampleInput}</p>
-       <p>{FirstSampleOutput}</p>
-
-       <p>{SecondSampleInput}</p>
-
-       <p>{SecondSampleOutput}</p>
-
-       <p>{problemSetterAllInputTestCase}</p>
-       <p>{problemSetterAllOutput}</p>
-
+      
 
 
       </div>

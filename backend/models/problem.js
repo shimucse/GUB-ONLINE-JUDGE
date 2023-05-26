@@ -61,7 +61,10 @@ const problemSchema = mongoose.Schema({
         type:Date,
         default:Date.now
 
-   }
+   },
+   acceptedList:[{
+      type:String
+   }]
 
 
 });
