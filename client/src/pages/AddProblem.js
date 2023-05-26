@@ -5,6 +5,16 @@ import React,{useState} from "react";
 
 export default function AddProblem() {
   const [problemId, setProblemId]= useState();
+  const [problemTitle, setProblemTitle] = useState();
+  const [problemDescription, setProblemDescription] = useState();
+  const [problemInputFormat, setProblemInputFormat] = useState();
+  const [problemOutputFormat, setProblemOutputFormat] = useState();
+  const [FirstSampleInput, setFirstSampleInput] = useState();
+  const [FirstSampleOutput, setFirstSampleOutput] = useState();
+  const [SecondSampleInput, setSecondSampleInput] = useState();
+  const [SecondSampleOutput, setSecondSampleOutput] = useState();
+  const [problemSetterAllInputTestCse, setProblemSetterAllInputTestCse] = useState();
+  const [ problemSetterAllOutput, setProblemSetterAllOutput] = useState();
 
   return (
     <>
@@ -13,113 +23,122 @@ export default function AddProblem() {
           Problem
         </h1>
 
-       
-          <p className="text-sm italic text-gray-500 my-2">
+          <p className="">
             Get started by providing the initial details needed to create a
             problem.
-          </p>
-    
+          </p>    
 
         {/* Problem Details */}
         <div className="">
           <div className="">
             <p className="">Problem Id</p>
             <input
-              value=""
+              value={problemId}
              
-              type="text"
+              type=""
               required
-              placeholder="Write problem slug. i.e problem123 (Should be unique)"
+              placeholder=""
+              onChange={(e)=>{setProblemId(e.target.value)}}
             />
           </div>
           <div className="">
             <p className="">Problem Name</p>
             <input
-              value=""
+              value={problemTitle}
              
               type="text"
               className=""
               required
               placeholder="Write problem name"
+              onChange={(e)=>{setProblemTitle(e.target.value)}}
             />
           </div>
           <div className="">
             <p className="">Description</p>
+
             <MDEditor
-              value=""
+              value={problemDescription}
               
               required
               preview="edit"
+              onChange={setProblemDescription}
             />
           </div>
          
             <p className="">Input Format</p>
             <div className="">
               <MDEditor
-                value=""
+                value={problemInputFormat}
                
                 preview="edit"
+                onChange={setProblemInputFormat}
               />
             </div>
         
             <p className="">Output Format</p>
             <div className="">
               <MDEditor
-                value=""
-                placeholder=""
-                preview=""
+                value={problemOutputFormat}
+                preview="edit"
+                onChange={setProblemOutputFormat}
             
               />
           </div>
           <div className="">
             <p className="">First Sample Input Output: </p>
             <input
-              value=""
+              value={FirstSampleInput}
              
               type="text"
               className=""
               required
               placeholder="Give input"
+              onChange={(e)=>{setFirstSampleInput(e.target.value)}}
             />
               <input
-              value=""
+              value={FirstSampleOutput}
              
               type="text"
               className=""
               required
               placeholder="Give output"
+              onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
             />
           </div>
           <div className="">
             <p className="">Second Sample Input Output : </p>
             <input
-              value=""
+              value={SecondSampleInput}
              
               type="text"
               className=""
               required
               placeholder="Give input"
+              onChange={(e)=>{setSecondSampleInput(e.target.value)}}
             />
               <input
-              value=""
+              value={SecondSampleOutput}
              
               type="text"
               className=""
               required
               placeholder="Give output"
+
+              onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
             />
           </div>          
           <div className="">
           <div className="flex">
             <p className="">Add all input String</p>
             <textarea
-              value=""
+              value={problemSetterAllInputTestCse}
               rows ='8'
              cols='75'
               type="text"
               className=""
               required
               placeholder="Give all  input"
+              onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
             />
              
           </div>
@@ -130,11 +149,12 @@ export default function AddProblem() {
             <textarea
              rows ='8'
              cols='75'
-              value=""             
+              value={problemSetterAllOutput}            
               type="text"
               className=""
               required
               placeholder="Give output"
+              onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
             />
           
           </div>
@@ -145,7 +165,23 @@ export default function AddProblem() {
 
         </div>
 
-       
+       <p>{problemId}</p>
+       <p>{problemTitle}</p>
+       <p>{problemDescription}</p>
+       <p>{problemInputFormat}</p>
+       <p>{problemOutputFormat}</p>
+       <p>{FirstSampleInput}</p>
+       <p>{FirstSampleOutput}</p>
+
+       <p>{SecondSampleInput}</p>
+
+       <p>{SecondSampleOutput}</p>
+
+       <p>{problemSetterAllInputTestCse}</p>
+       <p>{problemSetterAllOutput}</p>
+
+
+
       </div>
      
     </>

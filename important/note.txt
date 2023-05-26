@@ -33,3 +33,6 @@ PONG
 npm install  bull --save
 
 npm i moment
+install codemirror 3.2.1
+
+install MDEditor for text editor
