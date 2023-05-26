@@ -13,9 +13,10 @@ export default function AddProblem() {
   const [FirstSampleOutput, setFirstSampleOutput] = useState();
   const [SecondSampleInput, setSecondSampleInput] = useState();
   const [SecondSampleOutput, setSecondSampleOutput] = useState();
-  const [problemSetterAllInputTestCse, setProblemSetterAllInputTestCse] = useState();
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState();
   const [ problemSetterAllOutput, setProblemSetterAllOutput] = useState();
-
+  const [problemTimeLimit, setProblemTimeLimit] = useState();
+  const [ problemMemoryLimit, setProblemMemoryLimit] = useState();
   return (
     <>
       <div className="">
@@ -53,6 +54,31 @@ export default function AddProblem() {
               onChange={(e)=>{setProblemTitle(e.target.value)}}
             />
           </div>
+          <div className="">
+            <p className="">MemoryLimit</p>
+            <input
+              value={problemMemoryLimit}
+             
+              type="text"
+              className=""
+              required
+              placeholder="write memory limit"
+              onChange={(e)=>{setProblemMemoryLimit(e.target.value)}}
+            />
+          </div>
+          <div className="">
+            <p className="">Problem time limit</p>
+            <input
+              value={problemTimeLimit}
+             
+              type="text"
+              className=""
+              required
+              placeholder="Write problem time limit"
+              onChange={(e)=>{setProblemTimeLimit(e.target.value)}}
+            />
+          </div>
+
           <div className="">
             <p className="">Description</p>
 
@@ -131,7 +157,7 @@ export default function AddProblem() {
           <div className="flex">
             <p className="">Add all input String</p>
             <textarea
-              value={problemSetterAllInputTestCse}
+              value={problemSetterAllInputTestCase}
               rows ='8'
              cols='75'
               type="text"
@@ -177,7 +203,7 @@ export default function AddProblem() {
 
        <p>{SecondSampleOutput}</p>
 
-       <p>{problemSetterAllInputTestCse}</p>
+       <p>{problemSetterAllInputTestCase}</p>
        <p>{problemSetterAllOutput}</p>
 
 
