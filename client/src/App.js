@@ -4,7 +4,7 @@ import React,{useState, useEffect} from 'react';
 
 import AddProblem from './pages/AddProblem';
 import ProblemDisplay from './pages/ProblemDisplay';
-import ProblemSubmit from './pages/ProblemSubmit';
+import ProblemSubmit from './pages/codeSubmit';
 
 function App() {
    const [active, setActive] = useState('');
@@ -15,7 +15,7 @@ function App() {
      <nav>
         <button onClick={()=> setActive('AddProblem')}>AddProblem</button>
         <button onClick={()=> setActive('ProblemDisplay')}>ProblemDisplay</button>
-        <button onClick={()=> setActive('ProblemSubmit')}>ProblemSubmit</button>
+        <button onClick={()=> setActive('ProblemSubmit')}>Code Submit</button>
 
 
      </nav>

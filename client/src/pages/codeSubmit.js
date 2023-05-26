@@ -81,14 +81,14 @@ const ProblemSubmit =  ()=>{
                        setJobMemory("");
                        setJobDetails(null);
   
-                       const {data} = await Axios.post("http://localhost:5000/submit", payload)
+                       const {data} = await Axios.post("http://localhost:5000/codeSubmit/submit", payload)
                        setJobId(data.jobId);
                        let intervalId;
   
                        
                        intervalId = setInterval(async()=>{
   
-                             const{data:dataRes} = await axios.get('http://localhost:5000/status', {params: {id:data.jobId}});
+                             const{data:dataRes} = await axios.get('http://localhost:5000/codeSubmit/status', {params: {id:data.jobId}});
                              deleteId=data.jobId;
                              const {success, job, error} = dataRes;
   
@@ -109,7 +109,7 @@ const ProblemSubmit =  ()=>{
                                 if(SubmitType === 'run'){                                
   
                                    console.log("run will call the delete method"+ deleteId);
-                                   await axios.delete('http://localhost:5000/delete', {params: {id:data.jobId}});
+                                   await axios.delete('http://localhost:5000/codeSubmit/delete', {params: {id:data.jobId}});
                                    clearInterval(intervalId);
   
                  

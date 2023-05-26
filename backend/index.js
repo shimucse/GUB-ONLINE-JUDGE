@@ -6,7 +6,6 @@ const os = require('os');
 const mongodb = require('mongodb');
 
 
-
 const {generateFile} = require('./generateFile');
 
 const {addJobToQueue} = require('./jobQueue');
@@ -25,6 +24,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
 
+app.use('/codeSubmit',require('./routes/codeSubmit'));
 
 app.get('/status',async(req,res)=>{
    //localhost:5000/status?id=

@@ -1,10 +1,10 @@
-problem slug:add
+problem Id:add
 
 problemName: Add Two lineNumber
 
 Description : Print the sum of two number
 
-Problem Statement :You are given two integer numbers, Print the sum of those two numbers.
+(cancle) Problem Statement :You are given two integer numbers, Print the sum of those two numbers.
 
 Input format : The first line contains integar ***a*** and ***b***
 
@@ -14,3 +14,7 @@ Add Custom Testcase
 Input       output
  2 3         5
 
+
+//add a input number (for  total number of input)
+// add a input string 
+// add a output string 
