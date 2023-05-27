@@ -5,34 +5,53 @@ import React,{useState} from "react";
 
 
 export default function AddProblem() {
-  const [problemId, setProblemId]= useState();
-  const [problemTitle, setProblemTitle] = useState();
-  const [problemDescription, setProblemDescription] = useState();
-  const [problemInputFormat, setProblemInputFormat] = useState();
-  const [problemOutputFormat, setProblemOutputFormat] = useState();
-  const [FirstSampleInput, setFirstSampleInput] = useState();
-  const [FirstSampleOutput, setFirstSampleOutput] = useState();
-  const [SecondSampleInput, setSecondSampleInput] = useState();
-  const [SecondSampleOutput, setSecondSampleOutput] = useState();
-  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState();
-  const [ problemSetterAllOutput, setProblemSetterAllOutput] = useState();
-  const [problemTimeLimit, setProblemTimeLimit] = useState();
-  const [ problemMemoryLimit, setProblemMemoryLimit] = useState();
+  const [problemId, setProblemId]= useState('');
+  const [problemTitle, setProblemTitle] = useState('');
+  const [problemDescription, setProblemDescription] = useState('');
+  const [problemInputFormat, setProblemInputFormat] = useState('');
+  const [problemOutputFormat, setProblemOutputFormat] = useState('');
+  const [FirstSampleInput, setFirstSampleInput] = useState('');
+  const [FirstSampleOutput, setFirstSampleOutput] = useState('');
+  const [SecondSampleInput, setSecondSampleInput] = useState('');
+  const [SecondSampleOutput, setSecondSampleOutput] = useState('');
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState('');
+  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState('');
+  const [problemTimeLimit, setProblemTimeLimit] = useState('');
+  const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
 
-  const addButtonHandlser = ()=>{
-      console.log("hi from addProblem click");
-      const problemDetailse = {
-          id: problemId
-      }
+  const addButtonHandlser = async()=>{
+      if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 && SecondSampleOutput.trim().length!==0){
+          const problemDetailse = {
+             id: problemId,
+             name:problemTitle,
+             description:problemDescription,
+             inputFormat:problemInputFormat,
+             outputFormat:problemOutputFormat,
+
+             firstSampleInput:FirstSampleInput,
+             firstSampleOutput:FirstSampleOutput,
+
+             secondSampleInput:SecondSampleInput,
+             secondSampleOutput:SecondSampleOutput,
+
+             problemSetterAllInputTestCase:problemSetterAllInputTestCase,
+             problemSetterAllOutputTestCase:problemSetterAllOutput,
+             timeLimit:problemTimeLimit,
+             memoryLimit:problemMemoryLimit
+          }
       try{
-        const {data} =  Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
-       // const {data}  =  axios.get('http://localhost:5000/problemAdd');
+        const {data} = await Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
+       //const {data}  =  axios.get('http://localhost:5000/problemAdd');
         console.log("data from problem add"+data);
-
       }
       catch(errMsg){
-          console.log(errMsg);
+        window.confirm(' Error : id should be unique');
       }
+      }
+      else{
+        window.confirm("WARNING:Fill the  all field 'must include' ");
+      }
+      
   }
   return (
     <>
@@ -55,7 +74,7 @@ export default function AddProblem() {
              
               type=""
               required
-              placeholder=""
+              placeholder="Must fill and should be unique"
               onChange={(e)=>{setProblemId(e.target.value)}}
             />
           </div>
@@ -67,7 +86,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Write problem name"
+              placeholder="Must fill"
               onChange={(e)=>{setProblemTitle(e.target.value)}}
             />
           </div>
@@ -104,6 +123,7 @@ export default function AddProblem() {
               
               required
               preview="edit"
+              placeholder="must fill"
               onChange={setProblemDescription}
             />
           </div>
@@ -135,7 +155,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give input"
+              placeholder="must fill"
               onChange={(e)=>{setFirstSampleInput(e.target.value)}}
             />
               <input
@@ -144,7 +164,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give output"
+              placeholder="must fill"
               onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
             />
           </div>
@@ -156,7 +176,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give input"
+              placeholder="must fill"
               onChange={(e)=>{setSecondSampleInput(e.target.value)}}
             />
               <input
@@ -165,7 +185,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give output"
+              placeholder="must fill"
 
               onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
             />

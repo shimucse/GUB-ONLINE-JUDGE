@@ -52,18 +52,20 @@ const problemSchema = mongoose.Schema({
       type:String
 
    },
-   problemSetterName:{
-      type:String,
-      required:true,
-      default:"Before login signUp system"
-   },
+   
    problemAddDate:{
         type:Date,
         default:Date.now
 
-   },
-   acceptedList:[{
-      type:String
+   }  ,
+   problemSetterName:{
+    type:String,
+    required:true,
+    default:"Before login signUp system"
+ },
+ acceptedList:[{
+      type:String,
+      default:"after submision add user"
    }]
 
 
