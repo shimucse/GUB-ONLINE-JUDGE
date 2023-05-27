@@ -42,6 +42,18 @@ router.post ('/submit',async (req,res)=>{
         
  });
  
- 
+ router.get('/read', async(req,res)=>{
+    console.log("read from ProblemAdd");
+    try{
+        const listOfProblem = await problemDB.find();
+        res.send(listOfProblem);
+
+    }catch(err){
+         console.log(err);
+         res.status(500).json({ error: 'server error' });
+
+    }
+  
+ })
  
 module.exports=  router;
