@@ -1,6 +1,5 @@
 import './App.css';
 import React,{useState} from 'react';
-import ReactDOM from 'react-dom';
 
 import { BrowserRouter, Routes, Route,Link,Router,Outlet } from "react-router-dom";
 
@@ -33,6 +32,8 @@ function App() {
          <Route exact path="AddNewProblem" element={<AddProblem/>}/>
          <Route exact path="ProblemList" element={<ProblemList/>}/>
          <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
+         <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
+
 
 
         </Routes>

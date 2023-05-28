@@ -36,3 +36,9 @@ npm i moment
 install codemirror 3.2.1
 
 install MDEditor for text editor
+
+for redirect to another page :
+npm i react-router-dom
+import { BrowserRouter, Routes, Route,Link,Router,Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; for go another page
+

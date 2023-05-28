@@ -14,7 +14,10 @@ const ProblemList = ()=>{
 
   const [problemList, setProblemList] = useState(['']);
   const [problemId, setProblemId] = useState('');
-  const [active, setActive] = useState('');
+  const [data, setData] = useState({
+     id:"1",
+     title:"How to pass state in react-router-dom"
+  });
 
 
 
@@ -28,13 +31,10 @@ const ProblemList = ()=>{
   },[]); 
 
   const HandleLoadProblemPage = (id)=>{
-      console.log("problem id"+ id);
       setProblemId(id);
-      navigate("/ProblemSubmit");
-     
-     // setActive('activeName');   
+      navigate("/ProblemDisplay",{state:{id:id}});
 
-  }
+    }
   return (
     <div className="container">
       
@@ -76,14 +76,7 @@ const ProblemList = ()=>{
           </div>
           <p>{problemId}</p>
 
-        {/*  <div>{active === 'activeName' && <CodeSubmit/>}</div>
-         
-           <BrowserRouter>
         
-       <Routes>       
-        <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
-        </Routes>
-                            </BrowserRouter>*/}
     </div>
     
   );

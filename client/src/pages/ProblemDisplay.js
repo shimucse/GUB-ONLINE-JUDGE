@@ -1,20 +1,18 @@
 import React , { useState } from "react";
-import MDEditor, { commands }  from '@uiw/react-md-editor';
-import rehypeSanitize, {defaultSchema} from 'rehype-stringify'
+import { useLocation} from "react-router-dom";
 
 
-const ProblemDisplay = ()=>{
 
-  const [value, setValue] = React.useState("**Hello world!!!**");
-  return (
-    <div className="container">
-      <MDEditor
-        value={value}
-        onChange={setValue}
-      />
-      <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
-      
+import { redirect } from "react-router-dom";
+
+const ProblemDisplay = (props)=>{
+  const location = useLocation();
+  console.log("id:  "+location.state.id);
+  return(
+    <div>
+      <h1>Problem Display Page</h1>
     </div>
-  );
+  )
+  
 }
 export default ProblemDisplay;
