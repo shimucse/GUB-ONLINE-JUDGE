@@ -1,10 +1,16 @@
 import React , { useState,useEffect } from "react";
 import Axios from 'axios';
 import '../pagesCss/ProblemList.css'
-import CodeSubmit from './codeSubmit';
+import { BrowserRouter as Router, Switch, 
+  Route, Redirect,} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 const ProblemList = ()=>{
+   
+  let navigate = useNavigate();
 
   const [problemList, setProblemList] = useState(['']);
   const [problemId, setProblemId] = useState('');
@@ -24,6 +30,7 @@ const ProblemList = ()=>{
   const HandleLoadProblemPage = (id)=>{
       console.log("problem id"+ id);
       setProblemId(id);
+      navigate("/ProblemSubmit");
      
      // setActive('activeName');   
 
@@ -67,10 +74,18 @@ const ProblemList = ()=>{
                 </div>  
             </div>
           </div>
-
-          <div>{active === 'activeName' && <CodeSubmit/>}</div>
           <p>{problemId}</p>
+
+        {/*  <div>{active === 'activeName' && <CodeSubmit/>}</div>
+         
+           <BrowserRouter>
+        
+       <Routes>       
+        <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
+        </Routes>
+                            </BrowserRouter>*/}
     </div>
+    
   );
 }
 export default ProblemList;
