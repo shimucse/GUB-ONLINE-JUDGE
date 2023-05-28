@@ -1,0 +1,77 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+  }
+  .wrap{
+    background-color: rgb(246, 251, 244);
+    width: 75%;
+    height: 100%;
+    margin-left: 12.5%;
+    /*border:solid;
+    border-radius: 10px;
+    border-color:rgb(223, 243, 215) ;*/
+  }
+
+  
+  
+ 
+  .body_column {
+        margin-top: 100px;      
+  
+  }
+  .problem_archive{
+        margin-bottom: 50px;
+        text-align: center;
+  }
+  table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        height: 550px;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      .problemName{
+        border: none;
+        padding: 0;
+        background: none;
+        cursor: 'pointer',
+
+     }
+      tr:nth-child(even) {
+        background-color: white;
+      }
+      td{
+        padding: 10px;
+      }
+      
+      /* Next Previous button*/
+      .next_previou_button{
+        margin-top: 25px;
+        margin-bottom: 50px;
+      }
+      .next_previou_button  a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+      }
+      
+      .next_previou_button a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      
+      .previous,.next {
+        background-color:white;
+        color: black;
+       
+      }
+      
+      
+     

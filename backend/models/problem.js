@@ -66,7 +66,10 @@ const problemSchema = mongoose.Schema({
  acceptedList:[{
       type:String,
       default:"after submision add user"
-   }]
+   }],
+totalSubmitAttempt:{
+     type:Number
+}
 
 
 });
