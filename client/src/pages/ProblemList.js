@@ -14,11 +14,7 @@ const ProblemList = ()=>{
 
   const [problemList, setProblemList] = useState(['']);
   const [problemId, setProblemId] = useState('');
-  const [data, setData] = useState({
-     id:"1",
-     title:"How to pass state in react-router-dom"
-  });
-
+ 
 
 
   useEffect(() => {

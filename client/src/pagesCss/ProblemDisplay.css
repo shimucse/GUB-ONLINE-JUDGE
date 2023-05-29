@@ -1,0 +1,98 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+}
+.wrap{
+background-color: white;
+width: 100%;
+height: 100%;
+
+}
+
+
+.left_column{
+    
+
+    margin-left: 30px;
+    border-right: 1px solid;
+    border-color: #f5e9e9;
+    
+
+}
+
+
+.problem_header{
+  margin-top:50px;
+  padding-top:50px;
+  margin-bottom: 50px;
+}
+
+.problem_id, .problem_name{
+  font-size: 21px;
+}
+.problem_id,.time_limit, .memory_limit, .input_txt, .output_txt{
+ display: block;
+ text-align: center;
+ font-size: 20px;
+}
+.problem_description{
+    margin-top: 70px;
+    font-size: 20px;
+}
+.input_format, .output_format{
+    margin-top: 70px;
+    font-size: 20px;
+}
+.input_output_table table{
+    width: 97%;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    border-right: none;
+    height: 250px;
+    margin-left: 20px;
+    
+}
+
+
+.input_output_table tr:nth-child(even){background-color: #f2f2f2;}
+
+.input_output_table tr:hover {background-color: #d7dddf;}
+
+
+.input_output_table th, .input_output_table td {
+    padding: 8px;
+    border: 1px solid;
+    border-color: #f5e9e9;
+    border-right: none;
+
+
+  }
+  .input_output_table td {
+     border-bottom: none;
+     border-top: none;
+
+  }
+  
+  .input_output_table .total_test_case{
+     text-align: center;
+     border: 1px solid;
+     border-color: #f5e9e9;
+     border-right: none;
+
+  }
+  
+  
+  .input_output_table th {
+    width: 25%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    border-right: none;
+
+  }
+  
+
+

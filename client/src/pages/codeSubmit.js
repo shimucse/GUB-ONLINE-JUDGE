@@ -88,7 +88,7 @@ const ProblemSubmit =  ()=>{
                        
                        intervalId = setInterval(async()=>{
   
-                             const{data:dataRes} = await axios.get('http://localhost:5000/codeSubmit/status', {params: {id:data.jobId}});
+                             const{data:dataRes} = await Axios.get('http://localhost:5000/codeSubmit/status', {params: {id:data.jobId}});
                              deleteId=data.jobId;
                              const {success, job, error} = dataRes;
   

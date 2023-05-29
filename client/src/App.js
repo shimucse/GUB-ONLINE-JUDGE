@@ -27,41 +27,13 @@ function App() {
 
         </nav>
         <Routes>
-
-        <Route index element={<HomePage />} />
-         <Route exact path="AddNewProblem" element={<AddProblem/>}/>
-         <Route exact path="ProblemList" element={<ProblemList/>}/>
-         <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
-         <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
-
-
-
+          <Route index element={<HomePage />} />
+          <Route exact path="AddNewProblem" element={<AddProblem/>}/>
+          <Route exact path="ProblemList" element={<ProblemList/>}/>
+          <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
+          <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
         </Routes>
-      </BrowserRouter>
-     
-
-     
-
-     
-    { /*<nav>
-        <button onClick={()=> setActive('AddProblem')}>AddProblem</button>
-        <button onClick={()=> setActive('ProblemDisplay')}>ProblemDisplay</button>
-        <button onClick={()=> setActive('ProblemSubmit')}>CodeSubmit</button>
-        <button onClick={()=> setActive('ProblemList')}>ProblemList </button>
-        <button onClick={()=> setActive('ProblemHtml')}>problemHtml </button>
-
-     </nav>
-
-
-     <div>
-       {active === 'AddProblem' && <AddProblem/>}
-       {active === 'ProblemDisplay' && <ProblemDisplay/>}
-     {active === 'ProblemSubmit' && <ProblemSubmit/>}
-       {active === 'ProblemList' && <ProblemList/>}
-       {active === 'ProblemHtml' && <ProblemHtml/>}
-
-     </div>
-     */}
+      </BrowserRouter>    
       
     </div>
   );

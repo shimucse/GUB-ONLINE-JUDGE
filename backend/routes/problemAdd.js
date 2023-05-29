@@ -41,6 +41,25 @@ router.post ('/submit',async (req,res)=>{
      }
         
  });
+
+ router.get('/fetch/:id',async function(req,res){
+      fetchid = req.params.id;
+      console.log("fetchid "+ fetchid);
+
+
+
+      try{
+        const data = await problemDB.find({id:fetchid})
+        console.log('data'+data);
+        res.send(data);
+
+    }catch(err){
+         console.log(err);
+         res.status(500).json({ error: 'server error' });
+
+    }
+
+ });
  
  router.get('/read', async(req,res)=>{
     console.log("read from ProblemAdd");
@@ -55,5 +74,6 @@ router.post ('/submit',async (req,res)=>{
     }
   
  })
+ 
  
 module.exports=  router;
