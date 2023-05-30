@@ -20,7 +20,19 @@ export default function AddProblem() {
   const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
 
   const addButtonHandlser = async()=>{
-      if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 && SecondSampleOutput.trim().length!==0){
+      if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 
+      && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 &&
+       SecondSampleOutput.trim().length!==0)
+      {
+          console.log(problemId);
+          console.log(problemTitle);
+          console.log(problemDescription);
+          console.log(FirstSampleInput);
+          console.log(FirstSampleOutput);
+          console.log(SecondSampleInput);
+          console.log(SecondSampleOutput);
+
+
           const problemDetailse = {
              id: problemId,
              name:problemTitle,
@@ -39,14 +51,15 @@ export default function AddProblem() {
              timeLimit:problemTimeLimit,
              memoryLimit:problemMemoryLimit
           }
-      try{
-        const {data} = await Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
-       //const {data}  =  axios.get('http://localhost:5000/problemAdd');
-        console.log("data from problem add"+data);
-      }
-      catch(errMsg){
-        window.confirm(' Error : id should be unique');
-      }
+            try{
+                  const {data} = await Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
+                  console.log("data from problem add"+data);
+                  window.confirm(' New Problem added sucessfully');
+
+            }
+            catch(errMsg){
+              window.confirm(' Error : id should be unique');
+            }
       }
       else{
         window.confirm("WARNING:Fill the  all field 'must include' ");
@@ -149,7 +162,7 @@ export default function AddProblem() {
           </div>
           <div className="">
             <p className="">First Sample Input Output: </p>
-            <input
+            <textarea
               value={FirstSampleInput}
              
               type="text"
@@ -158,10 +171,10 @@ export default function AddProblem() {
               placeholder="must fill"
               onChange={(e)=>{setFirstSampleInput(e.target.value)}}
             />
-              <input
+              <textarea
               value={FirstSampleOutput}
              
-              type="text"
+              type="text areah"
               className=""
               required
               placeholder="must fill"
@@ -170,7 +183,7 @@ export default function AddProblem() {
           </div>
           <div className="">
             <p className="">Second Sample Input Output : </p>
-            <input
+            <textarea
               value={SecondSampleInput}
              
               type="text"
@@ -179,7 +192,7 @@ export default function AddProblem() {
               placeholder="must fill"
               onChange={(e)=>{setSecondSampleInput(e.target.value)}}
             />
-              <input
+              <textarea
               value={SecondSampleOutput}
              
               type="text"

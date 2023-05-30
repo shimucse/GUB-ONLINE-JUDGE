@@ -12,10 +12,10 @@ const problemSchema = mongoose.Schema({
      required:true
    },
    timeLimit:{
-     type :Number
+     type :String
    },
    memoryLimit:{
-     type:Number
+     type:String
    },
    description:{
      type:String,

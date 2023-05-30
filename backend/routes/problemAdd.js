@@ -16,13 +16,7 @@ router.post ('/submit',async (req,res)=>{
         secondSampleOutput,problemSetterAllInputTestCase,
         problemSetterAllOutputTestCase,timeLimit,memoryLimit
         } = req.body;
-    console.log("problem id: "+ id); 
-    console.log("problem name: "+ name); 
-    console.log("problem description: "+ description); 
-
-    console.log("first sample input: "+ firstSampleInput); 
-    console.log("second sample input: "+ secondSampleInput); 
-
+   
     
      try{
         //add to database;
