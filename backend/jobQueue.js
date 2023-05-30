@@ -43,13 +43,19 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
 
             //execute 
-            Array.isArray(job.userInput)
+            Array.isArray(job.input)
             /*?job.userInput.map( async(item) => {
                 console.log("item: "+ item)
                 job['output'] = await executCpp_and_executePy(job,item);
                  
                 }):( job['output'] = await executCpp_and_executePy(job,item))*/
-                job['output'] = await executCpp_and_executePy(job,job.userInput)   
+                if(job.submitType === 'submit'){
+                    job['output'] = await executCpp_and_executePy(job,job.input)   
+
+                }else{
+                    job['output'] = await executCpp_and_executePy(job,job.input)   
+
+                }
 
             
             //Memory2

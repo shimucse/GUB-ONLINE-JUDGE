@@ -168,7 +168,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="must fill"
+              placeholder="must fill(each number in seperate line)"
               onChange={(e)=>{setFirstSampleInput(e.target.value)}}
             />
               <textarea
@@ -177,7 +177,7 @@ export default function AddProblem() {
               type="text areah"
               className=""
               required
-              placeholder="must fill"
+              placeholder="must fill(each number in seperate line)"
               onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
             />
           </div>
@@ -189,7 +189,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="must fill"
+              placeholder="must fill(each number in seperate line)"
               onChange={(e)=>{setSecondSampleInput(e.target.value)}}
             />
               <textarea
@@ -198,7 +198,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="must fill"
+              placeholder="must fill(each number in seperate line)"
 
               onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
             />
@@ -213,7 +213,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give all  input"
+              placeholder="Give all  input (each number in seperate line)"
               onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
             />
              
@@ -229,7 +229,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="Give output"
+              placeholder="Give output (each number in seperate line)"
               onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
             />
           

@@ -22,6 +22,7 @@ const ProblemSubmit =  (props)=>{
     const [jobDetails,setJobDetails ] = useState(null);
     const [customInput, setCustomInput] = useState([]);
     const [customInputFirst, setCustomInputFirst ] = useState("");
+    const [setterInput, setSetterInput] = useState("");
   
     let location = useLocation();
 
@@ -56,28 +57,46 @@ const ProblemSubmit =  (props)=>{
   
    useEffect(()=> {
        let inputTrim = (customInputFirst.trim());
-  
+       const input =
+       'shima\n\
+       saif\n\
+       safwan\n\
+       marwan';
+     setSetterInput(input);
+     setCustomInput(inputTrim);
+
+
     // let inputSplice= (inputTrim.split(/\n/))  
    
   
    
-     setCustomInput(inputTrim);
      
   },[customInputFirst]);
   
     const handleSubmit = async(SubmitType,userInput) =>{
                  
-  
-                 console.log(customInput);
-                 console.log(customInput.length)
+                 
+      console.log('setter input : '+setterInput);
+
                  console.log("callType:"+SubmitType);
                  let deleteId;
-                       const payload = {
-                       language : language,
-                       code:code ,
-                       SubmitType:SubmitType,
-                       userInput:customInput
-                       };
+                 let payload ={};
+                 if(SubmitType === 'submit'){
+                   payload = {
+                           language : language,
+                           code:code ,
+                           SubmitType:SubmitType,
+                           input:setterInput
+                     };
+
+                 }else{
+                            payload = {
+                           language : language,
+                           code:code ,
+                           SubmitType:SubmitType,
+                           input:customInput
+                           };
+                     }
                  try{
                        setJobId("");
                        setStatus("");

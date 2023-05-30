@@ -38,7 +38,7 @@ const JobSchema = mongoose.Schema({
     submitType:{
         type:String
     },
-    userInput : { 
+    input : { 
         type : String
     }
 
