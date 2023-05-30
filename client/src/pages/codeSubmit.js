@@ -9,8 +9,9 @@ import 'codemirror/theme/dracula.css';
 import "codemirror/theme/idea.css";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/closebrackets";
+import { useLocation} from "react-router-dom";
 
-const ProblemSubmit =  ()=>{
+const ProblemSubmit =  (props)=>{
 
     const[code,setCode] = useState('');
     const[output, setOutput] = useState('');
@@ -22,9 +23,12 @@ const ProblemSubmit =  ()=>{
     const [customInput, setCustomInput] = useState([]);
     const [customInputFirst, setCustomInputFirst ] = useState("");
   
-  
+    let location = useLocation();
+
   
    useEffect(()=> {
+      let id = location.state.id
+      console.log("problem id via useLocation"+id);
       setCode(stubs[language]);
    },[language]);
   

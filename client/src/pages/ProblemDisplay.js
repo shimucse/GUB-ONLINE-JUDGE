@@ -1,6 +1,7 @@
 import React , { useState,useEffect } from "react";
 import { useLocation} from "react-router-dom";
 import '../pagesCss/ProblemDisplay.css'
+import { useNavigate } from "react-router-dom";
 
 import Axios from 'axios';
 
@@ -10,6 +11,7 @@ const ProblemDisplay = (props)=>{
   const [problemDes, setProblemDes] = useState('');
   let location = useLocation();
 
+  let navigate = useNavigate();
 
   
  
@@ -87,7 +89,7 @@ const ProblemDisplay = (props)=>{
                   <span className="problemAddDate">Date at :  {val.problemAddDate}</span>
 
               </div>
-              <button>Solve Problem</button>
+              <button onClick={()=>{ navigate("/ProblemSubmit",{state:{id:val.id}});}}>Solve Problem</button>
               </>
                 );
             })
