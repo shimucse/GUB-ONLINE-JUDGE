@@ -61,7 +61,11 @@ const ProblemSubmit =  (props)=>{
        'shima\n\
        saif\n\
        safwan\n\
-       marwan';
+       marwan\n\
+       Jesmin\n\
+       Ruma\n\
+       Rabia\n\
+       Fysal';
      setSetterInput(input);
      setCustomInput(inputTrim);
 

@@ -9,16 +9,19 @@ const {deleteFile} = require('./generateFile');
 
 const Num_WORKERS = 5;
 let filepath;
-const executCpp_and_executePy = async(job,item)=>{
+const executCpp_and_executePy = async(job,item,deleteFileSet)=>{
     let output;
     if(job.language === "cpp"){
         output = await executeCpp(job.filepath,item);
-        await deleteFile(job.filepath);
-        await deleteForDotOut();
+        if(deleteFileSet){
+            await deleteFile(job.filepath);
+            await deleteForDotOut();
+        }
+        
 
     }else {
-        output = await executePy(job.filepath, "safwan");
-        await deleteForDotPy();
+        output = await executePy(job.filepath, item);
+        if(deleteFileSet) await deleteForDotPy();
     } 
     console.log("output from exectue:"+output);
     return output;
@@ -49,11 +52,47 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                 job['output'] = await executCpp_and_executePy(job,item);
                  
                 }):( job['output'] = await executCpp_and_executePy(job,item))*/
-                if(job.submitType === 'submit'){
-                    job['output'] = await executCpp_and_executePy(job,job.input)   
+                let deleteFileSet = true;
 
-                }else{
-                    job['output'] = await executCpp_and_executePy(job,job.input)   
+                if(job.submitType === 'submit'){
+
+                    deleteFileSet = false;
+                    const outputLength =2; 
+                    let jobinput = job.input;                  
+                    let incrementNumber = jobinput.length;
+                    
+                    const linesnum =(jobinput.split("\n")).length;  
+                    let endindex = (outputLength-1);
+                 
+                        for(let i=0; i<linesnum; i = i+outputLength)
+                        {
+                            let newStr;
+                            let inputStr="";
+
+                                for(let j =i; j<outputLength+i; j++){
+                                    
+                                    newStr=  ((jobinput.split('\n')[j]).trim());
+                                    if(j!==(outputLength+i-1)){
+
+                                        newStr = newStr.concat('\n');    
+
+                                    }
+                                    inputStr = inputStr.concat(newStr);                     
+
+                                }
+                                console.log('newStr :  '+inputStr);                   
+                                if(i===(linesnum-2))  {
+                                    console.log("last stage");
+                                    deleteFileSet = true;
+                                    job['output'] = 'Accepted'
+                                }
+                                await executCpp_and_executePy(job,inputStr,deleteFileSet)
+
+                             }
+
+                }else{                   
+
+                    job['output'] = await executCpp_and_executePy(job,job.input,deleteFileSet)   
 
                 }
 
