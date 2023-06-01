@@ -26,7 +26,7 @@ router.post ('/submit',async (req,res)=>{
             problemSetterAllOutputTestCase,timeLimit,memoryLimit
             }).save();
         //include acceptedList after accepted
-        console.log('newProblem'+newProblem);
+      //  console.log('newProblem'+newProblem);
         res.status(201).json({success:true});
         
          

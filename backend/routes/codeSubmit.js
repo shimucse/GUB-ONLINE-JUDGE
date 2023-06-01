@@ -15,9 +15,9 @@ router.get('/', function(req,res){
 router.get('/status',async(req,res)=>{
     //localhost:5000/status?id=
     const jobId = req.query.id;
-    console.log("jobId"+jobId);
+   //  console.log("jobId"+jobId);
     if(jobId == undefined){
-       console.log("job id not undefined")
+      // console.log("job id not undefined")
         return res
              .status(400)
              .json({success : false, error: "missing id quory "})
@@ -47,7 +47,7 @@ router.get('/status',async(req,res)=>{
         
     }try{  
             const result = await Job.deleteOne({"_id": new mongodb.ObjectId(jobId)});
-            console.log(result);
+          //  console.log(result);
          }         
       catch(err){
       //return res.status(400).json({success:false, error:JSON.stringify(err)});
@@ -61,7 +61,8 @@ router.get('/status',async(req,res)=>{
     const {language='cpp',code} = req.body;
     const submitType = req.body.SubmitType;
     const input = req.body.input;
-    console.log("userInput: "+ input);
+    problemId = req.body.problemId;
+    const problemStterOutput = req.body.problemStterOutput;
        //console.log('total memory : ' + os.totalmem() + " bytes.");
       // console.log('free memory : ' + os.freemem() + " bytes.");
  
@@ -74,9 +75,8 @@ router.get('/status',async(req,res)=>{
          //need to generate a c++ file with content from the request 
          const filepath = await generateFile(language,code);
          // we need to run the file and send the response
- 
-          const job = await new Job({language,filepath,submitType,input}).save();
-         // console.log("job from index :" + job);
+         
+          const job = await new Job({language,filepath,submitType,input,problemStterOutput,problemId}).save();
          
          const jobId = job["_id"];
          addJobToQueue(jobId,filepath);

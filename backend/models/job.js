@@ -40,6 +40,12 @@ const JobSchema = mongoose.Schema({
     },
     input : { 
         type : String
+    },
+    problemStterOutput :{
+        type:String
+    },
+    problemId :{
+        type:String
     }
 
 

@@ -89,7 +89,9 @@ const ProblemDisplay = (props)=>{
                   <span className="problemAddDate">Date at :  {val.problemAddDate}</span>
 
               </div>
-              <button onClick={()=>{ navigate("/ProblemSubmit",{state:{id:val.id}});}}>Solve Problem</button>
+              <button onClick={()=>{ navigate("/ProblemSubmit",
+                     {state:{id:val.id,problemStetterInput:val.problemSetterAllInputTestCase, problemStterOutput:val.problemSetterAllOutputTestCase}
+               });}}>Solve Problem</button>
               </>
                 );
             })

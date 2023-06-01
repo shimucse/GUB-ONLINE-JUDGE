@@ -23,13 +23,16 @@ const ProblemSubmit =  (props)=>{
     const [customInput, setCustomInput] = useState([]);
     const [customInputFirst, setCustomInputFirst ] = useState("");
     const [setterInput, setSetterInput] = useState("");
+    const [problemId, setProblemId] = useState('');
+    const [problemSetterInput, setProblemStterInput] = useState('');
+    const [problemStterOutput, setProblemStterOutput] = useState('');
+
+    
   
     let location = useLocation();
 
   
-   useEffect(()=> {
-      let id = location.state.id
-      console.log("problem id via useLocation"+id);
+   useEffect(()=> {     
       setCode(stubs[language]);
    },[language]);
   
@@ -56,20 +59,17 @@ const ProblemSubmit =  (props)=>{
    }
   
    useEffect(()=> {
-       let inputTrim = (customInputFirst.trim());
-       const input =
-       'shima\n\
-       saif\n\
-       safwan\n\
-       marwan\n\
-       Jesmin\n\
-       Ruma\n\
-       Rabia\n\
-       Fysal';
-     setSetterInput(input);
-     setCustomInput(inputTrim);
+      let id = location.state.id
+      let SetterInputLocation = location.state.problemStetterInput;
+      let Setteroutput = location.state.problemStterOutput;
+     // console.log("problem input via useLocation"+SetterInputLocation);
+      //console.log("problem output via useLocation"+Setteroutput);
 
-
+      setProblemId(id);
+      setProblemStterInput(SetterInputLocation);
+      setProblemStterOutput(Setteroutput);
+      let inputTrim = (customInputFirst.trim());      
+      setCustomInput(inputTrim);
     // let inputSplice= (inputTrim.split(/\n/))  
    
   
@@ -77,10 +77,10 @@ const ProblemSubmit =  (props)=>{
      
   },[customInputFirst]);
   
-    const handleSubmit = async(SubmitType,userInput) =>{
+    const handleSubmit = async(SubmitType) =>{
                  
                  
-      console.log('setter input : '+setterInput);
+      console.log('setter input : '+problemSetterInput);
 
                  console.log("callType:"+SubmitType);
                  let deleteId;
@@ -90,7 +90,10 @@ const ProblemSubmit =  (props)=>{
                            language : language,
                            code:code ,
                            SubmitType:SubmitType,
-                           input:setterInput
+                           input:problemSetterInput,
+                           problemStterOutput:problemStterOutput,
+                           problemId:problemId
+                        
                      };
 
                  }else{
@@ -98,7 +101,9 @@ const ProblemSubmit =  (props)=>{
                            language : language,
                            code:code ,
                            SubmitType:SubmitType,
-                           input:customInput
+                           input:customInput,
+                           problemStterOutput:'',
+                           problemId:problemId
                            };
                      }
                  try{
@@ -227,7 +232,7 @@ const ProblemSubmit =  (props)=>{
          </textarea>
          <br/><br/>
    
-         <button onClick={ ()=>handleSubmit("run",customInputFirst)}>Run</button>
+         <button onClick={ ()=>handleSubmit("run")}>Run</button>
          <button onClick={()=>handleSubmit("submit")}>Submit</button> 
         <br/><br/>
         <p>{customInput}</p>

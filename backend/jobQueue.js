@@ -23,7 +23,7 @@ const executCpp_and_executePy = async(job,item,deleteFileSet)=>{
         output = await executePy(job.filepath, item);
         if(deleteFileSet) await deleteForDotPy();
     } 
-    console.log("output from exectue:"+output);
+   // console.log("output from exectue:"+output);
     return output;
 }
 jobQueue.process(Num_WORKERS, async({data})=>{
@@ -42,11 +42,11 @@ jobQueue.process(Num_WORKERS, async({data})=>{
             
             //Memory1
             let Memoryused1 = process.memoryUsage().heapUsed; 
-            console.log("memory1 :"+Memoryused1);
+           // console.log("memory1 :"+Memoryused1);
 
 
             //execute 
-            Array.isArray(job.input)
+            console.log("problemId : "+ job.problemId);
             /*?job.userInput.map( async(item) => {
                 console.log("item: "+ item)
                 job['output'] = await executCpp_and_executePy(job,item);
@@ -57,38 +57,75 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                 if(job.submitType === 'submit'){
 
                     deleteFileSet = false;
-                    const outputLength =2; 
-                    let jobinput = job.input;                  
-                    let incrementNumber = jobinput.length;
+                    const setterOutput = job.problemStterOutput
+                    const outputLength =(setterOutput.split('\n')).length;
+                    console.log('outputLength: '+outputLength); 
+
+
+                    let jobinput = job.input;    
+                  //  console.log("setterinput"+ jobinput);              
+                  
                     
                     const linesnum =(jobinput.split("\n")).length;  
+                    console.log("linesum"+ linesnum);
+
+                    let inputTestCaseAmount = (linesnum/outputLength);
+                    console.log("inputTestCaseAmount"+ inputTestCaseAmount);
+
                     let endindex = (outputLength-1);
-                 
-                        for(let i=0; i<linesnum; i = i+outputLength)
+                       let setterOuputIndex=0;
+                       let userOutput;
+                        for(let i=0; i<linesnum;  i=i+inputTestCaseAmount)
                         {
                             let newStr;
                             let inputStr="";
 
-                                for(let j =i; j<outputLength+i; j++){
+                                for(let j =i; j<i+inputTestCaseAmount; j++)
+                                {
                                     
                                     newStr=  ((jobinput.split('\n')[j]).trim());
-                                    if(j!==(outputLength+i-1)){
+                                    if(j!==(inputTestCaseAmount+i-1)){
 
                                         newStr = newStr.concat('\n');    
 
                                     }
                                     inputStr = inputStr.concat(newStr);                     
-
                                 }
-                                console.log('newStr :  '+inputStr);                   
+                             //  console.log('newStr :  '+inputStr);                   
                                 if(i===(linesnum-2))  {
-                                    console.log("last stage");
+                                  // console.log("last stage");
                                     deleteFileSet = true;
-                                    job['output'] = 'Accepted'
-                                }
-                                await executCpp_and_executePy(job,inputStr,deleteFileSet)
 
-                             }
+                                    //job['output'] = 'Accepted'
+                                }
+                                // match user output with setter output
+                                console.log('setterOuputIndex'+setterOuputIndex)
+                                userOutput=  await executCpp_and_executePy(job,inputStr,deleteFileSet)
+                                let setterOutputtemp  =  ((setterOutput.split('\n')[setterOuputIndex]).trim());
+                               
+                               // console.log("typeOfUser" + typeof(userOutput));
+                               // console.log("typeOfSetter" + typeof(setterOutputtemp));
+                               
+                                /*if((userOutput.localeCompare(setterOutputtemp)) ){
+                                    //forcely terminate the program;
+                                    //job['output'] = 'Accepted'
+                                    console.log("userOutput : "+ userOutput +"setteroutput: "+setterOutputtemp)
+
+                                    console.log("matched")
+                                    job['output'] = 'Accepted'
+
+                                }
+                                else{
+                                    job['output'] = 'Wrong'
+
+                                }*/
+
+                                 //console.log("userInt"+ Number.isInteger(userOutput) ) 
+                               
+                                setterOuputIndex++;
+
+
+                         }
 
                 }else{                   
 
@@ -99,16 +136,16 @@ jobQueue.process(Num_WORKERS, async({data})=>{
             
             //Memory2
             let Memoryused2 = process.memoryUsage().heapUsed;
-            console.log("memory2 :"+Memoryused2);
-            console.log("total Memory used:"+(Memoryused2-Memoryused1) ); 
+           //  console.log("memory2 :"+Memoryused2);
+            //console.log("total Memory used:"+(Memoryused2-Memoryused1) ); 
             let memoryUsedForCompilation =  ((((Memoryused2-Memoryused1)/ 1024 / 1024)*100)/100);
-            console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"MB");           
+          //  console.log("memoryUsedForCompilationProgramm"+ memoryUsedForCompilation+"MB");           
 
 
             job['completedAt'] = new Date();
             job['status'] = "success";
             job['memorySpace'] = memoryUsedForCompilation;
-            console.log("job memorySpace"+job.memorySpace);
+          //  console.log("job memorySpace"+job.memorySpace);
             await job.save();  
             
     }catch(err){
