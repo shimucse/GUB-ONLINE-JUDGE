@@ -100,13 +100,14 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                                 }
                                 // match user output with setter output
                                 console.log('setterOuputIndex'+setterOuputIndex)
-                                userOutput=  await executCpp_and_executePy(job,inputStr,deleteFileSet)
+                                userOutput=  await executCpp_and_executePy(job,inputStr,deleteFileSet);
+                                let kosto = userOutput.trim();
                                 let setterOutputtemp  =  ((setterOutput.split('\n')[setterOuputIndex]).trim());
                                
                                // console.log("typeOfUser" + typeof(userOutput));
                                // console.log("typeOfSetter" + typeof(setterOutputtemp));
                                
-                                /*if((userOutput.localeCompare(setterOutputtemp)) ){
+                                if(kosto==setterOutputtemp){
                                     //forcely terminate the program;
                                     //job['output'] = 'Accepted'
                                     console.log("userOutput : "+ userOutput +"setteroutput: "+setterOutputtemp)
@@ -116,9 +117,11 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
                                 }
                                 else{
-                                    job['output'] = 'Wrong'
+                                    job['output'] = 'Wrong';
+                                    console.log("wrong")
+                                    i = linesnum; //programed terminated;
 
-                                }*/
+                                }
 
                                  //console.log("userInt"+ Number.isInteger(userOutput) ) 
                                
