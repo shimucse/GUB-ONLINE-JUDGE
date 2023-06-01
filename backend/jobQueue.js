@@ -119,6 +119,8 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                                 else{
                                     job['output'] = 'Wrong';
                                     console.log("wrong")
+                                   await executCpp_and_executePy(job,inputStr,true);//for delete the file execute again
+
                                     i = linesnum; //programed terminated;
 
                                 }
