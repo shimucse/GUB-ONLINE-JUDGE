@@ -56,4 +56,6 @@ get data with id :
 for print response
             console.log("response data",response.data);//not +
 
+.join() for only array
+
 

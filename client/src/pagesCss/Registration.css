@@ -1,0 +1,41 @@
+
+
+
+.body_column {
+    margin-top: 100px;
+    
+    height: 670px;
+
+}
+.login_form{
+    margin-left: 24%;
+    width: 700px;
+    text-align: center;
+
+
+}
+.signup_page_header{
+
+    background-color: rgb(228, 226, 222); 
+   
+    border-top-left-radius:15px ;
+    border-top-right-radius:15px ;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-bottom: none;
+    height: 30px;
+    padding: 10px;
+    display: block;
+
+
+
+}
+.login_form form{
+ padding-top: 40px;
+ border: 1px solid;
+ height: 400px;
+ border-color: #dddddd ;
+
+}
+
+

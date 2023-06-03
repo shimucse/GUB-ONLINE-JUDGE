@@ -10,6 +10,7 @@ import ProblemSubmit from './pages/codeSubmit'
 import ProblemList from './pages/ProblemList';
 import ProblemHtml from './pages/problemHtml';
 import HomePage from './pages/Home';
+import Registration from './pages/Registration';
 
 function App() {
    const [active, setActive] = useState('');
@@ -24,6 +25,9 @@ function App() {
         <Link to={"AddNewProblem"}>Add New Problem</Link>
         <br/>
         <Link to={"ProblemList"}>ProblemList</Link>
+        <br />
+
+        <Link to={"Registration"}>Registration</Link>
 
         </nav>
         <Routes>
@@ -32,6 +36,8 @@ function App() {
           <Route exact path="ProblemList" element={<ProblemList/>}/>
           <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
           <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
+          <Route exact path="Registration" element={<Registration/>}/>
+
         </Routes>
       </BrowserRouter>    
       
