@@ -4,7 +4,7 @@ const router = express.Router();
 const cors = require("cors");
 const userDb = require('../models/user');
 
-
+const jwt = require('jsonwebtoken');
 
 
 router.get('/', async function(req,res){
@@ -22,11 +22,49 @@ router.post ('/register',async (req,res)=>{
          
           const newUser = await new userDb({email,firstName, lastName,password}).save();
           console.log("newUser"+newUser);
-          res.status(201).json({success:true,newUser});
+          return res.status(201).json({success:true,newUser});
         
          
      }catch(err){
         return res.status(500).json({success:false, err: JSON.stringify(err)});
+     }
+        
+ });
+ router.post ('/login',async (req,res)=>{ 
+    console.log('login')
+ 
+    const {email,password}= req.body;
+    
+   
+     try{
+         
+         
+          const user = await  userDb.findOne(
+            {
+                 email:email,
+                 password:password,
+            });
+                if(user){
+
+                    const token = jwt.sign({
+                        name:user.firstName,
+                        email:user.email,
+
+                    }, 'secret123')
+                    //console.log('login sucess'); 
+                    return res.status(201).json({success:true,newUser});
+
+                }
+                else{
+                   // console.log("wrong email or pass")
+                    return res.status(500).json({success:false, err: JSON.stringify(err)});
+
+
+                }
+         
+     }catch(err){
+        return res.json({status:'error', user:false})
+
      }
         
  });

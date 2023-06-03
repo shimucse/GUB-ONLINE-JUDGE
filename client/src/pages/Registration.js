@@ -27,17 +27,20 @@ const Registration = ()=>{
                   };
           
               const {data} = await Axios.post("http://localhost:5000/RegistraionAndLogin/register", payload);
-             // const {data} = await Axios.delete("http://localhost:5000/RegistraionAndLogin/delete");
-             //  const data = await Axios.get("http://localhost:5000/RegistraionAndLogin/read");
+              //const {data} = await Axios.delete("http://localhost:5000/RegistraionAndLogin/delete");
+            //  const data = await Axios.get("http://localhost:5000/RegistraionAndLogin/read");
 
 
-             // setJobId(data.jobId);                         
+             // setJobId(data.jobId);           
+            alert('Registration completed  sucessfully');
+                       
               
         }
         catch({response}){
               if(response){
                  const errMsg = response.data.err;
-                 console.log("error from registration")
+                 window.confirm('Email should be unique');
+
            }else{
               console.log("Error connecting to server!");
            }
@@ -87,7 +90,7 @@ const Registration = ()=>{
                                     type="password"
                                     id="pwd"
                                     name="pwd"
-                                    minlength="8"
+                                    minlength="7"
                                     value={password}
                                     onChange={(e)=>setPassword(e.target.value)}
                                 /><br/><br/>

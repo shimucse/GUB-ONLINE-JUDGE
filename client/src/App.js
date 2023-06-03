@@ -11,6 +11,8 @@ import ProblemList from './pages/ProblemList';
 import ProblemHtml from './pages/problemHtml';
 import HomePage from './pages/Home';
 import Registration from './pages/Registration';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 
 function App() {
    const [active, setActive] = useState('');
@@ -28,6 +30,8 @@ function App() {
         <br />
 
         <Link to={"Registration"}>Registration</Link>
+        <br />
+        <Link to={"Login"}>Login</Link>
 
         </nav>
         <Routes>
@@ -37,6 +41,9 @@ function App() {
           <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
           <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
           <Route exact path="Registration" element={<Registration/>}/>
+          <Route exact path="Login" element={<Login/>}/>
+          <Route exact path="Dashboard" element={<Dashboard/>}/>
+
 
         </Routes>
       </BrowserRouter>    

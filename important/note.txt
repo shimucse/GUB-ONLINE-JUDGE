@@ -38,7 +38,7 @@ install codemirror 3.2.1
 install MDEditor for text editor
 
 for redirect to another page :
-npm i react-router-dom
+npm i react-router-dom // for using different page
 import { BrowserRouter, Routes, Route,Link,Router,Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom"; for go another page
 //for pass value to other page 
@@ -58,4 +58,9 @@ for print response
 
 .join() for only array
 
+install jsonwebtoken on backend
+allow us to sign 
+npm add jsonwebtoken
 
+
+window.confirm and alert are same

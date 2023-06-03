@@ -1,0 +1,30 @@
+.login_form{
+    margin-left: 28%;
+    width: 600px;
+    text-align: center;
+
+
+}
+.login_page_header{
+
+    background-color: rgb(228, 226, 222); 
+   
+    border-top-left-radius:15px ;
+    border-top-right-radius:15px ;
+    border: 1px solid;
+    border-color: #dddddd;
+    border-bottom: none;
+    height: 30px;
+    padding: 10px;
+    display: block;
+
+
+
+}
+.login_form form{
+ padding-top: 40px;
+ border: 1px solid;
+ height: 250px;
+ border-color: #dddddd ;
+
+}
