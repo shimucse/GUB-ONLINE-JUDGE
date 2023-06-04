@@ -64,3 +64,17 @@ npm add jsonwebtoken
 
 
 window.confirm and alert are same
+JSON.parse:When receiving data from a web server, the data is always a string.
+
+Parse the data with JSON.parse(), and the data becomes a JavaScript object.
+
+In frontend/client 
+npm add jsonwebtoken its shows errror while import 
+
+thats why 
+npm i jwt-decode 
+import jwtDecode from 'jwt-decode'
+const decoded = jwtDecode(token)
+console.log(decoded)
+//it worked
+

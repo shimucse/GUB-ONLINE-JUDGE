@@ -1,8 +1,14 @@
 import React , { useState,useEffect } from "react";
 import '../pagesCss/Registration.css'
 import Axios from 'axios';
+import { useNavigate } from "react-router-dom";
+
 
 const Registration = ()=>{
+
+    let navigate = useNavigate();
+
+
     const[firstName, setFirstName] = useState('');
     const[lastName, setLastName] = useState('');
 
@@ -31,7 +37,12 @@ const Registration = ()=>{
             //  const data = await Axios.get("http://localhost:5000/RegistraionAndLogin/read");
 
 
-             // setJobId(data.jobId);           
+             // setJobId(data.jobId); 
+             console.log(data);       
+             if(data.success === true)   {
+                console.log('success true');
+                 navigate('/Login');
+             }
             alert('Registration completed  sucessfully');
                        
               

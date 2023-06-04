@@ -52,12 +52,12 @@ router.post ('/register',async (req,res)=>{
 
                     }, 'secret123')
                     //console.log('login sucess'); 
-                    return res.status(201).json({success:true,newUser});
+                    return res.status(201).json({success:true,user:token});
 
                 }
                 else{
                    // console.log("wrong email or pass")
-                    return res.status(500).json({success:false, err: JSON.stringify(err)});
+                    return res.status(500).json({success:false, user:false});
 
 
                 }
@@ -96,5 +96,45 @@ router.post ('/register',async (req,res)=>{
     }
   
  })
+ router.get ('/quote',async (req,res)=>{ 
+    console.log('quote')
+    const token = req.headers['x-access-token']   
+    
+    
+     try{
+             const decode = jwt.verify(token, 'secret123');
+             const email = decode.email;
+            console.log("gmail"+ email);
+             const user = await userDb.findOne({email:email});
+             console.log("userFirstName"+ user.firstName);
+              
+            return res.status(201).json({success:true, firstName:user.firstName})
+
+         
+     }catch(error){
+        return res.status(500).json({status:'error', error:'invalid token'})
+
+     }
+        
+ });
+ router.post ('/quote',async (req,res)=>{ 
+    console.log('quote')
+    const token = req.header['x-access-token']  
+   
+
+    
+    try{
+            const decode = jwt.verify(token, 'secret123');
+         //   const email = decoded.email;
+         //   await userDb.updateOne({email:email},{$set:{firstName:req.body.firstName}})
+              
+            return res.status(201).json({success:true})
+         
+     }catch(error){
+        return res.status(500).json({status:'error', error:'invalid token'})
+
+     }
+        
+ });
  
 module.exports = router;

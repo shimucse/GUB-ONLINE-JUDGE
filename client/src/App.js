@@ -32,6 +32,7 @@ function App() {
         <Link to={"Registration"}>Registration</Link>
         <br />
         <Link to={"Login"}>Login</Link>
+        <br />
 
         </nav>
         <Routes>
@@ -43,6 +44,7 @@ function App() {
           <Route exact path="Registration" element={<Registration/>}/>
           <Route exact path="Login" element={<Login/>}/>
           <Route exact path="Dashboard" element={<Dashboard/>}/>
+
 
 
         </Routes>

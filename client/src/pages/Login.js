@@ -6,7 +6,12 @@ const Login = ()=>{
     const[email, setEmail] = useState('');
 
     const[password, setPassword] = useState('');
+    const [user, setUser] = useState('');
 
+   
+     
+
+      //login the user
     const loginUser = async(e)=>{
         e.preventDefault();
 
@@ -22,23 +27,33 @@ const Login = ()=>{
               const {data} = await Axios.post("http://localhost:5000/RegistraionAndLogin/login", payload);
              // const {data} = await Axios.delete("http://localhost:5000/RegistraionAndLogin/delete");
              //  const data = await Axios.get("http://localhost:5000/RegistraionAndLogin/read");
-             window.confirm('login sucessfull');
+            // const dataExtract = await data.json();
+             console.log(data.user);
+            if(data.user){
+                localStorage.setItem('token', data.user);
+                window.confirm('login sucessfull');
+                window.location.href='/Dashboard';
+
+            }else{
+                alert('Please check your username password');
+            }
 
               
         }
         catch({response}){
               if(response){
                  const errMsg = response.data.err;
-                 window.confirm('Wrong email or password');
+                 window.confirm('Please check your username password');
 
            }else{
               console.log("Error connecting to server!");
            }
-        }
-       
+        }   
         
         }
 
+               
+    //if there's no user, show the login form
     return(
         <>
            <h1>Login Form</h1>
@@ -72,6 +87,7 @@ const Login = ()=>{
                                       
                     
                 </form> 
+
             </div>
         </>
     );
