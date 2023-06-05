@@ -27,11 +27,10 @@ function App() {
         <Link to={"AddNewProblem"}>Add New Problem</Link>
         <br/>
         <Link to={"ProblemList"}>ProblemList</Link>
-        <br />
 
-        <Link to={"Registration"}>Registration</Link>
         <br />
-        <Link to={"Login"}>Login</Link>
+       
+        <Link to={"Logout"}>Login/Logout</Link>
         <br />
 
         </nav>

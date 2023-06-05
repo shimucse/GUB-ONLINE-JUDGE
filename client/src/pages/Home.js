@@ -2,9 +2,16 @@ import React from "react";
 import ReactDOM from 'react-dom';
 
 import { BrowserRouter as Router,  Route, Redirect,Routes} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import '../pagesCss/Home.css'
 
+import Registration from './Registration';
+import Login from "./Login";
+
+
 const Home = ()=>{
+    let navigate = useNavigate();
 
   return (
       <>
@@ -21,8 +28,8 @@ const Home = ()=>{
                           <span className="H_programmer">Programmer</span>
                     </div>
                     <div className="H_login_signup_div">
-                        <a href=""><button className="H_login_button">Login</button></a>
-                        <a href=""> <button className="H_signup_button">Signup</button></a>
+                        <a href=""><button className="H_login_button" onClick={()=>navigate("/Login")}>Login</button></a>
+                        <a href=""> <button className="H_signup_button"onClick={()=>navigate("/Registration")}>Signup</button></a>
                     </div>
 
               </div>
