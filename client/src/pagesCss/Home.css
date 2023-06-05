@@ -9,7 +9,7 @@
 .H_body_column {
     margin-top: 100px;
     display: grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:70% 30% 1fr 1fr;
     height: 670px;
 
 }
@@ -74,8 +74,6 @@
     display: grid;
     grid-template-columns: 1fr;
     background-color: white;
-    margin-right: 50px;
-    margin-bottom:50px;
     border: solid;
     border-radius: 15px;
     border-color: rgb(246, 251, 244);

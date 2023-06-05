@@ -15,7 +15,6 @@
 .body_column {
   margin-top: 100px;
   display: grid;
-  height: 670px;
 
 }
 
@@ -51,15 +50,15 @@
 .input_format, .output_format{
     margin-top: 70px;
     font-size: 20px;
+    text-align: left;
+
 }
 .input_output_table table{
-    width: 97%;
+    width: 100%;
     font-size: 20px;
     margin-top: 30px;
     margin-bottom: 70px;
-    border-right: none;
     height: 250px;
-    margin-left: 20px;
     
 }
 
@@ -72,22 +71,15 @@
 .input_output_table th, .input_output_table td {
     padding: 8px;
     border: 1px solid;
-    border-color: #f5e9e9;
-    border-right: none;
+    border-color: #e9d7d7;
 
 
   }
-  .input_output_table td {
-     border-bottom: none;
-     border-top: none;
-
-  }
-  
+ 
   .input_output_table .total_test_case{
      text-align: center;
      border: 1px solid;
      border-color: #f5e9e9;
-     border-right: none;
 
   }
   
@@ -97,9 +89,16 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    border-right: none;
 
   }
   
 
-
+  .problemSubmit_btn{
+      width: 150px;
+      height: 50px;
+      border-radius: 12px;
+      border: none;
+      float: left;
+      background-color:rgb(245, 223, 153) ;
+      font-size: 20px;
+    }

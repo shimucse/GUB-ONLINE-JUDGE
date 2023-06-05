@@ -65,8 +65,8 @@ const ProblemList = ()=>{
                         )}                   
                   </table>
                   <div className="next_previou_button">
-                    <button href={"" }className="previous">&laquo; Previous</button>
-                    <button href={""} className="next">Next &raquo;</button>
+                    <button href={"" }className="previous"><a>&laquo; Previous</a></button>
+                    <button href={""} className="next"><a>Next &raquo;</a></button>
                 </div>  
             </div>
           </div>
