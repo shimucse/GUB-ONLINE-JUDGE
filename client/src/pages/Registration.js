@@ -61,62 +61,65 @@ const Registration = ()=>{
         }
     return(
             <>
-               <div className="body_column">  
-                     <h1>Register</h1>      
-                    <div className="login_form">
-                        <span className="signup_page_header">Signup into GUB Online Judge</span>
+            <div class="wrap">
+
+                <div className="body_column">  
+                        <h1>Register</h1>      
+                        <div className="registraion_form">
+                            <span className="signup_page_header">Signup into GUB Online Judge</span>
 
 
-                        <form onSubmit={registerUser} >
-                            <label for="firstName">First Name:</label>
-                            <input
-                                 type="text" 
-                                 id="first_name" 
-                                 name="firstName"
-                                 value={firstName}
-                                 onChange={(e)=>setFirstName(e.target.value)}
-                            />
-                            <br/><br/>
-
-                            <label for="email">LastName:</label>
-                                <input 
+                            <form onSubmit={registerUser} >
+                                <label for="firstName">First Name:</label>
+                                <input
                                     type="text" 
-                                    id="lastName" 
-                                    name="lastName"
-                                    value={lastName}
-                                 onChange={(e)=>setLastName(e.target.value)}
-                                /><br/><br/>
+                                    id="first_name" 
+                                    name="firstName"
+                                    value={firstName}
+                                    onChange={(e)=>setFirstName(e.target.value)}
+                                />
+                                <br/><br/>
 
-                                <label for="email">Email:</label>
-                                <input 
-                                    type="email"
-                                    id="email" 
-                                    name="email"
-                                    value={email}
-                                    onChange={(e)=>setEmail(e.target.value)}
-                                /><br/><br/>
+                                <label for="email">LastName:</label>
+                                    <input 
+                                        type="text" 
+                                        id="lastName" 
+                                        name="lastName"
+                                        value={lastName}
+                                    onChange={(e)=>setLastName(e.target.value)}
+                                    /><br/><br/>
 
-                                <label for="pwd">Password:</label>
-                                <input 
-                                    type="password"
-                                    id="pwd"
-                                    name="pwd"
-                                    minlength="7"
-                                    value={password}
-                                    onChange={(e)=>setPassword(e.target.value)}
-                                /><br/><br/>
+                                    <label for="email">Email:</label>
+                                    <input 
+                                        type="email"
+                                        id="email" 
+                                        name="email"
+                                        value={email}
+                                        onChange={(e)=>setEmail(e.target.value)}
+                                    /><br/><br/>
 
-                               
+                                    <label for="pwd">Password:</label>
+                                    <input 
+                                        type="password"
+                                        id="pwd"
+                                        name="pwd"
+                                        minlength="7"
+                                        value={password}
+                                        onChange={(e)=>setPassword(e.target.value)}
+                                    /><br/><br/>
 
-                                <input type="submit" value="Signup" /><br/><br/><br/><br/>
-                                <label for="text">Already a member? </label>
-                                <a href={""}>Log In </a><br/><br/>
-                 
-               
-                        </form> 
-                        
-                    </div>
+                                
+
+                                    <input type="submit" value="Signup" /><br/><br/><br/><br/>
+                                    <label for="text">Already a member? </label>
+                                    <a href={""}>Log In </a><br/><br/>
+                    
+                
+                            </form> 
+                            
+                        </div>
                 </div>
+           </div>
 
 </>
     );

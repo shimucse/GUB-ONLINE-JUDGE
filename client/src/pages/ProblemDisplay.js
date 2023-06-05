@@ -32,70 +32,71 @@ const ProblemDisplay = (props)=>{
    
 
   return(
-    <div>
     
 
       <div className="wrap">
-      {Array.isArray(problemDes)
-        ? problemDes.map((val, key)  => {
-            return(
-              <>
-                         
-              <div className="left_column">
+      <div class="body_column">
 
-                  <div className="problem_header">
-                     <span className="problem_id">{val.id}.<span className ="problem_name">{val.name}</span></span>
-                     
-                     <span className="time_limit">time limit per test:  {val.timeLimit}s</span>
-                     <span className="memory_limit">memory limit per test: {val.memoryLimit}</span>
+            {Array.isArray(problemDes)
+              ? problemDes.map((val, key)  => {
+                  return(
+                    <>
+                              
+                    <div className="left_column">
+
+                        <div className="problem_header">
+                          <span className="problem_id">{val.id}.<span className ="problem_name">{val.name}</span></span>
+                          
+                          <span className="time_limit">time limit per test:  {val.timeLimit}s</span>
+                          <span className="memory_limit">memory limit per test: {val.memoryLimit}</span>
+                          
+
+                        </div>
+
+                        <div className="problem_description">
+                          <p className="problem_description_middle">{val.description}</p>
                     
+                        </div>
 
-                  </div>
+                        <div className="input_format">
+                            <h3>Input</h3>
+                            <span>{val.inputFormat}</span>
+                        </div>
+                        <div className="output_format">
+                          <h3>Output</h3>
+                          <span>{val.outputFormat}</span>
+                        </div>
+                    </div>
 
-                  <div className="problem_description">
-                    <p className="problem_description_middle">{val.description}</p>
-              
-                  </div>
+                    <div className="input_output_table">
+                        <table>
+                          <th>input</th>    
+                          <th>output</th>
 
-                   <div className="input_format">
-                      <h3>Input</h3>
-                      <span>{val.inputFormat}</span>
-                   </div>
-                   <div className="output_format">
-                    <h3>Output</h3>
-                    <span>{val.outputFormat}</span>
-                   </div>
-              </div>
+                            <tr>
+                                                    
+                              </tr>
+                              <tr>
+                              <td>{val.firstSampleInput}</td>
+                              <td>{val.firstSampleOutput}</td> 
+                            </tr>
+                              <tr>
+                                <td>{val.secondSampleInput} </td>
+                                <td>{val.secondSampleOutput}</td>
+                              </tr>                
+                          
+                        </table> 
+                        <span className="setterName">Problem Set By:  {val.problemSetterName}</span>
+                        <span className="problemAddDate">Date at :  {val.problemAddDate}</span>
 
-              <div className="input_output_table">
-                  <table>
-                    <th>input</th>    
-                     <th>output</th>
-
-                      <tr>
-                                               
-                        </tr>
-                        <tr>
-                        <td>{val.firstSampleInput}</td>
-                        <td>{val.firstSampleOutput}</td> 
-                      </tr>
-                        <tr>
-                          <td>{val.secondSampleInput} </td>
-                          <td>{val.secondSampleOutput}</td>
-                        </tr>                
-                    
-                  </table> 
-                  <span className="setterName">Problem Set By:  {val.problemSetterName}</span>
-                  <span className="problemAddDate">Date at :  {val.problemAddDate}</span>
-
-              </div>
-              <button onClick={()=>{ navigate("/ProblemSubmit",
-                     {state:{id:val.id,problemStetterInput:val.problemSetterAllInputTestCase, problemStterOutput:val.problemSetterAllOutputTestCase}
-               });}}>Solve Problem</button>
-              </>
-                );
-            })
-            : console.log("no data found;")}
+                    </div>
+                    <button onClick={()=>{ navigate("/ProblemSubmit",
+                          {state:{id:val.id,problemStetterInput:val.problemSetterAllInputTestCase, problemStterOutput:val.problemSetterAllOutputTestCase}
+                    });}}>Solve Problem</button>
+                    </>
+                      );
+                  })
+                  : console.log("no data found;")}
           </div>
 
 

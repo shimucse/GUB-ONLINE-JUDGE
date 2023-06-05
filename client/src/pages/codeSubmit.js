@@ -9,7 +9,10 @@ import 'codemirror/theme/dracula.css';
 import "codemirror/theme/idea.css";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/closebrackets";
+
+
 import { useLocation} from "react-router-dom";
+import "../pagesCss/codeSubmit.css"
 
 const ProblemSubmit =  (props)=>{
 
@@ -177,9 +180,10 @@ const ProblemSubmit =  (props)=>{
       
     return (
      
-        <div className="App">
+      <div className="wrap">
         <h1>Online Code Compiler</h1>
-        <div>
+        <div className="body_column">
+          <div>
            <select
              value={language}
              onChange={
@@ -199,9 +203,9 @@ const ProblemSubmit =  (props)=>{
                <option value="py">Python</option>
            </select>
         </div>
-        <CodeMirror
-             height='200px'
-             width='600px'
+        <CodeMirror className="editor"
+             height='400px'
+             width='1500px'
              options={{
                theme: 'dracula',
                tabSize: 2,
@@ -222,9 +226,8 @@ const ProblemSubmit =  (props)=>{
    
        
         <h3>Test against Custom Input</h3>
-        <textarea
-            rows ='8'
-             cols='75'
+        <textarea className='customInput'
+            
              value={customInputFirst}
              onChange={(e)=>{setCustomInputFirst(e.target.value)}}
             
@@ -232,16 +235,16 @@ const ProblemSubmit =  (props)=>{
          </textarea>
          <br/><br/>
    
-         <button onClick={ ()=>handleSubmit("run")}>Run</button>
-         <button onClick={()=>handleSubmit("submit")}>Submit</button> 
-        <br/><br/>
+         <button className='run_btn' onClick={ ()=>handleSubmit("run")}>Run</button>
+         <button className ='submit_btn'onClick={()=>handleSubmit("submit")}>Submit</button> 
+        
         <p>{customInput}</p>
         <p>{status}</p>
         <p>{jobId && `JobId: ${jobId}`}</p>
         <p>{renderTimeDetailse()}</p>
         <p>{output}</p>
         <p>Memory space :{jobMemory}MB</p>
-       
+       </div>
        </div>
     );
   }

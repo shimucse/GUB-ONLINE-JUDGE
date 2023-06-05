@@ -68,7 +68,8 @@ export default function AddProblem() {
   }
   return (
     <>
-      <div className="">
+        <div class="wrap">
+          <div class="body_column">
         <h1 className="">
           Problem
         </h1>
@@ -244,7 +245,7 @@ export default function AddProblem() {
 
 
       </div>
-     
+    </div> 
     </>
   );
 }

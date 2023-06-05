@@ -1,13 +1,21 @@
-
-
-
-.body_column {
-    margin-top: 100px;
+.wrap{
+    background-color: rgb(246, 251, 244);
+    width: 75%;
+    height: 100%;
+    margin-left: 12.5%;
+    margin-top: 0px;
     
+    /*border:solid;
+    border-radius: 10px;
+    border-color:rgb(223, 243, 215) ;*/
+  }
+  .body_column {
+    margin-top: 100px;
+    display: grid;
     height: 670px;
 
 }
-.login_form{
+.registraion_form{
     margin-left: 24%;
     width: 700px;
     text-align: center;
@@ -30,11 +38,12 @@
 
 
 }
-.login_form form{
+.registraion_form form{
  padding-top: 40px;
  border: 1px solid;
  height: 400px;
  border-color: #dddddd ;
+ background-color: rgb(247, 246, 248);
 
 }
 

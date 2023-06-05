@@ -56,39 +56,44 @@ const Login = ()=>{
     //if there's no user, show the login form
     return(
         <>
-           <h1>Login Form</h1>
-           <div className="login_form">
-               <span className="login_page_header">Login into GUB Online Judge</span>
-               <form onSubmit={loginUser} >
-                        <label for="email">Email:</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email"
-                            value={email}
-                            onChange={(e)=>setEmail(e.target.value)}
-                            
-                        />
-                        <br/><br/>
-                        <label for="pwd">Password:</label>
-                        <input
-                             type="password" 
-                             id="pwd" name="pwd"
-                             minlength="7"
-                             value={password}
-                             onChange={(e)=>setPassword(e.target.value)}
-                        />
-                        <br/><br/>
-                        <input 
-                            type="submit"
-                             value="Login"
-                        />
-                            <br/><br/><br/><br/>
-                                      
-                    
-                </form> 
+        <div class="wrap">
+            <div class="body_column">
+                
+                    <h1>Login Form</h1>
+                    <div className="login_form">
+                        <span className="login_page_header">Login into GUB Online Judge</span>
+                        <form onSubmit={loginUser} >
+                                    <label for="email">Email:</label>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email"
+                                        value={email}
+                                        onChange={(e)=>setEmail(e.target.value)}
+                                        
+                                    />
+                                    <br/><br/>
+                                    <label for="pwd">Password:</label>
+                                    <input
+                                        type="password" 
+                                        id="pwd" name="pwd"
+                                        minlength="7"
+                                        value={password}
+                                        onChange={(e)=>setPassword(e.target.value)}
+                                    />
+                                    <br/><br/>
+                                    <input 
+                                        type="submit"
+                                        value="Login"
+                                    />
+                                        <br/><br/><br/><br/>
+                                                
+                                
+                            </form> 
 
+                    </div>
             </div>
+        </div>
         </>
     );
 }

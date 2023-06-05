@@ -6,3 +6,6 @@ matching Setter output and code output is tough
 
 //gmail created as unique but it didnt worked because i already add same email few time then made "unique:true" thats why its matched up 
 after that removing all data then unique key started working.
+
+//codeMirror css in line
+dont workd from css file

@@ -1,0 +1,113 @@
+
+.H_wrap{
+    background-color: rgb(246, 251, 244);
+    width: 75%;
+    height: 100%;
+    margin-left: 12.5%;
+    margin-top: 0px;
+}
+.H_body_column {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    height: 670px;
+
+}
+
+.H_right_body_column, .H_left_body_column {
+    font-size: 30px;
+    text-align: center;
+}
+
+.H_left_body_column{
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 5px;
+    grid-template-rows: 300px 300px;
+
+}
+.H_quote{
+}
+
+.H_unleash, .H_skill, .H_it_will, .H_rockstar,.H_programmer{
+    font-size: 50px;
+    display: block;
+    text-align: center;
+    
+}
+.H_unleash, .H_programmer{
+    background: linear-gradient(to right,green 10%,  rgb(245, 223, 153)  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+.H_skill, .H_rockstar{
+/*    background: linear-gradient(to right,black 0%,  rgb(235, 183, 13)  90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;*/
+}
+.H_login_signup_div{
+}
+.H_login_button, .H_signup_button{
+    margin-top: 0;
+    width: 200px;
+    height: 50px;
+    font-size: 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 30px;
+    border-radius: 10px;     
+    
+}
+.H_login_button:hover, .H_signup_button:hover{
+    opacity: 0.3;
+    transform: 2s;
+}
+.H_signup_button{
+    background-color:rgb(245, 223, 153) ;
+    margin-left: 50px;
+    color:black;
+}
+.H_right_body_column {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: white;
+    margin-right: 50px;
+    margin-bottom:50px;
+    border: solid;
+    border-radius: 15px;
+    border-color: rgb(246, 251, 244);
+    box-shadow: 1px 5px 5px  5px rgb(223, 243, 215); 
+    text-align: center;
+    font-size: 20px;
+
+}
+.H_contest_img{
+    margin-left: 25%;
+}
+.H_contest_join{
+    width: 150px;
+    background-color: rgb(75, 134, 115); 
+    color:white;
+    font-size: 20px;
+    margin-left: 37%;
+    border: none;
+    margin-bottom: 50px;
+}
+.H_upcoming_contest{
+
+    line-height: 80px;
+    font-size: 25px;
+}
+.H_contest,.name,.date, .start, .end{
+    font-size: 25px;
+    font-weight: bold;
+    color:  rgb(75, 134, 115); 
+}
+.H_contest_name, .H_contest_date, .H_contest_start,.H_contest_end{
+    display: block;
+    line-height: 32px;
+
+}
