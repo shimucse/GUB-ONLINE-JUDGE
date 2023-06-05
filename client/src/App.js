@@ -21,32 +21,38 @@ function App() {
     <div className="App">
      
      <BrowserRouter>
-        <nav>
-        <Link to={"/"}>Home</Link>
-        <br />
-        <Link to={"AddNewProblem"}>Add New Problem</Link>
-        <br/>
-        <Link to={"ProblemList"}>ProblemList</Link>
-
-        <br />
-       
-        <Link to={"Logout"}>Login/Logout</Link>
-        <br />
+        <nav className="nav">
+          <li>
+              <a><Link to={"/"}>Home</Link></a>
+         </li>
+            <br />
+          <li>
+              <a><Link to={"AddNewProblem"}>Add New Problem</Link></a>
+          </li>
+            <br/>
+          <li>
+            <a><Link to={"ProblemList"}>ProblemList</Link></a>
+          </li>
+            <br />
+           <li>
+             <a><Link to={"Logout"}>Login/Logout</Link></a>
+            </li>
+            <br />
 
         </nav>
-        <Routes>
-          <Route index element={<HomePage />} />
-          <Route exact path="AddNewProblem" element={<AddProblem/>}/>
-          <Route exact path="ProblemList" element={<ProblemList/>}/>
-          <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
-          <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
-          <Route exact path="Registration" element={<Registration/>}/>
-          <Route exact path="Login" element={<Login/>}/>
-          <Route exact path="Dashboard" element={<Dashboard/>}/>
+        <div className="container">
 
-
-
-        </Routes>
+            <Routes >
+                <Route clssName="HomePage" index element={<HomePage />} />
+                <Route  exact path="AddNewProblem" element={<AddProblem/>}/>
+                <Route exact path="ProblemList" element={<ProblemList/>}/>
+                <Route exact path="ProblemSubmit" element={<ProblemSubmit/>}/>
+                <Route exact path="ProblemDisplay" element={<ProblemDisplay/>}/>
+                <Route exact path="Registration" element={<Registration/>}/>
+                <Route exact path="Login" element={<Login/>}/>
+                <Route exact path="Dashboard" element={<Dashboard/>}/>
+            </Routes>
+        </div>
       </BrowserRouter>    
       
     </div>
