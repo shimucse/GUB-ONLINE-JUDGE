@@ -13,8 +13,8 @@ const ProblemDisplay = (props)=>{
 
   let navigate = useNavigate();
 
-  
- 
+  const token = localStorage.getItem('token');
+
    useEffect(()=>{
 
       let id = location.state.id
@@ -43,9 +43,19 @@ const ProblemDisplay = (props)=>{
                         <>
                                   
                         <div className="left_column">
-                        <button className="problemSubmit_btn"onClick={()=>{ navigate("/ProblemSubmit",
+                        <button className="problemSubmit_btn"onClick=
+                        {()=>{ 
+                            if(token)
+                            {
+                               navigate("/ProblemSubmit",
                               {state:{id:val.id,problemStetterInput:val.problemSetterAllInputTestCase, problemStterOutput:val.problemSetterAllOutputTestCase}
-                        });}}>Solve Problem</button>
+                               });
+                             }
+                             else{
+                                window.alert("You have to login ");
+                             }
+                        }}>Solve Problem
+                        </button>
                             <div className="problem_header">
                               <span className="problem_id">{val.id}.<span className ="problem_name">{val.name}</span></span>
                               
