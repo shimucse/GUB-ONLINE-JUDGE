@@ -13,6 +13,7 @@ import HomePage from './pages/Home';
 import Registration from './pages/Registration';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Logout from './pages/Logout';
 
 function App() {
    const [active, setActive] = useState('');
@@ -51,6 +52,8 @@ function App() {
                 <Route exact path="Registration" element={<Registration/>}/>
                 <Route exact path="Login" element={<Login/>}/>
                 <Route exact path="Dashboard" element={<Dashboard/>}/>
+                <Route exact path="Logout" element={<Logout/>}/>
+
             </Routes>
         </div>
       </BrowserRouter>    

@@ -9,3 +9,6 @@ after that removing all data then unique key started working.
 
 //codeMirror css in line
 dont workd from css file
+
+
+//when user press logout if the user already not logedin then the alert"you are not loged in"comes two time;

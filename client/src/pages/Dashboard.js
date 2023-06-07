@@ -40,6 +40,6 @@ const Dashboard = ()=>{
         }
 
     },[])
-    return<h1>Your firstName: {firstName || "no firstName found"}</h1>
+    return<h1>Hi {firstName || "no firstName found"} now you can submit your problem </h1>
 }
 export default Dashboard;
