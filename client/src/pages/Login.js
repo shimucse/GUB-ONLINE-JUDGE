@@ -42,7 +42,7 @@ const Login = ()=>{
                             if(data.user){
                                 localStorage.setItem('token', data.user);
                                 window.confirm('login sucessfull');
-                                window.location.href='/Dashboard';
+                                window.location.href='/UserProfile';
 
                             }else{
                                 alert('Please check your username password');
@@ -72,8 +72,8 @@ const Login = ()=>{
     //if there's no user, show the login form
     return(
         <>
-        <div class="wrap">
-            <div class="body_column">
+        <div className="wrap">
+            <div className="body_column">
                    
                     <h1>Login Form</h1>
                    

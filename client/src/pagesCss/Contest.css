@@ -1,0 +1,131 @@
+
+
+
+  .wrap{
+    background-color: rgb(246, 251, 244);
+    width: 75%;
+    height: 100%;
+    margin-left: 12.5%;
+    /*border:solid;
+    border-radius: 10px;
+    border-color:rgb(223, 243, 215) ;*/
+  }
+ 
+  
+  
+  .body_column {
+        margin-top: 100px;  
+       margin-left: 50px;
+  
+  }
+  .contestName{
+    margin-top: 70px;
+  }
+  .recent_notice_table{
+     display: grid;
+     grid-template-columns:  1fr 1fr;
+  }
+  .notice_table{
+    height: 120px;
+    width: 300px;
+    float: left;
+    margin-left: 100px;
+  
+  }
+  .notice_table span{
+     display: block;
+  }
+  
+  .recent_contest {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        height: 250px;
+        width: 900px;
+        font-size: 15px;
+  
+      }
+      .recent_contest_name, .pay_attention{
+  
+          border: none;
+          background-color: rgb(245, 223, 153); 
+          border-collapse: collapse;
+          border-top-left-radius:15px ;
+          border-top-right-radius:15px ;
+  
+  
+      }
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: white;
+      }
+      td{
+        padding: 10px;
+      }
+      /* Next Previous button*/
+     
+      .recent_contest a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+      }
+      
+      .recent_contest a:hover {
+        background-color: #ddd;
+        color: black;
+      }  
+      
+      .round {
+        border-radius: 50%;
+      }
+      
+      .old_contest {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 900px;
+        height: 500px;
+        font-size: 15px;
+  
+      }
+      .old_contest_name{
+  
+          border: none;
+          background-color: rgb(245, 223, 153); 
+          border-collapse: collapse;
+          border-top-left-radius:15px ;
+          border-top-right-radius:15px ;
+  
+  
+      }
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: white;
+      }
+      td{
+        padding: 10px;
+      }
+  .footer{
+        display: grid;
+        grid-template-columns:50% 50% 1fr 1fr;
+        height: 80px;
+        font-size: 20px;
+         padding-top: 20px;
+         background: linear-gradient(to right,rgb(75, 134, 115) 30%,   rgb(95, 208, 104)100%);
+        }
+  .footer_text{
+        margin-left: 100px;
+        display: block;
+  
+  }
+  .server,.footer{
+        color:black;      
+  }

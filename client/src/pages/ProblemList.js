@@ -42,23 +42,24 @@ const ProblemList = ()=>{
 
                   <table>
                         <tr>
-                            <th>Id</th>
-                            <th>Problem Name</th>
-                            <th>Status</th>
-                            <th>Acceptance/Submission</th>
-                            <th>Problem Setter</th>
+                            <th><a>Id</a></th>
+                            <th><a>Problem Name</a></th>
+                            <th><a>Status</a></th>
+                            <th><a>Acceptance/Submission</a></th>
+                            <th><a>Problem Setter</a></th>
                         </tr>
                         {problemList.map((val, key) =>{
-                            
                             return (
+                             
+
                               <tr>
-                                  <td>{val.id}</td>
+                                  <td><a>{val.id}</a></td>
                                   <td>
-                                    <button className="problemName" onClick={()=>HandleLoadProblemPage(val.id)}>{val.name}</button>
+                                    <button className="problemName" onClick={()=>HandleLoadProblemPage(val.id)}><a>{val.name}</a></button>
                                   </td>
-                                  <td>&#10003;(do after login)</td>
-                                  <td>8/12</td>
-                                  <td>{val.problemSetterName}</td>
+                                  <td><a>&#10003;(do after login)</a></td>
+                                  <td><a>8/12</a></td>
+                                  <td><a>{val.problemSetterName}</a></td>
                              </tr>
                             )
                               }          

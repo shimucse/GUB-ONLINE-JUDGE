@@ -1,0 +1,47 @@
+.wrap{
+    background-color: rgb(246, 251, 244);
+    width: 75%;
+    height: 100%;
+    margin-left: 12.5%;
+    margin-top: 0px;
+    
+    /*border:solid;
+    border-radius: 10px;
+    border-color:rgb(223, 243, 215) ;*/
+  }
+  .body_column {
+    margin-top: 100px;
+    display: grid;
+    height: 670px;
+
+}
+button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  .socialMedia{
+    margin: 24px ;
+
+  }
+  .img{
+     width: 100px;
+     alt:'John';
+
+  }
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+  
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
