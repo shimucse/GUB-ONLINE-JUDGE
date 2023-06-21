@@ -17,6 +17,7 @@
     "react-scripts": "^5.0.1",
     "rehype-mathjax": "^4.0.2",
     "remark-rehype": "^10.1.0",
+    "scripts": "^0.1.0",
     "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },

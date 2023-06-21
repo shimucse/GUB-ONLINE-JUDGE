@@ -58,7 +58,8 @@ export default function AddProblem() {
 
             }
             catch(errMsg){
-              window.confirm(' Error : id should be unique');
+              // window.confirm(' Error : id should be unique');
+              window.confirm(errMsg);
             }
       }
       else{

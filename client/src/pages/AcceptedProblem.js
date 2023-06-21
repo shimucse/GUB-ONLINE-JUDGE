@@ -1,7 +1,7 @@
 import React from "react";
-import '../pagesCss/Submission.css'
+import '../pagesCss/AcceptedProblem.css';
 
-const AllSubmissionDisplay = ()=>{
+const AcceptedProblem = ()=>{
     return(
 
             <>
@@ -103,4 +103,4 @@ const AllSubmissionDisplay = ()=>{
             </>
      );
 };
-export default AllSubmissionDisplay;
+export default AcceptedProblem;

@@ -64,7 +64,10 @@ const UserProfile = ()=>{
 
                                     <button onClick={()=>{  navigate("/Submission",
                                             {state:{email:userEmail}
-                                            });}} >My submissions</button>
+                                            });}} >All submissions</button>
+                                     <button onClick={()=>{  navigate("/AcceptedProblem",
+                                            {state:{email:userEmail}
+                                            });}} >Accepted submissions</button>
 
                                 
                                     <p><button>Contact</button></p>

@@ -18,6 +18,7 @@ import UserProfile from './pages/UserProfile';
 import Contest from './pages/Contest';
 import Standing from './pages/Standing';
 import Submission from './pages/Submission'
+import AcceptedProblem from './pages/AcceptedProblem';
 
 function App() {
    const [active, setActive] = useState('');
@@ -80,6 +81,8 @@ function App() {
                 <Route exact path="Contest" element={<Contest/>}/>
                 <Route exact path="Standing" element={<Standing/>}/>
                 <Route exact path="Submission" element={<Submission/>}/>
+                <Route exact path="Submission" element={<AcceptedProblem/>}/>
+
 
 
 

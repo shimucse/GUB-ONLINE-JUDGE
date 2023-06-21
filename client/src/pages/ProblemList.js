@@ -58,7 +58,7 @@ const ProblemList = ()=>{
                                     <button className="problemName" onClick={()=>HandleLoadProblemPage(val.id)}><a>{val.name}</a></button>
                                   </td>
                                   <td><a>&#10003;(do after login)</a></td>
-                                  <td><a>8/12</a></td>
+                                  <td><a>{val.acceptedList}/{val.totalSubmitAttempt}</a></td>
                                   <td><a>{val.problemSetterName}</a></td>
                              </tr>
                             )
