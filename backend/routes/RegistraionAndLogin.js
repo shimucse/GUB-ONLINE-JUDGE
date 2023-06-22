@@ -6,6 +6,11 @@ const userDb = require('../models/user');
 
 const jwt = require('jsonwebtoken');
 
+const multer  = require('multer')
+//setting options for multer
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 router.get('/', async function(req,res){
     console.log("registration")
@@ -14,13 +19,12 @@ router.get('/', async function(req,res){
 router.post ('/register',async (req,res)=>{ 
     console.log('registered')
  
-    const {firstName, lastName,email,password}= req.body;
+    const {firstName, lastName,email,password,country,university,img}= req.body;
     
    
-     try{
+     try{         
          
-         
-          const newUser = await new userDb({email,firstName, lastName,password}).save();
+          const newUser = await new userDb({email,firstName, lastName,password,country,university,img}).save();
           console.log("newUser"+newUser);
           return res.status(201).json({success:true,newUser});
         
@@ -108,7 +112,7 @@ router.post ('/register',async (req,res)=>{
              const user = await userDb.findOne({email:email});
              console.log("userFirstName"+ user.firstName);
               
-            return res.status(201).json({success:true, firstName:user.firstName})
+            return res.status(201).json({success:true, firstName:user.firstName, img:user.img})
 
          
      }catch(error){

@@ -79,3 +79,28 @@ console.log(decoded)
 //it worked
 
 for decoding in backend
+
+
+
+if inside return for display Html
+{token?<h1>Token is true</h1>:<h1>token not true</h1>}
+
+//For display img:
+    const [img, setImg] = useState();
+
+  <h2>Add Image:</h2>
+        <input
+              type="file" 
+              onChange={(e) =>setImg(URL.createObjectURL(e.target.files[0]))}
+              /><br/><br/>
+
+      <img src={img} />
+
+
+
+Why image handling is different on Express?
+When you send form data to the express backend, 
+express is equipped with handling the application/x-www-form-urlencoded and the text/plain encodings, it cannot process the multipart/form-data encoding, 
+which is primarily used for uploading files. This is where Multer comes in. A node.js middleware that will handle multipart encoded forms for us.
+
+

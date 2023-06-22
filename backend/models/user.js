@@ -28,6 +28,15 @@ const UserSchema = mongoose.Schema({
     },    
     problemSolvedList:{
         type:Number
+    },
+    country:{
+        type:String
+    },
+    university:{
+        type:String
+    },
+    img:{
+        type:String
     }
 
 
