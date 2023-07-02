@@ -83,11 +83,6 @@ function App() {
                 <Route exact path="Submission" element={<Submission/>}/>
                 <Route exact path="Submission" element={<AcceptedProblem/>}/>
 
-
-
-
-
-
             </Routes>
         </div>
       </BrowserRouter>    

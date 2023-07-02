@@ -104,3 +104,7 @@ express is equipped with handling the application/x-www-form-urlencoded and the 
 which is primarily used for uploading files. This is where Multer comes in. A node.js middleware that will handle multipart encoded forms for us.
 
 
+//*************************
+routes.get('/', UploadController.index);
+routes.post('/', upload('img'), UploadController.store);
+routes.delete('/:id', UploadController.destroy);

@@ -87,20 +87,9 @@ router.post ('/register',async (req,res)=>{
    }
  
  });
- router.get('/read', async(req,res)=>{
-    console.log("read from ProblemAdd");
-    try{
-        const listOfProblem = await userDb.find();
-        console.log("listOfProblem"+listOfProblem);
-
-    }catch(err){
-         console.log(err);
-         res.status(500).json({ error: 'server error' });
-
-    }
-  
- })
- router.get ('/quote',async (req,res)=>{ 
+ 
+ 
+ router.get ('/viewProfile',async (req,res)=>{ 
     console.log('quote')
     const token = req.headers['x-access-token']   
     
@@ -108,9 +97,11 @@ router.post ('/register',async (req,res)=>{
      try{
              const decode = jwt.verify(token, 'secret123');
              const email = decode.email;
-            console.log("gmail"+ email);
+             console.log("gmail"+ email);
              const user = await userDb.findOne({email:email});
              console.log("userFirstName"+ user.firstName);
+             console.log("user img : "+ user.img);
+
               
             return res.status(201).json({success:true, firstName:user.firstName, img:user.img})
 
@@ -121,24 +112,6 @@ router.post ('/register',async (req,res)=>{
      }
         
  });
- router.post ('/quote',async (req,res)=>{ 
-    console.log('quote')
-    const token = req.header['x-access-token']  
-   
-
-    
-    try{
-            const decode = jwt.verify(token, 'secret123');
-         //   const email = decoded.email;
-         //   await userDb.updateOne({email:email},{$set:{firstName:req.body.firstName}})
-              
-            return res.status(201).json({success:true})
-         
-     }catch(error){
-        return res.status(500).json({status:'error', error:'invalid token'})
-
-     }
-        
- });
+ 
  
 module.exports = router;

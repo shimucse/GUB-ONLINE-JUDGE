@@ -62,16 +62,28 @@ const Registration = ()=>{
               
         }
         catch({response}){
-              if(response){
-                 const errMsg = response.data.err;
-                 window.confirm('Email should be unique');
+                if(response){
+                        const errMsg = response.data.err;
+                        window.confirm('Email should be unique');
 
-           }else{
-              console.log("Error connecting to server!");
-           }
-        }
+            }else{
+                        console.log("Error connecting to server!");
+            }
+            }
        
         
+        }
+        function convertToBase64(e){
+                console.log(e);
+                var reader = new FileReader();
+                reader.readAsDataURL(e.target.files[0]);
+                reader.onload = ()=>{
+                     console.log(reader.result);//base64encoded string
+                     setImg(reader.result);
+                };
+                reader.onerror = error =>{
+                    console.log("Error: ", error);
+                };
         }
     return(
             <>
@@ -146,12 +158,16 @@ const Registration = ()=>{
                                             
                                             <h2>Add Image:</h2>
                                             <input
-                                                 type="file" 
-                                                 onChange={(e) =>setImg(URL.createObjectURL(e.target.files[0]))}
+                                                 type="file"
+                                                 label = "Image" 
+                                                 name = "myFile"
+                                                 id='file-upload'
+                                                 accept=".jpeg, .png,.jpg"
+                                                 onChange={convertToBase64}
                                                  /><br/><br/>
 
                                          <img src={img} />
- 
+                                            {img?console.log(img):console.log("img not found")}
 
                                             <input type="submit" value="Signup" /><br/><br/><br/><br/>
                                             <label for="text">Already a member? </label>

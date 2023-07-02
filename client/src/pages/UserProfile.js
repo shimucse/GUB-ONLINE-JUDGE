@@ -19,7 +19,7 @@ const UserProfile = ()=>{
     const[img, setImg] = useState('');
 
    async function populateQuote(){
-        const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/quote',{
+        const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
             headers:{
                 'x-access-token':localStorage.getItem('token'),
             }
@@ -37,6 +37,8 @@ const UserProfile = ()=>{
         }else{
             alert(data.error);
         }
+        //if needed to delete all user
+        //await Axios.delete('http://localhost:5000/RegistraionAndLogin/delete');
     }
     useEffect(()=>{
 
