@@ -59,11 +59,11 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                     deleteFileSet = false;
                     const setterOutput = job.problemStterOutput
                     const outputLength =(setterOutput.split('\n')).length;
-                    console.log('outputLength: '+outputLength); 
+                    console.log('setterOutput: '+setterOutput); 
 
 
                     let jobinput = job.input;    
-                  //  console.log("setterinput"+ jobinput);              
+                    console.log("setterinput"+ jobinput);              
                   
                     
                     const linesnum =(jobinput.split("\n")).length;  

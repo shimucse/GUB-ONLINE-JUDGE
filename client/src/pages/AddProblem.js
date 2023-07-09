@@ -10,12 +10,14 @@ export default function AddProblem() {
   const [problemDescription, setProblemDescription] = useState('');
   const [problemInputFormat, setProblemInputFormat] = useState('');
   const [problemOutputFormat, setProblemOutputFormat] = useState('');
-  const [FirstSampleInput, setFirstSampleInput] = useState('');
-  const [FirstSampleOutput, setFirstSampleOutput] = useState('');
-  const [SecondSampleInput, setSecondSampleInput] = useState('');
-  const [SecondSampleOutput, setSecondSampleOutput] = useState('');
-  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState('');
-  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState('');
+  const [FirstSampleInput, setFirstSampleInput] = useState([]);
+  const [FirstSampleOutput, setFirstSampleOutput] = useState([]);
+  const [SecondSampleInput, setSecondSampleInput] = useState([]);
+  const [SecondSampleOutput, setSecondSampleOutput] = useState([]);
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState([]);
+  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState([]);
+  const [problemSetterInputOutput, setProblemSetterInputOutput] = useState([]);
+
   const [problemTimeLimit, setProblemTimeLimit] = useState('');
   const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
 
@@ -46,8 +48,7 @@ export default function AddProblem() {
              secondSampleInput:SecondSampleInput,
              secondSampleOutput:SecondSampleOutput,
 
-             problemSetterAllInputTestCase:problemSetterAllInputTestCase,
-             problemSetterAllOutputTestCase:problemSetterAllOutput,
+             problemSetterAllInputOutputTestCase:problemSetterInputOutput,
              timeLimit:problemTimeLimit,
              memoryLimit:problemMemoryLimit
           }
@@ -67,10 +68,37 @@ export default function AddProblem() {
       }
       
   }
+
+  const addTestCase =()=>{
+    if(problemSetterAllInputTestCase && problemSetterAllOutput){
+       //window.confirm("testcase added")
+      let inputOutputobj={
+          setterInput:problemSetterAllInputTestCase,
+          setterOutput:problemSetterAllOutput
+      }
+      setProblemSetterInputOutput([inputOutputobj, ...problemSetterInputOutput]);
+      //for display purposes only
+      console.warn('added',{problemSetterInputOutput});
+    }
+    else{
+       window.confirm("add setter input and output");
+    }
+  }
   return (
     <>
         <div class="wrap">
           <div class="body_column">
+            <h1>Setter Input Output List </h1>
+              {
+              problemSetterInputOutput.map((obj,index)=>(
+                 <div key={index}>
+                   <span> input:{obj.setterInput}</span>
+                   <span>output:{obj.setterOutput}</span>
+                 </div>
+              )
+              )
+              }
+        
         <h1 className="">
           Problem
         </h1>
@@ -80,7 +108,6 @@ export default function AddProblem() {
             problem.
           </p>    
 
-        {/* Problem Details */}
         <div className="">
           <div className="">
             <p className="">Problem Id</p>
@@ -172,7 +199,7 @@ export default function AddProblem() {
               required
               placeholder="must fill(each number in seperate line)"
               onChange={(e)=>{setFirstSampleInput(e.target.value)}}
-            />
+            />{console.log(FirstSampleInput)}
               <textarea
               value={FirstSampleOutput}
              
@@ -204,39 +231,32 @@ export default function AddProblem() {
 
               onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
             />
-          </div>          
+          </div>       
+          //setter INput output
           <div className="">
-          <div className="flex">
-            <p className="">Add all input String</p>
+            <p className="">Setter  Input Output : </p>
             <textarea
               value={problemSetterAllInputTestCase}
-              rows ='8'
-             cols='75'
+             
               type="text"
               className=""
               required
-              placeholder="Give all  input (each number in seperate line)"
+              placeholder="must fill(each number in seperate line)"
               onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
             />
-             
-          </div>
-          </div>
-          <div className="">
-          <div className="flex">
-            <p className="">Add all output </p>
-            <textarea
-             rows ='8'
-             cols='75'
+              <textarea
               value={problemSetterAllOutput}            
+             
               type="text"
               className=""
               required
-              placeholder="Give output (each number in seperate line)"
+              placeholder="must fill(each number in seperate line)"
+
               onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
             />
-          
+           <button onClick={addTestCase}>Add test case</button>
+
           </div>
-          </div>          
          <button onClick={addButtonHandlser}>Add Problem</button>
         
 

@@ -48,7 +48,7 @@ const ProblemDisplay = (props)=>{
                             if(token)
                             {
                                navigate("/ProblemSubmit",
-                              {state:{id:val.id,problemStetterInput:val.problemSetterAllInputTestCase, problemStterOutput:val.problemSetterAllOutputTestCase}
+                              {state:{id:val.id,problemSetterAllInputOutputTestCase:val.problemSetterAllInputOutputTestCase}
                                });
                              }
                              else{

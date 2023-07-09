@@ -30,28 +30,28 @@ const problemSchema = mongoose.Schema({
 
    },
    firstSampleInput:{
-       type:String,
+       type:[],
        required:true
    },
    firstSampleOutput:{
-       type:String,
+       type:[],
        required:true
    },
    secondSampleInput:{
-       type:String,
+       type:[],
        required:true
    },
    secondSampleOutput:{
-       type:String,
+       type:[],
        required:true
    },
-   problemSetterAllInputTestCase:{
+   problemSetterAllInputOutputTestCase:{
       type:String
    },
-   problemSetterAllOutputTestCase:{
-      type:String
-
+   input:{
+     type:String
    },
+   
    
    problemAddDate:{
         type:Date,

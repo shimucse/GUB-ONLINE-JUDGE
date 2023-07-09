@@ -41,6 +41,7 @@ for redirect to another page :
 npm i react-router-dom // for using different page
 import { BrowserRouter, Routes, Route,Link,Router,Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom"; for go another page
+/**********************************
 //for pass value to other page 
 setProblemId(id);
       navigate("/ProblemDisplay",{state:{id:id}});
@@ -85,6 +86,7 @@ for decoding in backend
 if inside return for display Html
 {token?<h1>Token is true</h1>:<h1>token not true</h1>}
 
+/***********************************
 //For display img:
     const [img, setImg] = useState();
 
@@ -108,3 +110,28 @@ which is primarily used for uploading files. This is where Multer comes in. A no
 routes.get('/', UploadController.index);
 routes.post('/', upload('img'), UploadController.store);
 routes.delete('/:id', UploadController.destroy);
+
+
+/******************************
+declare an array object using state  :
+  const [problemSetterInputOutput, setProblemSetterInputOutput] = useState([]);
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState([]);
+  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState([]);
+const addTestCase =()=>{
+    
+      let inputOutputobj={
+          setterInput:problemSetterAllInputTestCase,
+          setterOutput:problemSetterAllOutput
+      }
+      setProblemSetterInputOutput([inputOutputobj, ...problemSetterInputOutput]);
+   
+  }
+  {
+              problemSetterInputOutput.map((obj,index)=>(
+                 <div key={index}>
+                   <span> input:{obj.setterInput}</span>
+                   <span>output:{obj.setterOutput}</span>
+                 </div>
+              )
+              )
+ }

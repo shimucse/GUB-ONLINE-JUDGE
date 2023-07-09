@@ -24,11 +24,13 @@ const ProblemSubmit =  (props)=>{
     const [jobMemory, setJobMemory]= useState('');
     const [jobDetails,setJobDetails ] = useState(null);
     const [customInput, setCustomInput] = useState([]);
-    const [customInputFirst, setCustomInputFirst ] = useState("");
+    const [customInputFirst, setCustomInputFirst ] = useState([]);
     const [setterInput, setSetterInput] = useState("");
     const [problemId, setProblemId] = useState('');
-    const [problemSetterInput, setProblemStterInput] = useState('');
-    const [problemStterOutput, setProblemStterOutput] = useState('');
+    const [problemSetterInput, setProblemStterInput] = useState([]);
+    const [problemStterOutput, setProblemStterOutput] = useState([]);
+    const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
+
 
     
   
@@ -63,15 +65,16 @@ const ProblemSubmit =  (props)=>{
   
    useEffect(()=> {
       let id = location.state.id
-      let SetterInputLocation = location.state.problemStetterInput;
-      let Setteroutput = location.state.problemStterOutput;
-     // console.log("problem input via useLocation"+SetterInputLocation);
-      //console.log("problem output via useLocation"+Setteroutput);
-
+      let SetterInputOutputLocation = location.state.problemSetterAllInputOutputTestCase;
+      setProblemStterInputOutput(SetterInputOutputLocation);
+     // let Setteroutput = location.state.problemStterOutput;
+     //console.log("setter input via useLocation"+SetterInputLocation);
+     //console.log("setter output via useLocation"+Setteroutput);
+     //have to extract the input output from object;
       setProblemId(id);
-      setProblemStterInput(SetterInputLocation);
-      setProblemStterOutput(Setteroutput);
-      let inputTrim = (customInputFirst.trim());      
+      setProblemStterInput('1');
+      setProblemStterOutput('2');
+      let inputTrim = (customInputFirst);      
       setCustomInput(inputTrim);
     // let inputSplice= (inputTrim.split(/\n/))  
    
@@ -83,32 +86,22 @@ const ProblemSubmit =  (props)=>{
     const handleSubmit = async(SubmitType) =>{
                  
                  
-      console.log('setter input : '+problemSetterInput);
 
                  console.log("callType:"+SubmitType);
                  let deleteId;
                  let payload ={};
-                 if(SubmitType === 'submit'){
                    payload = {
                            language : language,
                            code:code ,
                            SubmitType:SubmitType,
-                           input:problemSetterInput,
-                           problemStterOutput:problemStterOutput,
-                           problemId:problemId
+                           input:customInput,
+                           problemSetterAllInputOutputTestCase:problemStterInputOutput,
+                           problemId:problemId,
+                           submitType:SubmitType
                         
                      };
 
-                 }else{
-                            payload = {
-                           language : language,
-                           code:code ,
-                           SubmitType:SubmitType,
-                           input:customInput,
-                           problemStterOutput:'',
-                           problemId:problemId
-                           };
-                     }
+                
                  try{
                        setJobId("");
                        setStatus("");
