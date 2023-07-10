@@ -53,10 +53,21 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                  
                 }):( job['output'] = await executCpp_and_executePy(job,item))*/
                 let deleteFileSet = true;
-
+                console.log("submitType:" +job.submitType);
                 if(job.submitType === 'submit'){
 
-                    deleteFileSet = false;
+                    console.log("submit")
+                Array.isArray(job.problemSetterAllInputOutputTestCase)
+                 ?  job.problemSetterAllInputOutputTestCase.map((obj,index)=>(
+                    console.log(`input: ${obj.setterInput}`),
+                    console.log(`output: ${obj.setterOutput}`)
+
+                 )
+                 ):console.log("not found setter input output")
+                   
+
+                    
+                 /*   deleteFileSet = false;
                     const setterOutput = job.problemStterOutput
                     const outputLength =(setterOutput.split('\n')).length;
                     console.log('setterOutput: '+setterOutput); 
@@ -130,7 +141,7 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                                 setterOuputIndex++;
 
 
-                         }
+                         }*/
 
                 }else{                   
 

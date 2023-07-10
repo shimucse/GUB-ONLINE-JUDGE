@@ -60,9 +60,10 @@ router.get('/status',async(req,res)=>{
  
     const {language='cpp',code} = req.body;
     const submitType = req.body.SubmitType;
+
     const input = req.body.input;
     problemId = req.body.problemId;
-    const problemStterOutput = req.body.problemStterOutput;
+    const problemSetterAllInputOutputTestCase = req.body.problemSetterAllInputOutputTestCase;
        //console.log('total memory : ' + os.totalmem() + " bytes.");
       // console.log('free memory : ' + os.freemem() + " bytes.");
  
@@ -76,7 +77,7 @@ router.get('/status',async(req,res)=>{
          const filepath = await generateFile(language,code);
          // we need to run the file and send the response
          
-          const job = await new Job({language,filepath,submitType,input,problemStterOutput,problemId}).save();
+          const job = await new Job({language,filepath,submitType,input,problemSetterAllInputOutputTestCase,problemId}).save();
          
          const jobId = job["_id"];
          addJobToQueue(jobId,filepath);

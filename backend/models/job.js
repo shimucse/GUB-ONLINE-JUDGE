@@ -21,9 +21,19 @@ const JobSchema = mongoose.Schema({
     completedAt:{
         type:Date
     },
+    input : { 
+        type : String
+    },
     output:{
         type:String
     },
+    problemSetterAllInputOutputTestCase:[
+        {
+          setterInput:{type:String},
+          setterOutput:{ type:String}
+  
+      }
+    ],
     status:{
         type:String,
         default:"pending",
@@ -38,12 +48,8 @@ const JobSchema = mongoose.Schema({
     submitType:{
         type:String
     },
-    input : { 
-        type : String
-    },
-    problemStterOutput :{
-        type:String
-    },
+    
+   
     problemId :{
         type:String
     }

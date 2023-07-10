@@ -14,14 +14,14 @@ export default function AddProblem() {
   const [FirstSampleOutput, setFirstSampleOutput] = useState([]);
   const [SecondSampleInput, setSecondSampleInput] = useState([]);
   const [SecondSampleOutput, setSecondSampleOutput] = useState([]);
-  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState([]);
-  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState([]);
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState('');
+  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState('');
   const [problemSetterInputOutput, setProblemSetterInputOutput] = useState([]);
 
   const [problemTimeLimit, setProblemTimeLimit] = useState('');
   const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
 
-  const addButtonHandlser = async()=>{
+  const addButtonHandler = async()=>{
       if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 
       && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 &&
        SecondSampleOutput.trim().length!==0)
@@ -33,7 +33,10 @@ export default function AddProblem() {
           console.log(FirstSampleOutput);
           console.log(SecondSampleInput);
           console.log(SecondSampleOutput);
-
+          Array.isArray(problemSetterInputOutput)
+            ? problemSetterInputOutput.map((obj, key)  => {
+                console.log("setterInputoutput:"+obj.setterInput);
+            }):console.log("problemSetterInputOutput is empty")
 
           const problemDetailse = {
              id: problemId,
@@ -257,7 +260,7 @@ export default function AddProblem() {
            <button onClick={addTestCase}>Add test case</button>
 
           </div>
-         <button onClick={addButtonHandlser}>Add Problem</button>
+         <button onClick={addButtonHandler}>Add Problem</button>
         
 
         </div>

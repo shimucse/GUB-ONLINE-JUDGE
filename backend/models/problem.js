@@ -45,9 +45,14 @@ const problemSchema = mongoose.Schema({
        type:[],
        required:true
    },
-   problemSetterAllInputOutputTestCase:{
-      type:String
-   },
+   problemSetterAllInputOutputTestCase:[
+      {
+        setterInput:{type:String},
+        setterOutput:{ type:String}
+
+    }
+  ],
+  
    input:{
      type:String
    },

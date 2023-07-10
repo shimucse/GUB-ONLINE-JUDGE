@@ -20,7 +20,7 @@ const ProblemDisplay = (props)=>{
       let id = location.state.id
       const data =  Axios.get(`http://localhost:5000/problemAdd/fetch/${id}`).then((response)=>{
         setProblemDes(response.data); 
-            console.log(response.data);
+            console.log( "dilsplayed problem detailse:"+response.data);
       });
         
    },[]);
@@ -43,6 +43,9 @@ const ProblemDisplay = (props)=>{
                         <>
                                   
                         <div className="left_column">
+                        
+                          
+
                         <button className="problemSubmit_btn"onClick=
                         {()=>{ 
                             if(token)
@@ -50,6 +53,7 @@ const ProblemDisplay = (props)=>{
                                navigate("/ProblemSubmit",
                               {state:{id:val.id,problemSetterAllInputOutputTestCase:val.problemSetterAllInputOutputTestCase}
                                });
+                                
                              }
                              else{
                                 window.alert("You have to login ");

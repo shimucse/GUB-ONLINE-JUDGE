@@ -70,6 +70,8 @@ const ProblemSubmit =  (props)=>{
      // let Setteroutput = location.state.problemStterOutput;
      //console.log("setter input via useLocation"+SetterInputLocation);
      //console.log("setter output via useLocation"+Setteroutput);
+     console.log("setterInputOutput"+problemStterInputOutput);
+
      //have to extract the input output from object;
       setProblemId(id);
       setProblemStterInput('1');
@@ -167,7 +169,16 @@ const ProblemSubmit =  (props)=>{
                 
                  
   }
-  
+   const CheckSetterInputOutput=()=>{
+       alert("checked setter input output");
+       
+         Array.isArray(problemStterInputOutput)
+         ?  problemStterInputOutput.map((obj,index)=>(
+               console.log(`input:+${obj.setterInput}`)
+            )
+         ):console.log("not found setter input output")
+         
+   }
   
   
       
@@ -177,6 +188,16 @@ const ProblemSubmit =  (props)=>{
         <h1>Online Code Compiler</h1>
         <div className="body_column">
           <div>
+            <h1>input:output</h1>
+          {
+              problemStterInputOutput.map((obj,index)=>(
+                 <div key={index}>
+                   <span> input:{obj.setterInput}</span>
+                   <span>output:{obj.setterOutput}</span>
+                 </div>
+              )
+              )
+              }
            <select
              value={language}
              onChange={
@@ -230,6 +251,7 @@ const ProblemSubmit =  (props)=>{
    
          <button className='run_btn' onClick={ ()=>handleSubmit("run")}>Run</button>
          <button className ='submit_btn'onClick={()=>handleSubmit("submit")}>Submit</button> 
+         <button onClick={CheckSetterInputOutput}>check setter Input Output</button>
         
         <p>{customInput}</p>
         <p>{status}</p>

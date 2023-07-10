@@ -135,3 +135,8 @@ const addTestCase =()=>{
               )
               )
  }
+ ///*********Map without html and check if the array is empty*************************//
+  Array.isArray(problemSetterInputOutput)
+            ? problemSetterInputOutput.map((obj, key)  => {
+                console.log("setterInputoutput:"+obj.setterInput);
+            }):console.log("problemSetterInputOutput is empty")
