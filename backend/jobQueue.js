@@ -71,26 +71,29 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                   Array.isArray(job.problemSetterAllInputOutputTestCase)
                             ?job.problemSetterAllInputOutputTestCase.forEach(async(obj,index)=>{
 
+                              
+
+                              counter++;
 
                                // console.log(`input: ${obj.setterInput}`),
                                 //console.log(`output: ${obj.setterOutput}`),"
-                                let len = obj.setterOutput.length;
-                                console.log("setter output length"+ len);
+                               // let len = obj.setterOutput.length;
+                               // console.log("setter output length"+ len);
                                 if(result === true){
-                                   console.log("step :"+counter)
                                     counter++;
 
-                                    console.log('counter: '+counter+'testcaseLength: '+testcaseLength);
+                                    //console.log('counter: '+counter+'testcaseLength: '+testcaseLength);
     
                                                 if(counter===testcaseLength){
                 
                                                     deleteFileSet=true;
                                                     resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
+                                                  
                                                     console.log("result when at end of the loop:"+resTemp);
                                                     if(resTemp!==obj.setterOutput){
                                                         result=false;
                                                         job['output']='Wrong Answer';
-                                                        console.log("setter output and user output not same at end loop")
+                                                       // console.log("setter output and user output not same at end loop")
 
                                                     } 
                                                     else{
@@ -100,14 +103,18 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                                                 }
                                                 else{
                                                     resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
-                                                    //console.log(`output: ${obj.setterOutput}`);
-                                                    //console.log('result'+resTemp +"end result");
-                                                    console.log("stter output and user output same")
+                                                  
+                                                    console.log("all time result: "+resTemp );
+                                                    console.log(`output: ${obj.setterOutput}`);
+                                                   
                                                     if(resTemp!==obj.setterOutput){
                                                         result=false;
-                                                        console.log("stter output and user output same")
+                                                        console.log("stter output and user output not  same");
+                                                        
 
-                                                    } 
+                                                    }else{
+                                                        console.log("result same");
+                                                    }
                                                     
                                                 }
     

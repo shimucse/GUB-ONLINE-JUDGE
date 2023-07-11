@@ -253,7 +253,7 @@ export default function AddProblem() {
               type="text"
               className=""
               required
-              placeholder="must fill(each number in seperate line)"
+              placeholder="must fill(multiple output will be in same line using space)"
 
               onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
             />
