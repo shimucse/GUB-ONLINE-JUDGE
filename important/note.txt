@@ -140,3 +140,10 @@ const addTestCase =()=>{
             ? problemSetterInputOutput.map((obj, key)  => {
                 console.log("setterInputoutput:"+obj.setterInput);
             }):console.log("problemSetterInputOutput is empty")
+
+///********* loop an array of objects using foreach*******************************//
+ Array.isArray(job.problemSetterAllInputOutputTestCase)
+                            ?job.problemSetterAllInputOutputTestCase.forEach(async(obj,index)=>{
+                                   console.log(`input: ${obj.setterInput}`),
+
+                            });

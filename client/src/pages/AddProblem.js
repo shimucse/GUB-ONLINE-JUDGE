@@ -14,8 +14,8 @@ export default function AddProblem() {
   const [FirstSampleOutput, setFirstSampleOutput] = useState([]);
   const [SecondSampleInput, setSecondSampleInput] = useState([]);
   const [SecondSampleOutput, setSecondSampleOutput] = useState([]);
-  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState('');
-  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState('');
+  const [problemSetterAllInputTestCase, setProblemSetterAllInputTestCse] = useState([]);
+  const [problemSetterAllOutput, setProblemSetterAllOutput] = useState([]);
   const [problemSetterInputOutput, setProblemSetterInputOutput] = useState([]);
 
   const [problemTimeLimit, setProblemTimeLimit] = useState('');

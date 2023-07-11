@@ -46,103 +46,85 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
 
             //execute 
-            console.log("problemId : "+ job.problemId);
+          //  console.log("problemId : "+ job.problemId);
             /*?job.userInput.map( async(item) => {
                 console.log("item: "+ item)
                 job['output'] = await executCpp_and_executePy(job,item);
                  
                 }):( job['output'] = await executCpp_and_executePy(job,item))*/
                 let deleteFileSet = true;
-                console.log("submitType:" +job.submitType);
+                //console.log("submitType:" +job.submitType);
+               // console.log("run Input: "+job.input)
+
                 if(job.submitType === 'submit'){
 
-                    console.log("submit")
-                Array.isArray(job.problemSetterAllInputOutputTestCase)
-                 ?  job.problemSetterAllInputOutputTestCase.map((obj,index)=>(
-                    console.log(`input: ${obj.setterInput}`),
-                    console.log(`output: ${obj.setterOutput}`)
+                  deleteFileSet = false;
+                  let counter = -1;
 
-                 )
-                 ):console.log("not found setter input output")
+                  let testcaseLength = job.problemSetterAllInputOutputTestCase.length;
+                  testcaseLength = testcaseLength-1;
+                  let result =true;
+                  let resTemp;
+
+                 // job['output'] = await executCpp_and_executePy(job,job.input,deleteFileSet)   
+
+                  Array.isArray(job.problemSetterAllInputOutputTestCase)
+                            ?job.problemSetterAllInputOutputTestCase.forEach(async(obj,index)=>{
+
+
+                               // console.log(`input: ${obj.setterInput}`),
+                                //console.log(`output: ${obj.setterOutput}`),"
+                                let len = obj.setterOutput.length;
+                                console.log("setter output length"+ len);
+                                if(result === true){
+                                   console.log("step :"+counter)
+                                    counter++;
+
+                                    console.log('counter: '+counter+'testcaseLength: '+testcaseLength);
+    
+                                                if(counter===testcaseLength){
+                
+                                                    deleteFileSet=true;
+                                                    resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
+                                                    console.log("result when at end of the loop:"+resTemp);
+                                                    if(resTemp!==obj.setterOutput){
+                                                        result=false;
+                                                        job['output']='Wrong Answer';
+                                                        console.log("setter output and user output not same at end loop")
+
+                                                    } 
+                                                    else{
+                                                        job['output']='Accepted';
+                                                    }
+                
+                                                }
+                                                else{
+                                                    resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
+                                                    //console.log(`output: ${obj.setterOutput}`);
+                                                    //console.log('result'+resTemp +"end result");
+                                                    console.log("stter output and user output same")
+                                                    if(resTemp!==obj.setterOutput){
+                                                        result=false;
+                                                        console.log("stter output and user output same")
+
+                                                    } 
+                                                    
+                                                }
+    
+    
+                                }
+                                else{
+                                        job['output']='Wrong Answer';
+                                        console.log("wrong answer");
+                                }
+                               
+                            }                 
+                        ):console.log("not found setter input output")
+                     
                    
 
                     
-                 /*   deleteFileSet = false;
-                    const setterOutput = job.problemStterOutput
-                    const outputLength =(setterOutput.split('\n')).length;
-                    console.log('setterOutput: '+setterOutput); 
-
-
-                    let jobinput = job.input;    
-                    console.log("setterinput"+ jobinput);              
-                  
-                    
-                    const linesnum =(jobinput.split("\n")).length;  
-                    console.log("linesum"+ linesnum);
-
-                    let inputTestCaseAmount = (linesnum/outputLength);
-                    console.log("inputTestCaseAmount"+ inputTestCaseAmount);
-
-                    let endindex = (outputLength-1);
-                       let setterOuputIndex=0;
-                       let userOutput;
-                        for(let i=0; i<linesnum;  i=i+inputTestCaseAmount)
-                        {
-                            let newStr;
-                            let inputStr="";
-
-                                for(let j =i; j<i+inputTestCaseAmount; j++)
-                                {
-                                    
-                                    newStr=  ((jobinput.split('\n')[j]).trim());
-                                    if(j!==(inputTestCaseAmount+i-1)){
-
-                                        newStr = newStr.concat('\n');    
-
-                                    }
-                                    inputStr = inputStr.concat(newStr);                     
-                                }
-                             //  console.log('newStr :  '+inputStr);                   
-                                if(i===(linesnum-2))  {
-                                  // console.log("last stage");
-                                    deleteFileSet = true;
-
-                                    //job['output'] = 'Accepted'
-                                }
-                                // match user output with setter output
-                                console.log('setterOuputIndex'+setterOuputIndex)
-                                userOutput=  await executCpp_and_executePy(job,inputStr,deleteFileSet);
-                                let kosto = userOutput.trim();
-                                let setterOutputtemp  =  ((setterOutput.split('\n')[setterOuputIndex]).trim());
-                               
-                               // console.log("typeOfUser" + typeof(userOutput));
-                               // console.log("typeOfSetter" + typeof(setterOutputtemp));
-                               
-                                if(kosto==setterOutputtemp){
-                                    //forcely terminate the program;
-                                    //job['output'] = 'Accepted'
-                                    console.log("userOutput : "+ userOutput +"setteroutput: "+setterOutputtemp)
-
-                                    console.log("matched")
-                                    job['output'] = 'Accepted'
-
-                                }
-                                else{
-                                    job['output'] = 'Wrong';
-                                    console.log("wrong")
-                                   await executCpp_and_executePy(job,inputStr,true);//for delete the file execute again
-
-                                    i = linesnum; //programed terminated;
-
-                                }
-
-                                 //console.log("userInt"+ Number.isInteger(userOutput) ) 
-                               
-                                setterOuputIndex++;
-
-
-                         }*/
-
+               
                 }else{                   
 
                     job['output'] = await executCpp_and_executePy(job,job.input,deleteFileSet)   
