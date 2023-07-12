@@ -66,15 +66,15 @@ const problemSchema = mongoose.Schema({
    problemSetterName:{
     type:String,
     required:true,
-    default:"Before login signUp system"
  },
  acceptedList:[{
-      type:String,
-      default:"accepted"
+      type:String
    }],
+   acceptCounter:{
+     type:Number
+   },
 totalSubmitAttempt:{
      type:Number,
-     default:"attempted"
 
 }
 

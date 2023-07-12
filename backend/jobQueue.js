@@ -1,6 +1,6 @@
 const Queue = require("bull");
 const jobQueue = new Queue("job-runner-queue");
-  const {executeCpp,deleteForDotOut} = require('./executeCpp');
+const {executeCpp,deleteForDotOut} = require('./executeCpp');
 const { executePy,deleteForDotPy} = require('./executePy');
 const Job = require('./models/job');
 const {deleteFile} = require('./generateFile');
@@ -46,12 +46,7 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
 
             //execute 
-          //  console.log("problemId : "+ job.problemId);
-            /*?job.userInput.map( async(item) => {
-                console.log("item: "+ item)
-                job['output'] = await executCpp_and_executePy(job,item);
-                 
-                }):( job['output'] = await executCpp_and_executePy(job,item))*/
+         
                 let deleteFileSet = true;
                 //console.log("submitType:" +job.submitType);
                // console.log("run Input: "+job.input)

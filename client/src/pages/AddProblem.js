@@ -1,6 +1,7 @@
 import MDEditor from "@uiw/react-md-editor";
 import Axios from 'axios';
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -20,8 +21,27 @@ export default function AddProblem() {
 
   const [problemTimeLimit, setProblemTimeLimit] = useState('');
   const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
+  const [problemSetterName, setProblemSetterName] = useState('');
+
+  const token = localStorage.getItem('token');
+
+
 
   const addButtonHandler = async()=>{
+          //for problem setter name;
+          const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
+            headers:{
+                'x-access-token':localStorage.getItem('token'),
+            }
+        })
+        if(data.success === true){
+            setProblemSetterName(data.firstName+data.lastName);
+            //alert(problemSetterName);
+          
+        }else{
+            alert(data.error);
+      }
+
       if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 
       && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 &&
        SecondSampleOutput.trim().length!==0)
@@ -33,11 +53,12 @@ export default function AddProblem() {
           console.log(FirstSampleOutput);
           console.log(SecondSampleInput);
           console.log(SecondSampleOutput);
+
           Array.isArray(problemSetterInputOutput)
             ? problemSetterInputOutput.map((obj, key)  => {
                 console.log("setterInputoutput:"+obj.setterInput);
             }):console.log("problemSetterInputOutput is empty")
-
+            
           const problemDetailse = {
              id: problemId,
              name:problemTitle,
@@ -53,7 +74,8 @@ export default function AddProblem() {
 
              problemSetterAllInputOutputTestCase:problemSetterInputOutput,
              timeLimit:problemTimeLimit,
-             memoryLimit:problemMemoryLimit
+             memoryLimit:problemMemoryLimit,
+             problemSetterName:problemSetterName,
           }
             try{
                   const {data} = await Axios.post('http://localhost:5000/problemAdd/submit', problemDetailse);
@@ -89,6 +111,8 @@ export default function AddProblem() {
   }
   return (
     <>
+     {token ?
+                
         <div class="wrap">
           <div class="body_column">
             <h1>Setter Input Output List </h1>
@@ -270,6 +294,7 @@ export default function AddProblem() {
 
       </div>
     </div> 
+    :<h1>You are not logged in</h1>}
     </>
   );
 }

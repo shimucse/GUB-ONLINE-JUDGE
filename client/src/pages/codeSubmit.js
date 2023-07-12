@@ -27,9 +27,15 @@ const ProblemSubmit =  (props)=>{
     const [customInputFirst, setCustomInputFirst ] = useState([]);
     const [problemId, setProblemId] = useState('');
     const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
+    const [problemSolvedList, setproblemSolvedList]=useState([]);
+    const [acceptCounter, setacceptCounter]=useState(0);
+    const [userId, setUserId]=useState('');
 
 
-    
+    const [problemDes, setProblemDes] = useState([]);
+
+
+    //user acceptence 
   
     let location = useLocation();
 
@@ -115,9 +121,72 @@ const ProblemSubmit =  (props)=>{
                              const{data:dataRes} = await Axios.get('http://localhost:5000/codeSubmit/status', {params: {id:data.jobId}});
                              deleteId=data.jobId;
                              const {success, job, error} = dataRes;
-  
-                             if(success){
-  
+
+                              /**************Updat Accepted/Attempted in userDB and problemDb*************** */
+                              //problem database:
+                              let useridExistInProblemDB =false;
+                                //send problem id to
+                                
+                                const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
+                                 setProblemDes(response.data); 
+                                     //console.log( "dilsplayed problem detailse :"+response.data);
+
+                                //find the user id ;
+                               }); 
+                               Array.isArray(problemDes)
+                               ? problemDes.forEach((val, key)  => {
+                                       setproblemSolvedList(val.acceptedList);
+                                       setacceptCounter(val.acceptCounter);
+                                       console.log("problemSolvedList"+ problemSolvedList);
+                                       console.log("acceptCounter"+ acceptCounter);
+                                       console.log("seeterName:"+val.problemSetterName);
+                                       console.log("length of problemSolvedList"+ problemSolvedList.length);
+
+                                       if(problemSolvedList.length>=1){
+                                          problemSolvedList.forEach((val, key)  => {
+                                                if(val === 'userId'){
+                                                   useridExistInProblemDB = true;
+                                                   console.log("found the id ");
+                                                   //break the loop;
+
+                                                }
+                                          });
+                                       }else{
+
+                                          useridExistInProblemDB = false;
+                                          console.log("problemSolved List is still empty");
+
+                                       }
+
+                                    
+                               }):console.log('problem detailse not found');
+                                
+                             if(success)
+                             {
+
+                                 if(SubmitType === 'submit')
+                                 {
+                                       if(!useridExistInProblemDB){
+
+                                            console.log("User DB and Problem db will be updated");
+                                             //User database
+                                                   //query for user Info for update with new data;
+
+                                             
+                                                   //-problemAccepted counter++ and check if already solved(check Status);
+                                                         /*not already accepted{
+                                                               const UpdateUser={
+                                                                  Attempted:
+                                                                  Status:
+                                                                  id:
+
+                                                         }
+                                                         }*/
+                                                //Problem database
+                                                         //query for problem info for update with new data;
+                                          }
+                                 }
+                                   
                                 // const {status: jobStatus, output: jobOutput,  jobMemory:memorySpace} = job;
                                 const jobStatus = job.status;
                                 const jobOutput = job.output;
@@ -143,10 +212,17 @@ const ProblemSubmit =  (props)=>{
                                 
   
                              }else{
-                             setStatus("Error : Please retry !");
-                                console.error(error);
-                                clearInterval(intervalId);
-                                setOutput(error);
+                                       if(SubmitType === 'submit')
+                                       {
+                                          if(!useridExistInProblemDB){
+                                             console.log("will work on wrong answer");
+                                          }
+                                       }
+
+                                       setStatus("Error : Please retry !");
+                                       console.error(error);
+                                       clearInterval(intervalId);
+                                       setOutput(error);
                              }
                        },1000);
   

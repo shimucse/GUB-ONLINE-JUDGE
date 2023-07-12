@@ -26,7 +26,18 @@ const UserSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },    
-    problemSolvedList:{
+    problemSolvedList:[ {
+        Attempted:{type:Number},
+        Status:{ 
+            type:String,
+            default:" "
+        },
+        id:{
+            type:String
+        }
+
+    }],
+    ProblemAcceptedCounter:{
         type:Number
     },
     country:{

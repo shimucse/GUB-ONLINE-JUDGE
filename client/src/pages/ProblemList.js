@@ -45,7 +45,7 @@ const ProblemList = ()=>{
                             <th><a>Id</a></th>
                             <th><a>Problem Name</a></th>
                             <th><a>Status</a></th>
-                            <th><a>Acceptance/Submission</a></th>
+                            <th><a>Acceptance/Attempted</a></th>
                             <th><a>Problem Setter</a></th>
                         </tr>
                         {problemList.map((val, key) =>{
@@ -57,8 +57,8 @@ const ProblemList = ()=>{
                                   <td>
                                     <button className="problemName" onClick={()=>HandleLoadProblemPage(val.id)}><a>{val.name}</a></button>
                                   </td>
-                                  <td><a>&#10003;(do after login)</a></td>
-                                  <td><a>{val.acceptedList}/{val.totalSubmitAttempt}</a></td>
+                                  <td><a>&#10003;(user list: status:accept or wrong)</a></td>
+                                  <td><a>{val.acceptCounter}/{val.totalSubmitAttempt}</a></td>
                                   <td><a>{val.problemSetterName}</a></td>
                              </tr>
                             )

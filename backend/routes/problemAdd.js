@@ -14,10 +14,10 @@ router.post ('/submit',async (req,res)=>{
     const {id,name,description,inputFormat,outputFormat,
         firstSampleInput,firstSampleOutput,secondSampleInput,
         secondSampleOutput,
-        problemSetterAllInputOutputTestCase,timeLimit,memoryLimit
+        problemSetterAllInputOutputTestCase,timeLimit,memoryLimit,problemSetterName
         } = req.body;
    
-    const acceptedList=0;
+    const acceptCounter=0;
     const totalSubmitAttempt=0;
      try{
         console.log('newProblem');
@@ -26,7 +26,7 @@ router.post ('/submit',async (req,res)=>{
         const newProblem = await new problemDB({id,name,description,inputFormat,outputFormat,
             firstSampleInput,firstSampleOutput,secondSampleInput,
             secondSampleOutput,problemSetterAllInputOutputTestCase
-            ,timeLimit,memoryLimit,acceptedList,totalSubmitAttempt
+            ,timeLimit,memoryLimit,problemSetterName,acceptCounter,totalSubmitAttempt
             }).save();
         //include acceptedList after accepted
         console.log("newProblem:"+newProblem);

@@ -103,7 +103,7 @@ router.post ('/register',async (req,res)=>{
              console.log("user img : "+ user.img);
 
               
-            return res.status(201).json({success:true, firstName:user.firstName, img:user.img})
+            return res.status(201).json({success:true, firstName:user.firstName, lastName:user.lastName,img:user.img})
 
          
      }catch(error){
