@@ -10,8 +10,10 @@ import "codemirror/theme/idea.css";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/closebrackets";
 
+import { useNavigate } from "react-router-dom";
 
 import { useLocation} from "react-router-dom";
+
 import "../pagesCss/codeSubmit.css"
 
 const ProblemSubmit =  (props)=>{
@@ -29,9 +31,8 @@ const ProblemSubmit =  (props)=>{
     const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
     const [problemSolvedList, setproblemSolvedList]=useState([]);
     const [acceptCounter, setacceptCounter]=useState(0);
-    const [userId, setUserId]=useState('');
-
-
+    const [userEmail, setuserEmail]=useState('');
+    const [problemAcceptedCounter,setProblemAcceptedCounter]=useState(0);
     const [problemDes, setProblemDes] = useState([]);
 
 
@@ -111,10 +112,15 @@ const ProblemSubmit =  (props)=>{
                        setJobMemory("");
                        setJobDetails(null);
   
+
+                     
+
                        const {data} = await Axios.post("http://localhost:5000/codeSubmit/submit", payload)
                        setJobId(data.jobId);
                        let intervalId;
   
+                       
+
                        
                        intervalId = setInterval(async()=>{
   
@@ -124,27 +130,31 @@ const ProblemSubmit =  (props)=>{
 
                               /**************Updat Accepted/Attempted in userDB and problemDb*************** */
                               //problem database:
-                              let useridExistInProblemDB =false;
-                                //send problem id to
-                                
-                                const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
-                                 setProblemDes(response.data); 
-                                     //console.log( "dilsplayed problem detailse :"+response.data);
+                              //user Email
+                              handleViewProfile();
+                              handleViewProfile();
 
-                                //find the user id ;
-                               }); 
+                              console.log("userEmail:"+userEmail);
+                              console.log("problemSolveCounter:"+problemAcceptedCounter);
+
+                              let useridExistInProblemDB =false;
+                                
+                             
+                             //problem id    
+                             const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
+                                 setProblemDes(response.data); 
+                                     //console.log( "dilsplayed problem detailse :"+response.data);                                
+                              }); 
+                              
                                Array.isArray(problemDes)
                                ? problemDes.forEach((val, key)  => {
                                        setproblemSolvedList(val.acceptedList);
                                        setacceptCounter(val.acceptCounter);
-                                       console.log("problemSolvedList"+ problemSolvedList);
-                                       console.log("acceptCounter"+ acceptCounter);
-                                       console.log("seeterName:"+val.problemSetterName);
-                                       console.log("length of problemSolvedList"+ problemSolvedList.length);
+                                     
 
                                        if(problemSolvedList.length>=1){
                                           problemSolvedList.forEach((val, key)  => {
-                                                if(val === 'userId'){
+                                                if(val === userEmail){
                                                    useridExistInProblemDB = true;
                                                    console.log("found the id ");
                                                    //break the loop;
@@ -156,9 +166,7 @@ const ProblemSubmit =  (props)=>{
                                           useridExistInProblemDB = false;
                                           console.log("problemSolved List is still empty");
 
-                                       }
-
-                                    
+                                       }                                    
                                }):console.log('problem detailse not found');
                                 
                              if(success)
@@ -169,21 +177,18 @@ const ProblemSubmit =  (props)=>{
                                        if(!useridExistInProblemDB){
 
                                             console.log("User DB and Problem db will be updated");
-                                             //User database
-                                                   //query for user Info for update with new data;
-
+                                            if(userEmail){
+                                             updateUserBd(userEmail);
+                                           }
+                                           else{
+                                             console.log("userEmail still empty");
+                                             handleViewProfile();
+                                             if(userEmail){
+                                                updateUserBd(userEmail);
+                                              }
+                                           }
+                                            
                                              
-                                                   //-problemAccepted counter++ and check if already solved(check Status);
-                                                         /*not already accepted{
-                                                               const UpdateUser={
-                                                                  Attempted:
-                                                                  Status:
-                                                                  id:
-
-                                                         }
-                                                         }*/
-                                                //Problem database
-                                                         //query for problem info for update with new data;
                                           }
                                  }
                                    
@@ -212,12 +217,7 @@ const ProblemSubmit =  (props)=>{
                                 
   
                              }else{
-                                       if(SubmitType === 'submit')
-                                       {
-                                          if(!useridExistInProblemDB){
-                                             console.log("will work on wrong answer");
-                                          }
-                                       }
+                                    
 
                                        setStatus("Error : Please retry !");
                                        console.error(error);
@@ -241,8 +241,59 @@ const ProblemSubmit =  (props)=>{
   }
  
   
-  
+  const handleViewProfile  =async()=>{
+       //for problem setter name;
+       const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
+         headers:{
+             'x-access-token':localStorage.getItem('token'),
+         }
+     })
+     if(data.success === true){
+      setuserEmail(data.email);
+      setProblemAcceptedCounter(data.ProblemAcceptedCounter);
+       
+     }else{
+         alert(data.error);
+   }
+  }
       
+  const updateUserBd = async(gmail)=>{      
+    console.log("updateUserBd called"); 
+     let counter = problemAcceptedCounter+1;
+     console.log("counter: "+ counter);
+         
+            try{
+
+                        const UpdateUser={
+                           Status:'Accepted',
+                           problem_id:problemId,
+                           ProblemAcceptedCounter: (problemAcceptedCounter+1),
+                           email:gmail
+
+                           }
+               
+                     const {data} = await Axios.put("http://localhost:5000/RegistraionAndLogin/updateUser", UpdateUser);
+                  
+                     console.log(data.user);
+                     if(data.user){
+                        window.confirm('user infor updated sucessfully');
+
+                     }else{
+                        alert('couldnnot updated');
+                     }
+
+
+            }
+            catch({response}){
+            if(response){
+                  const errMsg = response.data.err;
+                  window.confirm('Please check your username password');
+
+            }else{
+            console.log("Error connecting to server!");
+         }
+}      
+  }
     return (
      
       <div className="wrap">
@@ -304,6 +355,8 @@ const ProblemSubmit =  (props)=>{
    
          <button className='run_btn' onClick={ ()=>handleSubmit("run")}>Run</button>
          <button className ='submit_btn'onClick={()=>handleSubmit("submit")}>Submit</button> 
+         <button className ='submit_btn'onClick={handleViewProfile}>profile</button> 
+
         
         <p>{customInput}</p>
         <p>{status}</p>

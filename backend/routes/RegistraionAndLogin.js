@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const cors = require("cors");
-const userDb = require('../models/user');
+const userDb = require('../models/user');//
 
 const jwt = require('jsonwebtoken');
 
@@ -20,11 +20,11 @@ router.post ('/register',async (req,res)=>{
     console.log('registered')
  
     const {firstName, lastName,email,password,country,university,img}= req.body;
-    
+    const ProblemAcceptedCounter=0;
    
      try{         
          
-          const newUser = await new userDb({email,firstName, lastName,password,country,university,img}).save();
+          const newUser = await new userDb({email,firstName, lastName,password,country,university,img,ProblemAcceptedCounter}).save();
           console.log("newUser"+newUser);
           return res.status(201).json({success:true,newUser});
         
@@ -103,7 +103,9 @@ router.post ('/register',async (req,res)=>{
              console.log("user img : "+ user.img);
 
               
-            return res.status(201).json({success:true, firstName:user.firstName, lastName:user.lastName,img:user.img})
+            return res.status(201).json({success:true, firstName:user.firstName, lastName:user.lastName,
+                img:user.img, email:user.email,ProblemAcceptedCounter:user.ProblemAcceptedCounter,
+                problemSolvedList:user.problemSolvedList, UserAddDate:user.UserAddDate, university:user.university})
 
          
      }catch(error){
@@ -113,5 +115,38 @@ router.post ('/register',async (req,res)=>{
         
  });
  
+ router.put('/updateUser',async(req,res)=>{
+
+    console.log("update user from registrationAnd login");
+     
+    const Status = req.body.Status;
+    const problem_id = req.body.problem_id;
+    const ProblemAcceptedCounter = req.body.ProblemAcceptedCounter;
+    const email = req.body.email;
+     
+    console.log ("Status:"+ Status + "problemId : "+problem_id 
+    + "ProblemAcceptedCounter"+ProblemAcceptedCounter+"email:"+email);
+    try{
+        await userDb.updateOne
+            (
+                {email:email},
+                { $set: 
+                    {
+                        ProblemAcceptedCounter:ProblemAcceptedCounter,
+                        problemSolvedList:[{Status:Status, problem_id:problem_id}]
+                   
+                    }
+            }
+            )
+            return res.status(201).json({success:true,user:token});
+
+    }catch(err){
+        return res.json({status:'error', user:false})
+
+    }
+    
+   
+})
+
  
 module.exports = router;

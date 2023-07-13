@@ -27,12 +27,11 @@ const UserSchema = mongoose.Schema({
         default:Date.now
     },    
     problemSolvedList:[ {
-        Attempted:{type:Number},
         Status:{ 
             type:String,
             default:" "
         },
-        id:{
+        problem_id:{
             type:String
         }
 
@@ -48,7 +47,12 @@ const UserSchema = mongoose.Schema({
     },
     img:{
         type:String
-    }
+    },
+    UserAddDate:{
+        type:Date,
+        default:Date.now
+
+   } 
 
 
 });
