@@ -39,7 +39,7 @@ const ProblemSubmit =  (props)=>{
     const [userEmail, setuserEmail]=useState('');
     const [AcceptedCounterUsers,setAcceptedCounterUsers]=useState(0);
     const [problemDes, setProblemDes] = useState([]);
-    const [useridExistInProblemDB, setuseridExistInProblemDB] = useState();
+    const [useridExistInProblemDB, setuseridExistInProblemDB] = useState(false);
     const [userProblemSolveList, setuserProblemSolveList]=useState([]);
 
 
@@ -89,12 +89,37 @@ const ProblemSubmit =  (props)=>{
       setCustomInput(inputTrim);
     // let inputSplice= (inputTrim.split(/\n/))  
      handleViewProfile();
+     if(id===problemId){
+      problemDesAxios();
 
-  
+     }
    
      
   },[customInputFirst]);
   
+
+  const problemDesAxios = async()=>{
+   try{
+      const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
+         setProblemDes(response.data); 
+            console.log( "dilsplayed problem detailse :"+response.data);     
+            
+            
+            Array.isArray(problemDes)
+            ? problemDes.forEach((val, key)  => {
+                  setwhoSolved(val.acceptedList);
+                  setacceptCounterForProblem(val.acceptCounter);   
+                  console.log("who solved"+whoSolved);                                          
+            }):console.log('problem detailse not found');  
+      }); 
+     
+        
+   }catch(err){
+      console.log("problem detailse not found"+err);
+   }
+
+     
+  }
     const handleSubmit = async(SubmitType) =>{
                  
                  
@@ -170,58 +195,7 @@ const ProblemSubmit =  (props)=>{
                                 /**************Update Accepted/Attempted in userDB and problemDb*************** */
                               if(jobOutput==='Accepted'){
                                     console.log("we will work ");
-                                     
-                                    //user Email
-                                   handleViewProfile();
-                                   if(userEmail){
-
-                                 
-
-                                          console.log("userEmail:"+userEmail);
-                                       // console.log("problemSolveCounter:"+AcceptedCounterUsers);                                
-                                 
-                                          //problem id    
-                                          const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
-                                                setProblemDes(response.data); 
-                                                   console.log( "dilsplayed problem detailse :"+response.data);                                
-                                             }); 
-                                             setuseridExistInProblemDB(false);
-
-                                             Array.isArray(problemDes)
-                                             ? problemDes.forEach((val, key)  => {
-                                                   setwhoSolved(val.acceptedList);
-                                                   setacceptCounterForProblem(val.acceptCounter);                                                                                                      
-
-                                                   if(whoSolved.length>=1){
-                                                      whoSolved.forEach((val, key)  => {
-                                                         console.log("userEmail in who solved:"+val);
-                                                            if(val === userEmail){
-                                                               setuseridExistInProblemDB(true);
-                                                               console.log("userIdExist= Ture");
-                                                               //break the loop;
-
-                                                            }
-                                                            
-                                                      });
-                                                   } 
-                                                   else{
-                                                      console.log("who sloved is empty")
-
-                                                   }                                 
-                                             }):console.log('problem detailse not found');                    
-                                             
-                                                   if(useridExistInProblemDB === false){
-
-                                                            console.log("User DB and Problem db will be updated");                                                            
-                                                            updateUserDb(userEmail);
-                                                            updateProblemDB();                                                                 
-
-                                                      }
-                                                   else{
-                                                      console.log("user already solved this problem: userExist ture");
-                                                   }
-                                          }  
-                                          console.log("user email still empty");
+                                    handleBD_after_accepted();                            
 
                                 } 
                                 else{
@@ -264,7 +238,71 @@ const ProblemSubmit =  (props)=>{
               
   }
  
-  
+  const handleBD_after_accepted = async()=>{
+          //user Email
+          handleViewProfile();
+          problemDesAxios();
+          let userInProblem = 0;
+          if(userEmail){
+
+        
+                userInProblem = 0
+                 console.log("userEmail:"+userEmail);
+              // console.log("problemSolveCounter:"+AcceptedCounterUsers);                                
+        
+                 //problem id    
+                 
+                    //setuseridExistInProblemDB(false); 
+                          if(userInProblem ===0)
+                          {
+                                 if(whoSolved.length>=1){
+                                    whoSolved.forEach((val, key)  => {
+                                       console.log("userEmail in who solved:"+val);
+                                       let email =val;
+                                       JSON.stringify(email);
+                                       console.log("email"+email);
+                                       console.log("type of email"+ typeof(email));
+                                       console.log("type of userEmail"+ typeof(userEmail));
+
+                                          if(val === userEmail){
+                                          userInProblem =1;
+                                             console.log("userIdExist 1");
+                                             //break the loop;
+      
+                                          }
+                                          
+                                    });
+                                 } 
+                                 else{
+                                    console.log("who sloved is empty")
+      
+                                 }  
+
+                          }
+                          else{
+                            console.log("userInProblem already 1");
+                          }
+                                              
+                    
+                          if(userInProblem === 0){
+
+                                   console.log("User DB and Problem db will be updated");                                                            
+                                    updateUserDb(userEmail);
+                                    updateProblemDB();                                                                 
+
+                             }
+                          else{
+                             console.log("BD wont updated(already solved it )");
+                          }
+                 }  
+             else{
+               console.log("user email still empty");
+             }    
+  }
+
+
+
+
   const handleViewProfile  =async()=>{
        //for problem setter name;
        const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
@@ -284,50 +322,69 @@ const ProblemSubmit =  (props)=>{
   }
       
   const updateProblemDB = async()=>{  
+
+   
    console.log("from updateProblemDb");
-   console.log("whoSolved length 1:"+whoSolved.length);
-   console.log("userEmail"+userEmail);
-   setwhoSolved([...whoSolved,userEmail]);
-   console.log("whoSolved length 2:"+whoSolved.length);
-   console.log("counter problem"+ acceptCounterForProblem);
 
-  /* try{
-         const updateDB = {
-            acceptCounter:acceptCounterForProblem+1,
-            acceptedList:whoSolved,
-            id:problemId
+   let arr = [''];
+   arr = [...whoSolved,userEmail];
+   //console.log("arr"+arr);
+   console.log("problemDB:_"+arr);
+   console.log("ProblemSolveList_prob_DB_length:"+userProblemSolveList.length);
+   let counter = acceptCounterForProblem;
+   counter = counter+1;
+   console.log("counter"+counter);
+ 
+  
+   const updateDB={
       
-         }
-        // const {data} = await Axios.put('http://localhost:5000/problemAdd/updateProblem',updateDB);
+      acceptCounter:counter,
+      acceptedList:arr,
+      id:problemId
 
-         console.log("updated problem des:"+ data);
+      }
+  
+   //console.log("counter problem"+ acceptCounterForProblem);
 
+  try{
+         
+       const {data} = await Axios.put('http://localhost:5000/problemAdd/updateProblem',updateDB);
+       if(data.user){
+         window.confirm('Problem infor updated sucessfully');
+
+      }else{
+         alert('couldnnot updated  user');
+      }
    }catch(error){
        alert("could not update problem DB"+error);
 
-   }*/
+   }
    
 
 }    
   const updateUserDb= async(gmail)=>{  
-         console.log("from user update")
-         console.log("userProblemSolveList length 1:"+userProblemSolveList.length);
-
-         setuserProblemSolveList([...userProblemSolveList, problemId])
-         console.log("userArrayforSolvedProblem length 2:"+userProblemSolveList.length);
-         console.log("counter user"+ AcceptedCounterUsers);           
-         /*  try{
-                     
-
-                       const UpdateUser={
+         //console.log("from user update")
+         let arr = [''];
+         arr = [...userProblemSolveList,problemId];
+         //console.log("arr"+arr);
+         //console.log("userProblemSolveList length:"+userProblemSolveList.length);
+         let counter = AcceptedCounterUsers;
+         counter = counter+1;
+       
+        
+         const UpdateUser={
                          
-                          ProblemAcceptedCounter: (AcceptedCounterUsers+1),
-                          email:gmail,
-                          problemSolvedList:userProblemSolveList
+            ProblemAcceptedCounter: counter,
+            email:gmail,
+            problemSolvedList:arr
 
-                          }
+            }
+            console.log("counter"+UpdateUser.ProblemAcceptedCounter + "problemList:"+ UpdateUser.problemSolvedList+"email "+UpdateUser.email);
+           try{              
+
+                      
               
-                   // const {data} = await Axios.put("http://localhost:5000/RegistraionAndLogin/updateUser", UpdateUser);
+                   const {data} = await Axios.put("http://localhost:5000/RegistraionAndLogin/updateUser", UpdateUser);
                  
                     console.log("data.user"+data.user);
                     if(data.user){
@@ -339,15 +396,9 @@ const ProblemSubmit =  (props)=>{
 
 
            }
-           catch({response}){
-               if(response){
-                     const errMsg = response.data.err;
-                     window.confirm('Please check your username password');
-
-               }else{
-               console.log("Error connecting to server!");
-            }
-         }  */    
+           catch(err){
+              console.log("could not updated user"+err);
+         }    
  }
     return (
      <>

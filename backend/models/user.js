@@ -27,7 +27,7 @@ const UserSchema = mongoose.Schema({
         default:Date.now
     },    
     acceptedList:[{
-        type:String
+        type:[]
      }],
     
     ProblemAcceptedCounter:{

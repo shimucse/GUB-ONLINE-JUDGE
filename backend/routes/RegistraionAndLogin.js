@@ -135,7 +135,7 @@ router.post ('/register',async (req,res)=>{
                     }
             }
             )
-            return res.status(201).json({success:true,user:token});
+            return res.status(201).json({success:true, user:true});
 
     }catch(err){
         return res.json({status:'error', user:false})

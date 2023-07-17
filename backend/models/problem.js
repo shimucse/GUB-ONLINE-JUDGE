@@ -68,7 +68,7 @@ const problemSchema = mongoose.Schema({
     required:true,
  },
  acceptedList:[{
-      type:String
+      type:[]
    }],
    acceptCounter:{
      type:Number
