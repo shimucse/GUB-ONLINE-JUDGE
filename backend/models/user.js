@@ -26,16 +26,10 @@ const UserSchema = mongoose.Schema({
         type:Date,
         default:Date.now
     },    
-    problemSolvedList:[ {
-        Status:{ 
-            type:String,
-            default:" "
-        },
-        problem_id:{
-            type:String
-        }
-
-    }],
+    acceptedList:[{
+        type:String
+     }],
+    
     ProblemAcceptedCounter:{
         type:Number
     },

@@ -18,10 +18,11 @@ const UserProfile = ()=>{
     const[university, setUniversity] = useState('');
     const[img, setImg] = useState('');
     const [problemAcceptedCounter,setProblemAcceptedCounter]=useState(0);
-    const[problemSolvedList, setproblemSolvedList]=([]);
-    const [UserAddDate, setUserAddDate] =('')
+    const[problemSolvedList, setproblemSolvedList]=useState([]);
+    const [UserAddDate, setUserAddDate] =useState('');
+    const [userDes,setUserDes]=useState([]);
 
-   async function populateQuote(){
+    async function populateQuote(){
         const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
             headers:{
                 'x-access-token':localStorage.getItem('token'),
@@ -81,10 +82,8 @@ const UserProfile = ()=>{
 
                                     <button onClick={()=>{  navigate("/Submission",
                                             {state:{email:userEmail}
-                                            });}} >All submissions</button>
-                                     <button onClick={()=>{  navigate("/AcceptedProblem",
-                                            {state:{email:userEmail}
-                                            });}} >Accepted submissions</button>
+                                            });}} >Solved Problem</button>
+                                    
 
                                 
                                     <p><button>Contact</button></p>

@@ -46,7 +46,7 @@ const Registration = ()=>{
                   
                   };
           
-              const {data} = await Axios.post("http://localhost:5000/RegistraionAndLogin/register", payload);
+            const {data} = await Axios.post("http://localhost:5000/RegistraionAndLogin/register", payload);
               //const {data} = await Axios.delete("http://localhost:5000/RegistraionAndLogin/delete");
             //  const data = await Axios.get("http://localhost:5000/RegistraionAndLogin/read");
 

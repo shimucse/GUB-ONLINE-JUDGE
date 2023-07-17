@@ -9,15 +9,15 @@ import '../pagesCss/Home.css'
 import Registration from './Registration';
 import Login from "./Login";
 
-
 const Home = ()=>{
     let navigate = useNavigate();
 
   return (
       <>
+               
       <div className="H_wrap">
           <div className="H_body_column">
-                
+
               <div className="H_left_body_column">            
                     <div className="H_quote">
                   

@@ -70,6 +70,35 @@ router.post ('/submit',async (req,res)=>{
     }
   
  })
- 
+ router.put('/updateProblem',async(req,res)=>{
+
+    console.log("update problem from problemAdd");
+     
+    const {acceptCounter,acceptedList,id}=req.body;
+     
+    console.log ("problemId : "+id 
+    + "acceptCounter"+acceptCounter+"acceptedList:"+acceptedList);
+    try{
+        await problemDB.updateOne
+            (
+                {id:id},
+                { $set: 
+                    {
+                        acceptCounter:acceptCounter,
+                        acceptedList:[acceptedList]
+                   
+                    }
+            }
+            )
+            return res.status(201).json({success:true,user:token});
+
+    }catch(err){
+        return res.json({status:'error', user:false})
+
+    }
+    
+   
+})
+
  
 module.exports=  router;

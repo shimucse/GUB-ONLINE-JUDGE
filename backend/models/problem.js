@@ -73,10 +73,7 @@ const problemSchema = mongoose.Schema({
    acceptCounter:{
      type:Number
    },
-totalSubmitAttempt:{
-     type:Number,
 
-}
 
 
 });

@@ -90,7 +90,6 @@ router.post ('/register',async (req,res)=>{
  
  
  router.get ('/viewProfile',async (req,res)=>{ 
-    console.log('quote')
     const token = req.headers['x-access-token']   
     
     
@@ -99,13 +98,12 @@ router.post ('/register',async (req,res)=>{
              const email = decode.email;
              console.log("gmail"+ email);
              const user = await userDb.findOne({email:email});
-             console.log("userFirstName"+ user.firstName);
-             console.log("user img : "+ user.img);
+             //console.log("userFirstName"+ user.firstName);
 
               
             return res.status(201).json({success:true, firstName:user.firstName, lastName:user.lastName,
                 img:user.img, email:user.email,ProblemAcceptedCounter:user.ProblemAcceptedCounter,
-                problemSolvedList:user.problemSolvedList, UserAddDate:user.UserAddDate, university:user.university})
+                acceptedList:user.acceptedList, UserAddDate:user.UserAddDate, university:user.university})
 
          
      }catch(error){
@@ -119,13 +117,12 @@ router.post ('/register',async (req,res)=>{
 
     console.log("update user from registrationAnd login");
      
-    const Status = req.body.Status;
-    const problem_id = req.body.problem_id;
+
     const ProblemAcceptedCounter = req.body.ProblemAcceptedCounter;
     const email = req.body.email;
+    const acceptedList = req.body.problemSolvedList;
      
-    console.log ("Status:"+ Status + "problemId : "+problem_id 
-    + "ProblemAcceptedCounter"+ProblemAcceptedCounter+"email:"+email);
+    console.log ("ProblemAcceptedCounter"+ProblemAcceptedCounter+"email:"+email);
     try{
         await userDb.updateOne
             (
@@ -133,7 +130,7 @@ router.post ('/register',async (req,res)=>{
                 { $set: 
                     {
                         ProblemAcceptedCounter:ProblemAcceptedCounter,
-                        problemSolvedList:[{Status:Status, problem_id:problem_id}]
+                        acceptedList:[acceptedList]
                    
                     }
             }

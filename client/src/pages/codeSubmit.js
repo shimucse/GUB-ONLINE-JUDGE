@@ -14,7 +14,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useLocation} from "react-router-dom";
 
-import "../pagesCss/codeSubmit.css"
+import "../pagesCss/codeSubmit.css";
+import Update_user_problem_DB_after_accepted from './Update_user_problem_DB_after_accepted'
 
 const ProblemSubmit =  (props)=>{
 
@@ -29,11 +30,18 @@ const ProblemSubmit =  (props)=>{
     const [customInputFirst, setCustomInputFirst ] = useState([]);
     const [problemId, setProblemId] = useState('');
     const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
-    const [problemSolvedList, setproblemSolvedList]=useState([]);
-    const [acceptCounter, setacceptCounter]=useState(0);
+
+    //prbolem db
+    const [whoSolved, setwhoSolved]=useState([]);
+    const [acceptCounterForProblem, setacceptCounterForProblem]=useState(0);
+
+    //User
     const [userEmail, setuserEmail]=useState('');
-    const [problemAcceptedCounter,setProblemAcceptedCounter]=useState(0);
+    const [AcceptedCounterUsers,setAcceptedCounterUsers]=useState(0);
     const [problemDes, setProblemDes] = useState([]);
+    const [useridExistInProblemDB, setuseridExistInProblemDB] = useState();
+    const [userProblemSolveList, setuserProblemSolveList]=useState([]);
+
 
 
     //user acceptence 
@@ -72,7 +80,7 @@ const ProblemSubmit =  (props)=>{
       let SetterInputOutputLocation = location.state.problemSetterAllInputOutputTestCase;
       setProblemStterInputOutput(SetterInputOutputLocation);
     
-     console.log("setterInputOutput"+problemStterInputOutput);
+    // console.log("setterInputOutput"+problemStterInputOutput);
 
      //have to extract the input output from object;
       setProblemId(id);
@@ -80,7 +88,8 @@ const ProblemSubmit =  (props)=>{
       let inputTrim = (customInputFirst);      
       setCustomInput(inputTrim);
     // let inputSplice= (inputTrim.split(/\n/))  
-   
+     handleViewProfile();
+
   
    
      
@@ -89,21 +98,34 @@ const ProblemSubmit =  (props)=>{
     const handleSubmit = async(SubmitType) =>{
                  
                  
+             
+                console.log("callType 1:"+SubmitType);
 
-                 console.log("callType:"+SubmitType);
                  let deleteId;
                  let payload ={};
-                   payload = {
+
+                 if(SubmitType==='submit'){
+                        payload = {
                            language : language,
                            code:code ,
                            SubmitType:SubmitType,
-                           input:customInput,
                            problemSetterAllInputOutputTestCase:problemStterInputOutput,
                            problemId:problemId,
-                           submitType:SubmitType
                         
-                     };
+                        };
 
+                 }else{
+                     payload = {
+                        language : language,
+                        code:code ,
+                        SubmitType:SubmitType,
+                        input:customInput,
+                        problemId:problemId,
+                     
+                  };
+
+                 }
+                   
                 
                  try{
                        setJobId("");
@@ -128,82 +150,84 @@ const ProblemSubmit =  (props)=>{
                              deleteId=data.jobId;
                              const {success, job, error} = dataRes;
 
-                              /**************Updat Accepted/Attempted in userDB and problemDb*************** */
-                              //problem database:
-                              //user Email
-                              handleViewProfile();
-                              handleViewProfile();
-
-                              console.log("userEmail:"+userEmail);
-                              console.log("problemSolveCounter:"+problemAcceptedCounter);
-
-                              let useridExistInProblemDB =false;
-                                
                              
-                             //problem id    
-                             const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
-                                 setProblemDes(response.data); 
-                                     //console.log( "dilsplayed problem detailse :"+response.data);                                
-                              }); 
-                              
-                               Array.isArray(problemDes)
-                               ? problemDes.forEach((val, key)  => {
-                                       setproblemSolvedList(val.acceptedList);
-                                       setacceptCounter(val.acceptCounter);
-                                     
-
-                                       if(problemSolvedList.length>=1){
-                                          problemSolvedList.forEach((val, key)  => {
-                                                if(val === userEmail){
-                                                   useridExistInProblemDB = true;
-                                                   console.log("found the id ");
-                                                   //break the loop;
-
-                                                }
-                                          });
-                                       }else{
-
-                                          useridExistInProblemDB = false;
-                                          console.log("problemSolved List is still empty");
-
-                                       }                                    
-                               }):console.log('problem detailse not found');
                                 
                              if(success)
                              {
-
-                                 if(SubmitType === 'submit')
-                                 {
-                                       if(!useridExistInProblemDB){
-
-                                            console.log("User DB and Problem db will be updated");
-                                            if(userEmail){
-                                             updateUserBd(userEmail);
-                                           }
-                                           else{
-                                             console.log("userEmail still empty");
-                                             handleViewProfile();
-                                             if(userEmail){
-                                                updateUserBd(userEmail);
-                                              }
-                                           }
-                                            
-                                             
-                                          }
-                                 }
-                                   
+                                 
                                 // const {status: jobStatus, output: jobOutput,  jobMemory:memorySpace} = job;
                                 const jobStatus = job.status;
                                 const jobOutput = job.output;
                                 const memory = job.memorySpace;
-                                
+                                console.log("jobOutput"+jobOutput);
                                 setStatus(jobStatus);
                                 setJobDetails(job);
   
                                 setOutput(jobOutput);
                                 setJobMemory(memory);
                                 clearInterval(intervalId);
-                               
+                                
+                                /**************Update Accepted/Attempted in userDB and problemDb*************** */
+                              if(jobOutput==='Accepted'){
+                                    console.log("we will work ");
+                                     
+                                    //user Email
+                                   handleViewProfile();
+                                   if(userEmail){
+
+                                 
+
+                                          console.log("userEmail:"+userEmail);
+                                       // console.log("problemSolveCounter:"+AcceptedCounterUsers);                                
+                                 
+                                          //problem id    
+                                          const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
+                                                setProblemDes(response.data); 
+                                                   console.log( "dilsplayed problem detailse :"+response.data);                                
+                                             }); 
+                                             setuseridExistInProblemDB(false);
+
+                                             Array.isArray(problemDes)
+                                             ? problemDes.forEach((val, key)  => {
+                                                   setwhoSolved(val.acceptedList);
+                                                   setacceptCounterForProblem(val.acceptCounter);                                                                                                      
+
+                                                   if(whoSolved.length>=1){
+                                                      whoSolved.forEach((val, key)  => {
+                                                         console.log("userEmail in who solved:"+val);
+                                                            if(val === userEmail){
+                                                               setuseridExistInProblemDB(true);
+                                                               console.log("userIdExist= Ture");
+                                                               //break the loop;
+
+                                                            }
+                                                            
+                                                      });
+                                                   } 
+                                                   else{
+                                                      console.log("who sloved is empty")
+
+                                                   }                                 
+                                             }):console.log('problem detailse not found');                    
+                                             
+                                                   if(useridExistInProblemDB === false){
+
+                                                            console.log("User DB and Problem db will be updated");                                                            
+                                                            updateUserDb(userEmail);
+                                                            updateProblemDB();                                                                 
+
+                                                      }
+                                                   else{
+                                                      console.log("user already solved this problem: userExist ture");
+                                                   }
+                                          }  
+                                          console.log("user email still empty");
+
+                                } 
+                                else{
+                                  console.log("wrong answer we wont work");
+                                }
+                                 
                                 if(SubmitType === 'run'){                                
   
                                    console.log("run will call the delete method"+ deleteId);
@@ -237,7 +261,7 @@ const ProblemSubmit =  (props)=>{
                     }
                  }
                 
-                 
+              
   }
  
   
@@ -250,54 +274,88 @@ const ProblemSubmit =  (props)=>{
      })
      if(data.success === true){
       setuserEmail(data.email);
-      setProblemAcceptedCounter(data.ProblemAcceptedCounter);
+      setAcceptedCounterUsers(data.ProblemAcceptedCounter);
+      setuserProblemSolveList(data.acceptedList);
+
        
      }else{
          alert(data.error);
    }
   }
       
-  const updateUserBd = async(gmail)=>{      
-    console.log("updateUserBd called"); 
-     let counter = problemAcceptedCounter+1;
-     console.log("counter: "+ counter);
-         
-            try{
+  const updateProblemDB = async()=>{  
+   console.log("from updateProblemDb");
+   console.log("whoSolved length 1:"+whoSolved.length);
+   console.log("userEmail"+userEmail);
+   setwhoSolved([...whoSolved,userEmail]);
+   console.log("whoSolved length 2:"+whoSolved.length);
+   console.log("counter problem"+ acceptCounterForProblem);
 
-                        const UpdateUser={
-                           Status:'Accepted',
-                           problem_id:problemId,
-                           ProblemAcceptedCounter: (problemAcceptedCounter+1),
-                           email:gmail
-
-                           }
-               
-                     const {data} = await Axios.put("http://localhost:5000/RegistraionAndLogin/updateUser", UpdateUser);
-                  
-                     console.log(data.user);
-                     if(data.user){
-                        window.confirm('user infor updated sucessfully');
-
-                     }else{
-                        alert('couldnnot updated');
-                     }
-
-
-            }
-            catch({response}){
-            if(response){
-                  const errMsg = response.data.err;
-                  window.confirm('Please check your username password');
-
-            }else{
-            console.log("Error connecting to server!");
+  /* try{
+         const updateDB = {
+            acceptCounter:acceptCounterForProblem+1,
+            acceptedList:whoSolved,
+            id:problemId
+      
          }
-}      
-  }
+        // const {data} = await Axios.put('http://localhost:5000/problemAdd/updateProblem',updateDB);
+
+         console.log("updated problem des:"+ data);
+
+   }catch(error){
+       alert("could not update problem DB"+error);
+
+   }*/
+   
+
+}    
+  const updateUserDb= async(gmail)=>{  
+         console.log("from user update")
+         console.log("userProblemSolveList length 1:"+userProblemSolveList.length);
+
+         setuserProblemSolveList([...userProblemSolveList, problemId])
+         console.log("userArrayforSolvedProblem length 2:"+userProblemSolveList.length);
+         console.log("counter user"+ AcceptedCounterUsers);           
+         /*  try{
+                     
+
+                       const UpdateUser={
+                         
+                          ProblemAcceptedCounter: (AcceptedCounterUsers+1),
+                          email:gmail,
+                          problemSolvedList:userProblemSolveList
+
+                          }
+              
+                   // const {data} = await Axios.put("http://localhost:5000/RegistraionAndLogin/updateUser", UpdateUser);
+                 
+                    console.log("data.user"+data.user);
+                    if(data.user){
+                       window.confirm('user infor updated sucessfully');
+
+                    }else{
+                       alert('couldnnot updated  user');
+                    }
+
+
+           }
+           catch({response}){
+               if(response){
+                     const errMsg = response.data.err;
+                     window.confirm('Please check your username password');
+
+               }else{
+               console.log("Error connecting to server!");
+            }
+         }  */    
+ }
     return (
-     
+     <>
+
       <div className="wrap">
+
         <h1>Online Code Compiler</h1>
+
         <div className="body_column">
           <div>
             <h1>input:output</h1>
@@ -366,6 +424,7 @@ const ProblemSubmit =  (props)=>{
         <p>Memory space :{jobMemory}MB</p>
        </div>
        </div>
+   </>
     );
-  }
+            }
   export default ProblemSubmit;

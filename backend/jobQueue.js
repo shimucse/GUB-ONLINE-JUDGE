@@ -68,7 +68,6 @@ jobQueue.process(Num_WORKERS, async({data})=>{
 
                               
 
-                              counter++;
 
                                // console.log(`input: ${obj.setterInput}`),
                                 //console.log(`output: ${obj.setterOutput}`),"
@@ -84,31 +83,33 @@ jobQueue.process(Num_WORKERS, async({data})=>{
                                                     deleteFileSet=true;
                                                     resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
                                                   
-                                                    console.log("result when at end of the loop:"+resTemp);
+                                                    //console.log("result when at end of the loop:"+resTemp);
                                                     if(resTemp!==obj.setterOutput){
                                                         result=false;
                                                         job['output']='Wrong Answer';
-                                                       // console.log("setter output and user output not same at end loop")
+                                                    //   console.log("setter output and user output not same at end loop")
 
                                                     } 
                                                     else{
                                                         job['output']='Accepted';
+                                                       // console.log("setter output and user output  same at end loop")
+
                                                     }
                 
                                                 }
                                                 else{
                                                     resTemp =  await executCpp_and_executePy(job,obj.setterInput,deleteFileSet);
                                                   
-                                                    console.log("all time result: "+resTemp );
-                                                    console.log(`output: ${obj.setterOutput}`);
+                                                    //console.log("all time result: "+resTemp );
+                                                   // console.log(`output: ${obj.setterOutput}`);
                                                    
                                                     if(resTemp!==obj.setterOutput){
                                                         result=false;
-                                                        console.log("stter output and user output not  same");
+                                                        //console.log("stter output and user output not  same");
                                                         
 
                                                     }else{
-                                                        console.log("result same");
+                                                        //console.log("result same");
                                                     }
                                                     
                                                 }
