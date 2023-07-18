@@ -68,7 +68,9 @@ const problemSchema = mongoose.Schema({
     required:true,
  },
  acceptedList:[{
-      type:[]
+      userEmail:{
+        type:String
+      }
    }],
    acceptCounter:{
      type:Number

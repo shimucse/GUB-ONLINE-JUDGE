@@ -90,7 +90,7 @@ const ProblemSubmit =  (props)=>{
     // let inputSplice= (inputTrim.split(/\n/))  
      handleViewProfile();
      if(id===problemId){
-      problemDesAxios();
+          //problemDesAxios();
 
      }
    
@@ -99,6 +99,7 @@ const ProblemSubmit =  (props)=>{
   
 
   const problemDesAxios = async()=>{
+   console.log("problemDes");
    try{
       const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
          setProblemDes(response.data); 
@@ -109,7 +110,16 @@ const ProblemSubmit =  (props)=>{
             ? problemDes.forEach((val, key)  => {
                   setwhoSolved(val.acceptedList);
                   setacceptCounterForProblem(val.acceptCounter);   
-                  console.log("who solved"+whoSolved);                                          
+                 // console.log("who solved"+whoSolved); 
+                 console.log("acceptCounterForProblem"+acceptCounterForProblem);
+
+                 if(whoSolved.length>=1){
+                     whoSolved.forEach((val)=>{
+                                 console.log("inside axios : whosolved:"+val.userEmail);
+
+                     });
+
+                  }   else{console.log("inside p_dbaxios, whoSolved empty")}                                      
             }):console.log('problem detailse not found');  
       }); 
      
@@ -159,8 +169,8 @@ const ProblemSubmit =  (props)=>{
                        setJobMemory("");
                        setJobDetails(null);
   
-
-                     
+                     /********call for problem detailse */
+                       problemDesAxios();
 
                        const {data} = await Axios.post("http://localhost:5000/codeSubmit/submit", payload)
                        setJobId(data.jobId);
@@ -206,13 +216,11 @@ const ProblemSubmit =  (props)=>{
   
                                    console.log("run will call the delete method"+ deleteId);
                                    await axios.delete('http://localhost:5000/codeSubmit/delete', {params: {id:data.jobId}});
-                                   clearInterval(intervalId);
-  
+                                   clearInterval(intervalId); 
                  
                                }
   
-                                if(jobStatus === "pending")  return ;    
-                                
+                                if(jobStatus === "pending")  return ;                        
   
                              }else{
                                     
@@ -245,59 +253,51 @@ const ProblemSubmit =  (props)=>{
           let userInProblem = 0;
           if(userEmail){
 
-        
                 userInProblem = 0
                  console.log("userEmail:"+userEmail);
-              // console.log("problemSolveCounter:"+AcceptedCounterUsers);                                
-        
-                 //problem id    
-                 
-                    //setuseridExistInProblemDB(false); 
-                          if(userInProblem ===0)
-                          {
-                                 if(whoSolved.length>=1){
-                                    whoSolved.forEach((val, key)  => {
-                                       console.log("userEmail in who solved:"+val);
-                                       let email =val;
-                                       JSON.stringify(email);
-                                       console.log("email"+email);
-                                       console.log("type of email"+ typeof(email));
-                                       console.log("type of userEmail"+ typeof(userEmail));
+              // console.log("problemSolveCounter:"+AcceptedCounterUsers);   
+                 //problem id   
+                        
+                     
+                        if(userInProblem ===0)
+                        {
+                              if(whoSolved.length>=1){
 
-                                          if(val === userEmail){
+                            
+                                 whoSolved.forEach((val, index)  => {
+                                    console.log("inside who solved"+val.userEmail);
+
+                                       if(val.userEmail === userEmail){
                                           userInProblem =1;
-                                             console.log("userIdExist 1");
-                                             //break the loop;
-      
-                                          }
-                                          
-                                    });
-                                 } 
-                                 else{
-                                    console.log("who sloved is empty")
-      
-                                 }  
+                                          console.log("userIdExist 1");
+                                          //break the loop;
+   
+                                       }
+                                       
+                                 });  
+                              }else {
+                                 console.log("who sloved empty");
+                                console.log("acceptCounterForProblem"+acceptCounterForProblem);
+                               }                                 
 
-                          }
-                          else{
-                            console.log("userInProblem already 1");
-                          }
-                                              
-                    
-                          if(userInProblem === 0){
+                        }
+                        else{
+                           console.log("userInProblem already 1");
+                        }                                            
+                  
+                        if(userInProblem === 0){
 
-                                   console.log("User DB and Problem db will be updated");                                                            
-                                    updateUserDb(userEmail);
-                                    updateProblemDB();                                                                 
-
-                             }
-                          else{
-                             console.log("BD wont updated(already solved it )");
-                          }
-                 }  
-             else{
-               console.log("user email still empty");
-             }    
+                                 console.log("User DB and Problem db will be updated");                                                            
+                                 updateUserDb(userEmail);
+                                 updateProblemDB();        
+                        }
+                        else{
+                           console.log("BD wont updated(already solved it )");
+                        }
+               }  
+            else{
+            console.log("user email still empty");
+            }    
   }
 
 
@@ -326,11 +326,15 @@ const ProblemSubmit =  (props)=>{
    
    console.log("from updateProblemDb");
 
-   let arr = [''];
-   arr = [...whoSolved,userEmail];
+   let obj ={
+      userEmail:userEmail
+   }
+   let arr = [...whoSolved,obj];
    //console.log("arr"+arr);
    console.log("problemDB:_"+arr);
-   console.log("ProblemSolveList_prob_DB_length:"+userProblemSolveList.length);
+   arr.forEach((val)=>{
+         console.log("inside arr:"+val.userEmail);
+   })
    let counter = acceptCounterForProblem;
    counter = counter+1;
    console.log("counter"+counter);
@@ -402,7 +406,7 @@ const ProblemSubmit =  (props)=>{
  }
     return (
      <>
-
+    
       <div className="wrap">
 
         <h1>Online Code Compiler</h1>

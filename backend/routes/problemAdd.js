@@ -85,7 +85,7 @@ router.post ('/submit',async (req,res)=>{
                 { $set: 
                     {
                         acceptCounter:acceptCounter,
-                        acceptedList:[acceptedList]
+                        acceptedList:acceptedList
                    
                     }
             }
