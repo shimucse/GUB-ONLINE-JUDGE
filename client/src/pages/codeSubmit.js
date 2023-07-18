@@ -79,57 +79,24 @@ const ProblemSubmit =  (props)=>{
       let id = location.state.id
       let SetterInputOutputLocation = location.state.problemSetterAllInputOutputTestCase;
       setProblemStterInputOutput(SetterInputOutputLocation);
-    
-    // console.log("setterInputOutput"+problemStterInputOutput);
+      problemDesAxios(id);
+ 
+      handleViewProfile();
 
-     //have to extract the input output from object;
       setProblemId(id);
     
       let inputTrim = (customInputFirst);      
       setCustomInput(inputTrim);
-    // let inputSplice= (inputTrim.split(/\n/))  
-     handleViewProfile();
-     if(id===problemId){
-          //problemDesAxios();
+    // let inputSplice= (inputTrim.split(/\n/)) 
+        
 
-     }
+     
    
      
   },[customInputFirst]);
   
 
-  const problemDesAxios = async()=>{
-   console.log("problemDes");
-   try{
-      const ProblemDetailse =  Axios.get(`http://localhost:5000/problemAdd/fetch/${problemId}`).then((response)=>{
-         setProblemDes(response.data); 
-            console.log( "dilsplayed problem detailse :"+response.data);     
-            
-            
-            Array.isArray(problemDes)
-            ? problemDes.forEach((val, key)  => {
-                  setwhoSolved(val.acceptedList);
-                  setacceptCounterForProblem(val.acceptCounter);   
-                 // console.log("who solved"+whoSolved); 
-                 console.log("acceptCounterForProblem"+acceptCounterForProblem);
 
-                 if(whoSolved.length>=1){
-                     whoSolved.forEach((val)=>{
-                                 console.log("inside axios : whosolved:"+val.userEmail);
-
-                     });
-
-                  }   else{console.log("inside p_dbaxios, whoSolved empty")}                                      
-            }):console.log('problem detailse not found');  
-      }); 
-     
-        
-   }catch(err){
-      console.log("problem detailse not found"+err);
-   }
-
-     
-  }
     const handleSubmit = async(SubmitType) =>{
                  
                  
@@ -170,7 +137,7 @@ const ProblemSubmit =  (props)=>{
                        setJobDetails(null);
   
                      /********call for problem detailse */
-                       problemDesAxios();
+                      // problemDesAxios();
 
                        const {data} = await Axios.post("http://localhost:5000/codeSubmit/submit", payload)
                        setJobId(data.jobId);
@@ -249,7 +216,7 @@ const ProblemSubmit =  (props)=>{
   const handleBD_after_accepted = async()=>{
           //user Email
           handleViewProfile();
-          problemDesAxios();
+          problemDesAxios(problemId);
           let userInProblem = 0;
           if(userEmail){
 
@@ -288,8 +255,8 @@ const ProblemSubmit =  (props)=>{
                         if(userInProblem === 0){
 
                                  console.log("User DB and Problem db will be updated");                                                            
-                                 updateUserDb(userEmail);
-                                 updateProblemDB();        
+                                 //updateUserDb(userEmail);
+                                // updateProblemDB();        
                         }
                         else{
                            console.log("BD wont updated(already solved it )");
@@ -313,14 +280,45 @@ const ProblemSubmit =  (props)=>{
      if(data.success === true){
       setuserEmail(data.email);
       setAcceptedCounterUsers(data.ProblemAcceptedCounter);
-      setuserProblemSolveList(data.acceptedList);
-
-       
+      setuserProblemSolveList(data.acceptedList);       
      }else{
          alert(data.error);
    }
   }
-      
+  const problemDesAxios = async(id)=>{
+   console.log("problemDes");
+   let obj ={
+      id:'id'
+   }
+   try{
+         
+      const {data} = await Axios.get('http://localhost:5000/problemAdd/problemDetailse',{
+         headers:{
+             'id':id,
+         }
+     })
+
+     if(data.success === true){
+       // console.log("data.acceptCounter"+data.acceptCounter);
+        setacceptCounterForProblem(data.acceptCounter)
+        setwhoSolved(data.acceptedList);
+        //console.log("data.acceptedList"+data.acceptedList);
+
+
+     }
+     /* if(data.user){
+        window.confirm('Problem detailse found sucessfully');
+
+     }else{
+        alert('couldnnot found  problem');
+     }*/
+  }catch(error){
+      alert("could not found problem DB"+error);
+
+  }
+
+     
+  }   
   const updateProblemDB = async()=>{  
 
    

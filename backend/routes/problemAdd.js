@@ -56,7 +56,25 @@ router.post ('/submit',async (req,res)=>{
     }
 
  });
- 
+ router.get ('/problemDetailse',async (req,res)=>{ 
+    
+    
+    let id = req.headers.id;
+    console.log("id from problemDetailse:"+id);
+     try{
+             const user = await problemDB.findOne({id:id});
+             //console.log("userFirstName"+ user.firstName);
+
+              
+            return res.status(201).json({success:true, acceptCounter:user.acceptCounter, acceptedList:user.acceptedList})
+
+         
+     }catch(error){
+        return res.status(500).json({status:'error', error:'invalid token'})
+
+     }
+        
+ });
  router.get('/read', async(req,res)=>{
     console.log("read from ProblemAdd");
     try{
