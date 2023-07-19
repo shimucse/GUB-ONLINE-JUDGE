@@ -45,7 +45,7 @@ const ProblemList = ()=>{
                             <th><a>Id</a></th>
                             <th><a>Problem Name</a></th>
                             <th><a>Status</a></th>
-                            <th><a>Acceptance/Attempted</a></th>
+                            <th><a>Acceptance</a></th>
                             <th><a>Problem Setter</a></th>
                         </tr>
                         {problemList.map((val, key) =>{

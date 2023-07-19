@@ -130,7 +130,7 @@ router.post ('/register',async (req,res)=>{
                 { $set: 
                     {
                         ProblemAcceptedCounter:ProblemAcceptedCounter,
-                        acceptedList:[acceptedList]
+                        acceptedList:acceptedList
                    
                     }
             }

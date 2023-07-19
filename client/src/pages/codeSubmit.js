@@ -237,6 +237,7 @@ const ProblemSubmit =  (props)=>{
                                        if(val.userEmail === userEmail){
                                           userInProblem =1;
                                           console.log("userIdExist 1");
+                                          index = whoSolved.length;
                                           //break the loop;
    
                                        }
@@ -255,8 +256,8 @@ const ProblemSubmit =  (props)=>{
                         if(userInProblem === 0){
 
                                  console.log("User DB and Problem db will be updated");                                                            
-                                 //updateUserDb(userEmail);
-                                // updateProblemDB();        
+                                 updateUserDb(userEmail);
+                                 updateProblemDB();        
                         }
                         else{
                            console.log("BD wont updated(already solved it )");
@@ -298,20 +299,12 @@ const ProblemSubmit =  (props)=>{
          }
      })
 
-     if(data.success === true){
-       // console.log("data.acceptCounter"+data.acceptCounter);
-        setacceptCounterForProblem(data.acceptCounter)
-        setwhoSolved(data.acceptedList);
-        //console.log("data.acceptedList"+data.acceptedList);
-
-
-     }
-     /* if(data.user){
-        window.confirm('Problem detailse found sucessfully');
-
-     }else{
-        alert('couldnnot found  problem');
-     }*/
+      if(data.success === true){
+         // console.log("data.acceptCounter"+data.acceptCounter);
+         setacceptCounterForProblem(data.acceptCounter)
+         setwhoSolved(data.acceptedList);
+         //console.log("data.acceptedList"+data.acceptedList);
+       }    
   }catch(error){
       alert("could not found problem DB"+error);
 
@@ -325,7 +318,8 @@ const ProblemSubmit =  (props)=>{
    console.log("from updateProblemDb");
 
    let obj ={
-      userEmail:userEmail
+      userEmail:userEmail,
+      
    }
    let arr = [...whoSolved,obj];
    //console.log("arr"+arr);
@@ -366,8 +360,12 @@ const ProblemSubmit =  (props)=>{
 }    
   const updateUserDb= async(gmail)=>{  
          //console.log("from user update")
+         let obj ={
+            problemId:problemId,
+           Status:"Accepted"
+         }
          let arr = [''];
-         arr = [...userProblemSolveList,problemId];
+         arr = [...userProblemSolveList,obj];
          //console.log("arr"+arr);
          //console.log("userProblemSolveList length:"+userProblemSolveList.length);
          let counter = AcceptedCounterUsers;

@@ -60,7 +60,7 @@ router.post ('/submit',async (req,res)=>{
     
     
     let id = req.headers.id;
-    console.log("id from problemDetailse:"+id);
+    //console.log("id from problemDetailse:"+id);
      try{
              const user = await problemDB.findOne({id:id});
              //console.log("userFirstName"+ user.firstName);
