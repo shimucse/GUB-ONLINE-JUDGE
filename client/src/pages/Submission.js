@@ -1,7 +1,22 @@
-import React from "react";
-import '../pagesCss/Submission.css'
+import {React,useEffect,useState} from "react";
+import '../pagesCss/Submission.css';
+import { useLocation} from "react-router-dom";
+
+
 
 const AllSubmissionDisplay = ()=>{
+  const[problemSolvedList, setproblemSolvedList]=useState([]);
+  let location = useLocation();
+
+  useEffect(()=>{
+
+    
+    setproblemSolvedList(location.state.problemSolvedList);
+   console.log("problemSolvedList:  "+location.state.problemSolvedList);
+ 
+},[]);
+
+
     return(
 
             <>
@@ -19,77 +34,23 @@ const AllSubmissionDisplay = ()=>{
                           <th>CPU TIME</th>
                           
                       </tr>
-                      <tr>
-                          <td>1</td>
-                         <td><a href="">feeling lucky</a> </td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.07</td>
-                      </tr>
-                      <tr>
-                          <td>2</td>
-                        
-                          <td><a href="">IP Checking</a></td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.08</td>
-
-                      </tr>
-                      <tr>
-                          <td>3</td>
+                     
+                        {
+                           Array.isArray(problemSolvedList)
+                            ?problemSolvedList.map((val, key)=>{
+                              return(
+                                <tr>
+                                    <td>{val.problemId}</td>
+                                    <td><a href="">problemName</a> </td>
+                                    <td class="verdict">Accepted</td>
+                                 </tr>
+                              )
+                           }):<a>problemSolvedList Empty</a>
+                        }
                           
-                          <td><a href="">And ChessBoard</a> </td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.00</td>
-                      </tr>
-                      <tr>
-                          <td>4</td>
-                          
-                          <td><a href="">Merit Position</a></td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.01</td>
-                      </tr>
-                      <tr>
-                          <td>5</td>
-                        
-                          <td><a href="">Merit Position</a>Gretting</td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.01</td>
-                      </tr>
-                        <tr>
-                            <td>6</td>
-                           
-                            <td><a href="">Prime generator</a></td>
-                            <td class="verdict">Accepted</td>
-                            <td>5.00</td>
-                        </tr>
-                          <tr>
-                            <td>7</td>
-                          
-                            <td><a href="">Giovanni Rovelli</a></td>
-                          <td class="verdict">Accepted</td>
-                          <td>0.02</td>
-                        </tr>
-                          <tr>
-                            <td>8</td>
-                          
-                            <td><a href="">Magic sauare</a></td>
-                            <td class="verdict">Accepted</td>
-                            <td>0.01</td>
-                        </tr>
-                            <tr>
-                              <td>9</td>
-                             
-                              <td><a href="">Opposite Task</a></td>
-                              <td class="verdict">Wrong</td>
-                              <td>0.04</td>
-                          </tr>
-                            <tr>
-                              <td>10</td>
-                            
-
-                              <td><a href="">Country Roads</a></td>
-                              <td class="verdict">Wrong</td>
-                              <td>0.01</td>
-                            </tr>
+                         
+                    
+                      
                 </table>
                 <div class="next_previou_button">
                 <a href="#" class="previous">&laquo; Previous</a>

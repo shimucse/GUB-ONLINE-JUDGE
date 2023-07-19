@@ -38,10 +38,11 @@ const UserProfile = ()=>{
              setUniversity(data.university);
              setImg(data.img);
              setProblemAcceptedCounter(data.ProblemAcceptedCounter);
-             setproblemSolvedList(data.problemSolvedList);
+             setproblemSolvedList(data.acceptedList);
              setUserAddDate(data.UserAddDate);
              console.log("date:"+data.UserAddDate);
              console.log("inside profile");
+             
         }else{
             alert(data.error);
         }
@@ -70,6 +71,7 @@ const UserProfile = ()=>{
           <div className="wrap">
 
             <div className="body_column">
+              
                { firstName?
                                 <div class="card">
                                     <img  className="img" src={img}  />
@@ -81,8 +83,8 @@ const UserProfile = ()=>{
                                     <p><span>Solved: </span>{problemAcceptedCounter}</p>
 
                                     <button onClick={()=>{  navigate("/Submission",
-                                            {state:{email:userEmail}
-                                            });}} >Solved Problem</button>
+                                            {state:{problemSolvedList:problemSolvedList}
+                                            });}} >Solved Problem List</button>
                                     
 
                                 
