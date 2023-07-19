@@ -14,17 +14,47 @@ const ProblemList = ()=>{
 
   const [problemList, setProblemList] = useState(['']);
   const [problemId, setProblemId] = useState('');
+  const [userEmail, setUserEmail]= useState('');
+  const [token, settoken]= useState('');
+ var userEmail2 , token2;
  
 
 
   useEffect(() => {
-    const data =  Axios.get('http://localhost:5000/problemAdd/read').then((response)=>{
-    setProblemList(response.data); 
-    console.log(response.data);
-    });
-
+    
+    token2=(localStorage.getItem('token'));
+    console.log("token2"+token2);
+    if(token2){
+      UserToken();
+    }
+    ProblemListCall();
+   
    
   },[]); 
+  const ProblemListCall = async()=>{
+      const data =  Axios.get('http://localhost:5000/problemAdd/read').then((response)=>{
+      setProblemList(response.data); 
+      console.log(response.data);
+      });
+  }
+  const UserToken =async()=>{
+
+        const {data} = await Axios.get('http://localhost:5000/RegistraionAndLogin/viewProfile',{
+          headers:{
+              'x-access-token':localStorage.getItem('token'),
+          }
+      })
+
+      console.log("data from profile:"+data);
+      if(data.success === true){
+           userEmail2=data.email;
+           setUserEmail(data.email);
+           console.log("userEmail2"+userEmail2);
+        
+  }else{
+      alert(data.error);
+  }
+  }
 
   const HandleLoadProblemPage = (id)=>{
       setProblemId(id);
@@ -57,7 +87,27 @@ const ProblemList = ()=>{
                                   <td>
                                     <button className="problemName" onClick={()=>HandleLoadProblemPage(val.id)}><a>{val.name}</a></button>
                                   </td>
-                                  <td><a>&#10003;(user list: status:accept or wrong)</a></td>
+                                  <td>
+                                   
+                                    {
+                                    
+                                      Array.isArray( val.acceptedList)
+                                      ?val.acceptedList.map((value,key)=>{
+                                       // return(<a> {typeof(userEmail)}-{typeof(value.userEmail)}</a>)
+                                          if(userEmail === value.userEmail)
+                                          {
+                                            return(
+                                              <a>Accepted</a>
+                                              )
+                                            
+                                          }     
+                                     
+                                                                        
+                                      }):<a>Accepted List Empty</a>
+                                     
+                                    }
+                                    
+                                   </td>
                                   <td><a>{val.acceptCounter}</a></td>
                                   <td><a>{val.problemSetterName}</a></td>
                              </tr>
