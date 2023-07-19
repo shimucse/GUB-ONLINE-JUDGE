@@ -27,10 +27,11 @@ const UserSchema = mongoose.Schema({
         default:Date.now
     },    
     acceptedList:[{
-        problemId:{
-            type:String
-          },
-        Status:{type:String}
+        problemId:{ type:String },
+        Status:{type:String},
+        problemName:{ type:String },
+        cpuTime:{ type:String },
+        jobMemory:{ type:String  }
 
      }],
     

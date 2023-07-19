@@ -66,7 +66,8 @@ router.post ('/submit',async (req,res)=>{
              //console.log("userFirstName"+ user.firstName);
 
               
-            return res.status(201).json({success:true, acceptCounter:user.acceptCounter, acceptedList:user.acceptedList})
+            return res.status(201).json({success:true, acceptCounter:user.acceptCounter, acceptedList:user.acceptedList,
+                name:user.name,})
 
          
      }catch(error){

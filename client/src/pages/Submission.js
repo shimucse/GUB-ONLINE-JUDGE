@@ -32,6 +32,7 @@ const AllSubmissionDisplay = ()=>{
                           <th>Problem Name</th>
                           <th>Verdict</th>
                           <th>CPU TIME</th>
+                          <th>Job Memory </th>
                           
                       </tr>
                      
@@ -41,8 +42,11 @@ const AllSubmissionDisplay = ()=>{
                               return(
                                 <tr>
                                     <td>{val.problemId}</td>
-                                    <td><a href="">problemName</a> </td>
+                                    <td><a href="">{val.problemName}</a> </td>
                                     <td class="verdict">Accepted</td>
+                                    <td>{val.cpuTime}</td>
+                                    <td>{val.jobMemory}</td>
+
                                  </tr>
                               )
                            }):<a>problemSolvedList Empty</a>

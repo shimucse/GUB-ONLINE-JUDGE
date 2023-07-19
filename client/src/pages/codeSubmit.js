@@ -30,12 +30,15 @@ const ProblemSubmit =  (props)=>{
     const [customInputFirst, setCustomInputFirst ] = useState([]);
     const [problemId, setProblemId] = useState('');
     const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
+    //const [renderTime, setRenderTime]=useState('');
+    let renderTime;
 
     //prbolem db
     const [whoSolved, setwhoSolved]=useState([]);
     const [acceptCounterForProblem, setacceptCounterForProblem]=useState(0);
 
     //User
+    const[problemName, setproblemName]=useState("");
     const [userEmail, setuserEmail]=useState('');
     const [AcceptedCounterUsers,setAcceptedCounterUsers]=useState(0);
     const [problemDes, setProblemDes] = useState([]);
@@ -71,7 +74,8 @@ const ProblemSubmit =  (props)=>{
       const start = moment(startedAt);
       const  end = moment(completedAt);
       const executionTime = end.diff(start,'second',true);
-      result = `execution Time : ${executionTime}s`
+      result = `execution Time : ${executionTime}s`;
+      renderTime = executionTime;
       return result;
    }
   
@@ -172,7 +176,7 @@ const ProblemSubmit =  (props)=>{
                                 /**************Update Accepted/Attempted in userDB and problemDb*************** */
                               if(jobOutput==='Accepted'){
                                     console.log("we will work ");
-                                    handleBD_after_accepted();                            
+                                    handleBD_after_accepted(memory);                            
 
                                 } 
                                 else{
@@ -213,7 +217,7 @@ const ProblemSubmit =  (props)=>{
               
   }
  
-  const handleBD_after_accepted = async()=>{
+  const handleBD_after_accepted = async(memory)=>{
           //user Email
           handleViewProfile();
           problemDesAxios(problemId);
@@ -256,7 +260,7 @@ const ProblemSubmit =  (props)=>{
                         if(userInProblem === 0){
 
                                  console.log("User DB and Problem db will be updated");                                                            
-                                 updateUserDb(userEmail);
+                                 updateUserDb(userEmail,memory);
                                  updateProblemDB();        
                         }
                         else{
@@ -303,6 +307,7 @@ const ProblemSubmit =  (props)=>{
          // console.log("data.acceptCounter"+data.acceptCounter);
          setacceptCounterForProblem(data.acceptCounter)
          setwhoSolved(data.acceptedList);
+         setproblemName(data.name);
          //console.log("data.acceptedList"+data.acceptedList);
        }    
   }catch(error){
@@ -358,11 +363,16 @@ const ProblemSubmit =  (props)=>{
    
 
 }    
-  const updateUserDb= async(gmail)=>{  
+  const updateUserDb= async(gmail,memory)=>{  
          //console.log("from user update")
+         console.log("user cput Time:"+renderTime);
+         console.log("user jobMemory:"+memory);
          let obj ={
             problemId:problemId,
-           Status:"Accepted"
+            Status:"Accepted",
+            problemName:problemName,
+            cpuTime:renderTime,
+           jobMemory:memory
          }
          let arr = [''];
          arr = [...userProblemSolveList,obj];
@@ -398,7 +408,7 @@ const ProblemSubmit =  (props)=>{
            }
            catch(err){
               console.log("could not updated user"+err);
-         }    
+         }   
  }
     return (
      <>
@@ -467,10 +477,11 @@ const ProblemSubmit =  (props)=>{
          <button className ='submit_btn'onClick={handleViewProfile}>profile</button> 
 
         
-        <p>{customInput}</p>
+     {/* <p>{customInput}</p>
         <p>{status}</p>
-        <p>{jobId && `JobId: ${jobId}`}</p>
-        <p>{renderTimeDetailse()}</p>
+       <p>{jobId && `JobId: ${jobId}`}</p>
+        <p>{renderTimeDetailse()}</p> */}
+         <p>{renderTimeDetailse()}</p>
         <p>{output}</p>
         <p>Memory space :{jobMemory}MB</p>
        </div>
