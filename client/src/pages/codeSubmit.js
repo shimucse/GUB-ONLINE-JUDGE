@@ -30,8 +30,8 @@ const ProblemSubmit =  (props)=>{
     const [customInputFirst, setCustomInputFirst ] = useState([]);
     const [problemId, setProblemId] = useState('');
     const [problemStterInputOutput, setProblemStterInputOutput] = useState([]);
-    //const [renderTime, setRenderTime]=useState('');
-    let renderTime;
+    const [renderTime, setRenderTime]=useState('');
+ 
 
     //prbolem db
     const [whoSolved, setwhoSolved]=useState([]);
@@ -59,25 +59,6 @@ const ProblemSubmit =  (props)=>{
   
   
   
-   const renderTimeDetailse = ()=>{
-      if(!jobDetails){
-         return " ";
-      }
-      
-      let result = '';
-      let {submittedAt, completedAt, startedAt} = jobDetails;
-      submittedAt = moment(submittedAt).toString();
-      result += `submitted At: ${submittedAt}`;
-      if(!completedAt || !startedAt){
-         return result;
-      }
-      const start = moment(startedAt);
-      const  end = moment(completedAt);
-      const executionTime = end.diff(start,'second',true);
-      result = `execution Time : ${executionTime}s`;
-      renderTime = executionTime;
-      return result;
-   }
   
    useEffect(()=> {
       let id = location.state.id
@@ -91,20 +72,14 @@ const ProblemSubmit =  (props)=>{
     
       let inputTrim = (customInputFirst);      
       setCustomInput(inputTrim);
-    // let inputSplice= (inputTrim.split(/\n/)) 
-        
-
-     
-   
+    // let inputSplice= (inputTrim.split(/\n/))   
      
   },[customInputFirst]);
   
 
 
     const handleSubmit = async(SubmitType) =>{
-                 
-                 
-             
+
                 console.log("callType 1:"+SubmitType);
 
                  let deleteId;
@@ -130,26 +105,20 @@ const ProblemSubmit =  (props)=>{
                      
                   };
 
-                 }
-                   
+                 }                
                 
                  try{
                        setJobId("");
                        setStatus("");
                        setOutput("");
                        setJobMemory("");
-                       setJobDetails(null);
-  
-                     /********call for problem detailse */
-                      // problemDesAxios();
+                       setJobDetails(null);  
+                       setRenderTime("");               
 
                        const {data} = await Axios.post("http://localhost:5000/codeSubmit/submit", payload)
                        setJobId(data.jobId);
                        let intervalId;
-  
-                       
-
-                       
+                      
                        intervalId = setInterval(async()=>{
   
                              const{data:dataRes} = await Axios.get('http://localhost:5000/codeSubmit/status', {params: {id:data.jobId}});
@@ -167,16 +136,33 @@ const ProblemSubmit =  (props)=>{
                                 const memory = job.memorySpace;
                                 console.log("jobOutput"+jobOutput);
                                 setStatus(jobStatus);
-                                setJobDetails(job);
+                               // setJobDetails(job);
   
                                 setOutput(jobOutput);
                                 setJobMemory(memory);
                                 clearInterval(intervalId);
-                                
+
+                                /*************************render Time */
+                                 let renderTime = '';
+                                 let {submittedAt, completedAt, startedAt} = job;
+                                 submittedAt = moment(submittedAt).toString();
+                                 //result += `submitted At: ${submittedAt}`;
+
+                                 if(!completedAt || !startedAt){
+                                    renderTime =submittedAt;
+                                 }
+                                 else{
+                                       const start = moment(startedAt);
+                                       const  end = moment(completedAt);
+                                       const executionTime = end.diff(start,'second',true);
+                                       renderTime = executionTime;
+
+                                 }
+                                 setRenderTime(renderTime);
                                 /**************Update Accepted/Attempted in userDB and problemDb*************** */
                               if(jobOutput==='Accepted'){
                                     console.log("we will work ");
-                                    handleBD_after_accepted(memory);                            
+                                    handleBD_after_accepted(memory,renderTime);                            
 
                                 } 
                                 else{
@@ -189,8 +175,7 @@ const ProblemSubmit =  (props)=>{
                                    await axios.delete('http://localhost:5000/codeSubmit/delete', {params: {id:data.jobId}});
                                    clearInterval(intervalId); 
                  
-                               }
-  
+                               }  
                                 if(jobStatus === "pending")  return ;                        
   
                              }else{
@@ -217,7 +202,7 @@ const ProblemSubmit =  (props)=>{
               
   }
  
-  const handleBD_after_accepted = async(memory)=>{
+  const handleBD_after_accepted = async(memory,renderTime)=>{
           //user Email
           handleViewProfile();
           problemDesAxios(problemId);
@@ -259,9 +244,15 @@ const ProblemSubmit =  (props)=>{
                   
                         if(userInProblem === 0){
 
-                                 console.log("User DB and Problem db will be updated");                                                            
-                                 updateUserDb(userEmail,memory);
-                                 updateProblemDB();        
+                                 console.log("User DB and Problem db will be updated");    
+                                 if(renderTime !== " "){
+                                   console.log("renderTime:"+renderTime);
+                                    updateUserDb(userEmail,memory, renderTime);
+                                    updateProblemDB();  
+                                 }else{
+                                    console.log("render Time still empty");
+                                 }                                                
+                                       
                         }
                         else{
                            console.log("BD wont updated(already solved it )");
@@ -363,7 +354,8 @@ const ProblemSubmit =  (props)=>{
    
 
 }    
-  const updateUserDb= async(gmail,memory)=>{  
+  const updateUserDb= async(gmail,memory,renderTime)=>{  
+       console.log("render in console"+renderTime) ;
          //console.log("from user update")
          console.log("user cput Time:"+renderTime);
          console.log("user jobMemory:"+memory);
@@ -481,7 +473,7 @@ const ProblemSubmit =  (props)=>{
         <p>{status}</p>
        <p>{jobId && `JobId: ${jobId}`}</p>
         <p>{renderTimeDetailse()}</p> */}
-         <p>{renderTimeDetailse()}</p>
+         <p>Execution time:{renderTime}</p>
         <p>{output}</p>
         <p>Memory space :{jobMemory}MB</p>
        </div>
