@@ -43,7 +43,7 @@ const Login = ()=>{
                                     console.log(data.user);
                                     if(data.user){
                                         localStorage.setItem('token', data.user);
-                                        window.confirm('login sucessfull');
+                                       // window.confirm('login sucessfull');
                                         window.location.href='/UserProfile';
 
                                     }else{

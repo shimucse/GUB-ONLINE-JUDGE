@@ -17,11 +17,11 @@ const Logout = ()=>{
                // populateQuote();
                 //localStorage.setItem('token', 'null');
                 localStorage.removeItem('token');
-                 alert("you are successfully logeout")
+               //  alert("you are successfully logeout")
           
         }
         else{
-            alert("You are not loged in")
+          //  alert("You are not loged in")
             window.location.href='/Login';
 
            
