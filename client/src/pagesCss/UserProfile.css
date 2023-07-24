@@ -15,6 +15,10 @@
     height: 670px;
 
 }
+.card {
+font-size: x-large;
+text-align: left;
+}
 button {
     border: none;
     outline: 0;
