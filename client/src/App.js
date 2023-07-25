@@ -19,6 +19,7 @@ import Contest from './pages/Contest';
 import Standing from './pages/Standing';
 import Submission from './pages/Submission'
 import AcceptedProblem from './pages/AcceptedProblem';
+import ContestCreate from './pages/ContestCreate';
 
 function App() {
    const [active, setActive] = useState('');
@@ -44,7 +45,7 @@ function App() {
              <a><Link to={"Contest"}>Contest</Link></a>
             </li>
             <br />
-          
+           
             <li>
              <a><Link to={"Standing"}>Standing</Link></a>
             </li>
@@ -82,6 +83,8 @@ function App() {
                 <Route exact path="Standing" element={<Standing/>}/>
                 <Route exact path="Submission" element={<Submission/>}/>
                 <Route exact path="Submission" element={<AcceptedProblem/>}/>
+                <Route exact path="ContestCreate" element={<ContestCreate/>}/>
+
 
             </Routes>
         </div>

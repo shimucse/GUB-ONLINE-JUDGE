@@ -1,12 +1,19 @@
 import React from "react";
-import '../pagesCss/Contest.css'
+import '../pagesCss/Contest.css';
+import { useNavigate } from "react-router-dom"; 
+
 
 const Contest =()=>{
+  let navigate = useNavigate();
+
     return(
         <>
         <div className="wrap">
-            <h1>Hi from Contest</h1>
             <div className="body_column">
+              <div className="ManueOfContest">
+              <button onClick={()=>{navigate("/ContestCreate")}}>Create a Contest</button>
+              
+              </div>
               
               <div className="recent_notice_table" >
                        <table className="recent_contest">
@@ -59,7 +66,6 @@ const Contest =()=>{
                          </td></tr>
                        </table>
                  </div>
-                 <h3  className="contestName">Contest history</h3>
                  <table className="old_contest">
                    <tr><th  className="old_contest_name" colspan="6">Past contests</th></tr>
                    <tr>

@@ -14,7 +14,6 @@ import Login from "./Login";
 const Home = ()=>{
     let navigate = useNavigate();
     const[token, setToken] = useState('');
-  //  let token1 = 
     useEffect(
         ()=>{
               setToken(localStorage.getItem('token'));
