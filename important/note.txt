@@ -147,5 +147,7 @@ const addTestCase =()=>{
                                    console.log(`input: ${obj.setterInput}`),
 
                             });
-
+/************timer******************
+npm i react-icon
                             
+npm i style-components
