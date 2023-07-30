@@ -1,7 +1,6 @@
 import React from "react";
-import '../pagesCss/Contest.css';
 import { useNavigate } from "react-router-dom"; 
-
+import './css/Contest.css'
 
 const Contest =()=>{
   let navigate = useNavigate();
