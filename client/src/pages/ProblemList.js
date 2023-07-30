@@ -62,7 +62,6 @@ const ProblemList = ()=>{
 
     }
   return (
-    <div className="container">
       
 
           <div className   ="wrap">
@@ -120,7 +119,7 @@ const ProblemList = ()=>{
                     <button href={""} className="next"><a>Next &raquo;</a></button>
                 </div>  
             </div>
-          </div>
+          
           <p>{problemId}</p>
 
         

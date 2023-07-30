@@ -1,6 +1,5 @@
 import React from "react";
-
-import './css/Timer.css' ;
+import "./css/Timer.css"
 export default function Timer({
     seconds,
     minutes,

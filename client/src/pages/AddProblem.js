@@ -2,6 +2,7 @@ import MDEditor from "@uiw/react-md-editor";
 import Axios from 'axios';
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
+import "../pagesCss/AddProblem.css";
 
 
 

@@ -1,16 +1,9 @@
 
-.H_wrap{
-    background-color: rgb(246, 251, 244);
-    width: 75%;
-    height: 100%;
-    margin-left: 12.5%;
-    margin-top: 0px;
-}
+
 .H_body_column {
     margin-top: 0px;
     display: grid;
     grid-template-columns:70% 30% 1fr 1fr;
-    height: 670px;
 
 }
 

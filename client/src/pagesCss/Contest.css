@@ -1,22 +1,6 @@
 
 
 
-  .wrap{
-    background-color: rgb(246, 251, 244);
-    width: 75%;
-    height: 100%;
-    margin-left: 12.5%;
-    margin-top: 0px;
-    /*border:solid;
-    border-radius: 10px;
-    border-color:rgb(223, 243, 215) ;*/
-  }
- 
-  
-  
-  .body_column {
-    display: grid;
-  }
  .ManueOfContest{
    height: 50px;
    width:  200px;

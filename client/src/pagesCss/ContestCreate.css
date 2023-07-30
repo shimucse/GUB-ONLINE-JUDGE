@@ -1,17 +1,4 @@
-.wrap{
-    background-color: rgb(246, 251, 244);
-    width: 75%;
-    height: 100%;
-    margin-left: 12.5%;
-    margin-top: 0px;
-    
-    
-  }
-  .body_column {
-    display: grid;
-    height: 1500px;
 
-}
 .ContestHistory{
     width: 200px;
     height: 60px;

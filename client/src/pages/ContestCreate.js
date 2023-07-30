@@ -27,9 +27,9 @@ const ContestCreate = ()=>{
   return (
       <>
                
-      <div className="H_wrap">
-          <div className="H_body_column">          
-                 <CountdownTimer />
+      <div className="wrap">
+          <div className="body_column">          
+               <CountdownTimer />
 
 
          </div>

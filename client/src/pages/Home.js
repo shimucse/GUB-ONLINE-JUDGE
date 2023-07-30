@@ -25,7 +25,7 @@ const Home = ()=>{
   return (
       <>
                
-      <div className="H_wrap">
+      <div className="wrap">
           <div className="H_body_column">
 
               <div className="H_left_body_column">            
