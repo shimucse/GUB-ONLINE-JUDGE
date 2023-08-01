@@ -2,25 +2,20 @@ import React, { useEffect, useState } from "react";
 
 import CountdownTimer from './CountdownTimer';
 
+import { useState } from 'react';
+
+
 
 const ContestCreate = ()=>{
-
-     
+  
+  
 
   return (
       <>
-               
-      <div className="wrap">
-          <div className="body_column">          
-               <CountdownTimer />
+       <div>
+      
+       </div>      
 
-
-         </div>
-              
-
-          
-
-        </div>
   </>
     
   );

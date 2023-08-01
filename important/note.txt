@@ -151,3 +151,33 @@ const addTestCase =()=>{
 npm i react-icon
                             
 npm i style-components
+
+
+/*********************Date Time picker*************************/
+npm install react-datepicker --save  
+import React, { useState } from "react";  
+import DatePicker from "react-datepicker";  
+  
+import "react-datepicker/dist/react-datepicker.css";  
+  
+// CSS Modules, react-datepicker-cssmodules.css  
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';  
+tutorial from javaPoint
+https://www.javatpoint.com/react-date-picker
+  
+const Example = () => {  
+  const [startDate, setStartDate] = useState(new Date());  
+  return (  
+    <DatePicker selected={startDate} onChange={(date) =>   
+setStartDate(date)} />  
+  );  
+};  
+
+
+  <DatePicker 
+      selected={startDate}
+      onChange={(date) =>   
+      setStartDate(date)} 
+      minDate={new Date()}
+      maxDate={addDays(new Date(),15)}
+  />  
