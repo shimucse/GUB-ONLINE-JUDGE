@@ -1,5 +1,19 @@
-@import url("https://cdn.syncfusion.com/ej2/material.css");
 .ContestHistory{
     width: 200px;
     height: 60px;
+}
+
+.myContainter {
+    background: rgb(254, 249, 249);
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    flex: 1 1 0px;
+  }
+  .dateTimeSelector{
+    
+  }
+.myDatePicker{
+    background-color: rgb(147, 172, 195);
+    width: 100%;
 }
