@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import './css/ContestCreate.css'
-import CountdownTimer from './CountdownTimer';
 
 import DatePicker from 'react-datepicker';  
 import addDays from 'date-fns/addDays'  
 import "react-datepicker/dist/react-datepicker.css";  
-
+import { useNavigate } from "react-router-dom";
 
 
 const ContestCreate = ()=>{    
-
+  
+  
   const [startDate, setStartDate] = useState(new Date());  
   const [ RemainingDays, setRemainingDays] = useState(' ');
+
+  let navigate = useNavigate();
+
 
   let dateDifferent = ()=>{
      console.log("new Date "+new Date());
      console.log("new Date "+ startDate);
      const timeDifference = Math.abs(startDate-new Date());
-     const daysRemaining =Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+     let daysRemaining =(timeDifference / (1000 * 60 * 60 * 24));
      console.log("daysRemaining"+daysRemaining);
      setRemainingDays(daysRemaining);
+     navigate("/DisplayContest",{state:{daysRemaining:daysRemaining}});
+    
+     
   }
 
   
@@ -52,15 +58,16 @@ const ContestCreate = ()=>{
                 <button onClick={dateDifferent}>different date</button>
                 <br />      
 
-               1.Contest start day<br />
-                  .con<tb />vert day to hour minute second <br />
+               1.Contest start day<br />(done)
+                  .send remaining day to Display contest page 
+                  .convert day to hour minute second <br />
                2.contest duration<br />
                4.Create new problem   <br />
                    .problem point <br />
                    .Create new database for contest problem <br />
                5.problem List <br/>
                     
-               <CountdownTimer/>
+             
 
          </div>
               
