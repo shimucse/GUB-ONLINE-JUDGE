@@ -14,7 +14,11 @@ export default function CountdownTimer(props) {
     show: false,
     message: "Happy coding in 2023",
   });
+  console.log("Days_props : "+props.day);
 
+  console.log("Hour_props : "+props.contestdurationHour);
+  //console.log("Minutes_props"+props.contestdurationMinutes);
+  console.log("hi");
 
   let setTime =()=>{
      let truncNum = Math.trunc(props.day);
@@ -55,10 +59,12 @@ export default function CountdownTimer(props) {
                 console.log("hour inside setTime"+hour);
                 let truncNum = Math.trunc(hour);
                 setHours(truncNum);
-                let hour = Math.abs(hour);
+                 hour = Math.abs(hour);
+
                 let min1 = (hour - Math.floor(hour));
                 min1 = min1*60;
-                setMinutes(min1);
+                let truncmin = Math.trunc(min1);
+                setMinutes(truncmin);
           }
     }
     

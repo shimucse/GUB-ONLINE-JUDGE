@@ -6,6 +6,8 @@ const DisplayContest = ()=>{
   
   let location = useLocation();
   let day= location.state.daysRemaining;
+  let contestdurationHour = location.state.contestdurationHour;
+  let contestdurationMinutes = location.state.contestdurationMinutes;
   console.log("day"+day);
   const [minute, setMinute] = useState(6);
   const [isRunning, setIsRunning] = useState(true);
@@ -16,7 +18,7 @@ const DisplayContest = ()=>{
       <>
        <div>
          <h1>From DisplayContest page </h1>
-         <CountdownTimer day={day}/>  <div className="d-flex flex-column">
+         <CountdownTimer day={day} contestdurationHour={contestdurationHour} contestdurationMinutes={contestdurationMinutes}/>  <div className="d-flex flex-column">
         
       </div>
        </div>      
