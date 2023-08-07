@@ -8,19 +8,37 @@ export default function CountdownTimer(props) {
   const [seconds, setSeconds] = useState(0);
   const [milliseconds, setMilliseconds] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
+
+  const [isContestRunning, setIsContestRunning] = useState(true);
   const [day, setDay] = useState(0);
   const [callOnece, setCallOnce]= useState(0);
+  const [ contestName, setContestName]=useState('');
   const [showEndScreen, setShowEndScreen] = useState({
     show: false,
-    message: "Happy coding in 2023",
+    message: "End of Contest",
+    contestName :contestName
+  });
+  const [showStartScreen, setShowStartScreen] = useState({
+    show: false,
+    message: "Happy Coding!!!!",
+    contestName :'contestName'
+  });
+  const [remainingDays, setRemainingDays] = useState({
+    show: true,
+    message: "Remainig Days",
+    day :day
   });
   console.log("Days_props : "+props.day);
 
   console.log("Hour_props : "+props.contestdurationHour);
   //console.log("Minutes_props"+props.contestdurationMinutes);
+
   console.log("hi");
 
   let setTime =()=>{
+    setContestName(contestName);
+    console.log("contestName"+contestName);
+
      let truncNum = Math.trunc(props.day);
      console.log("truncNum"+truncNum);
      setDay(truncNum);
@@ -78,9 +96,9 @@ export default function CountdownTimer(props) {
   useEffect(() => {
    
     if(callOnece===0){
-      setTime();
-      setCallOnce(1);
-      console.log("executed callOnece");
+        setTime();
+        setCallOnce(1);
+        console.log("executed callOnece");
 
     }
    
@@ -105,24 +123,34 @@ export default function CountdownTimer(props) {
       }, 10);
     }
 
-    if (hours === 0 && minutes === 0 && seconds === 0 && milliseconds === 1) {
-      setShowEndScreen({ ...showEndScreen, show: true });
-      resetTimer();
+    if (hours === 0 && minutes === 0 && seconds === 0 && milliseconds === 1 ) {
+
+      if(isContestRunning === true){
+          // contestDuration timeDown will be started
+          setHours(props.contestdurationHour);
+          setMinutes(props.contestdurationMinutes);
+          setIsContestRunning(false);
+          setShowStartScreen({ ...showStartScreen, show: true });
+          setRemainingDays({...remainingDays, show:false});
+
+          
+      }else{
+          // contest will be ended up 
+          setRemainingDays({...remainingDays, show:false});
+
+          setShowStartScreen({ ...showStartScreen, show: false });
+
+          setShowEndScreen({ ...showEndScreen, show: true });
+
+          resetTimer();
+          setIsRunning(false);
+      }
+     
     }
     return () => clearInterval(interval);
-  }, [milliseconds, seconds, minutes, hours, isRunning, showEndScreen.show]);
+  }, [milliseconds, seconds, minutes, hours, isRunning, showEndScreen.show,showStartScreen.show]);
 
-  // Start Pause & Stop functions
-
-  // Start
-  function startTimer() {
-    if (hours !== 0 || minutes !== 0 || seconds !== 0 || milliseconds !== 0) {
-      setIsRunning(true);
-      setShowEndScreen({ ...showEndScreen, show: false });
-    } else {
-      window.alert("Add Time.");
-    }
-  }
+  
 
   
 
@@ -147,10 +175,20 @@ export default function CountdownTimer(props) {
   return (
     <div>
       {showEndScreen.show && (
-        <h1 className="title  text-light">{showEndScreen.message}</h1>
+        <h1 className="title  text-light">{showEndScreen.message} <span>{showEndScreen.contestName}</span></h1>
+
       )}
+       
       <div>
-        <h1>Remaining days {day}</h1>
+        <div>{showStartScreen.show && (
+        <h1 className="title  text-light">{showStartScreen.message}<span>{showStartScreen.contestName}</span></h1>
+
+      )}</div>
+        <div>{remainingDays.show && (
+        <h1 className="title  text-light">{remainingDays.message}<span> {remainingDays.day}</span></h1>
+
+
+      )}</div>
       </div>
       <Timer
         milliseconds={milliseconds}

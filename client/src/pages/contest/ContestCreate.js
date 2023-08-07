@@ -16,6 +16,7 @@ const ContestCreate = ()=>{
 
   const [contestdurationHour, setContestdurationHour] = useState(0);
   const [contestdurationMinutes, setContestdurationMinutes] = useState(0);
+  const [name, setName] = useState("");
 
 
   let navigate = useNavigate();
@@ -33,7 +34,7 @@ const ContestCreate = ()=>{
          console.log("Hour :",contestdurationHour+"Minutes : ",contestdurationMinutes);
         
 
-         navigate("/DisplayContest",{state:{daysRemaining:daysRemaining, contestdurationHour:contestdurationHour, contestdurationMinutes:contestdurationMinutes}});
+         navigate("/DisplayContest",{state:{daysRemaining:daysRemaining, contestdurationHour:contestdurationHour, contestdurationMinutes:contestdurationMinutes,name:name}});
      
   }
     return (
@@ -66,14 +67,19 @@ const ContestCreate = ()=>{
                 <input type="number" value={contestdurationHour} onChange={(e)=>setContestdurationHour(e.target.value)}></input><br />
                 <label>Minute : </label>
                 <input type="number" value={contestdurationMinutes} onChange={(e)=>setContestdurationMinutes(e.target.value)}></input><br />
+                
+                <label>Contest Name </label>
+                <input type="text" value={name} onChange={(e)=>setName(e.target.value)}></input><br />
 
                 <button onClick={dateDifferent}>different date</button>
+
                 <br />      
 
                   1.Contest start day<br />(done)
                      .send remaining day to Display contest page 
                      .convert day to hour minute second <br />(done)
-                  2.contest duration<br />
+                  2.contest duration<br />(done)
+                  3.Contest name must be unique 
                   4.Create new problem   <br />
                      .problem point <br />
                      .Create new database for contest problem <br />

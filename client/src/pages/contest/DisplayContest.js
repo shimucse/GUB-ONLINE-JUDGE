@@ -8,17 +8,18 @@ const DisplayContest = ()=>{
   let day= location.state.daysRemaining;
   let contestdurationHour = location.state.contestdurationHour;
   let contestdurationMinutes = location.state.contestdurationMinutes;
+  let contestName = location.state.name;
   console.log("day"+day);
   const [minute, setMinute] = useState(6);
   const [isRunning, setIsRunning] = useState(true);
+  
 
  
 
   return (
       <>
        <div>
-         <h1>From DisplayContest page </h1>
-         <CountdownTimer day={day} contestdurationHour={contestdurationHour} contestdurationMinutes={contestdurationMinutes}/>  <div className="d-flex flex-column">
+         <CountdownTimer day={day} contestdurationHour={contestdurationHour} contestdurationMinutes={contestdurationMinutes} contestName={contestName}/>  <div className="d-flex flex-column">
         
       </div>
        </div>      
