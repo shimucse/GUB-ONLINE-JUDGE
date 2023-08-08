@@ -191,7 +191,7 @@ setStartDate(date)} />
         timeCaption="time"  
         dateFormat="MMMM d, yyyy h:mm aa"  
         minDate={new Date()}  
-        maxDate={addDays(new Date(), 7)}  
+        maxDate={addDdcays(new Date(), 7)}  
   />  
 
 /***********  how to get a decimal portion of a number ***********************/
@@ -216,3 +216,7 @@ export default function CountdownTimer(days) {
 useEffect(()=> {     
       setCode(stubs[language]);
    },[language]);
+
+
+/*****************deploying project **************************/
+npm install gh-pages --save-dev
