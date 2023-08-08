@@ -9,10 +9,10 @@ button {
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #eebaba;
+    background-color: #2a2d2b;
     text-align: center;
     cursor: pointer;
-    width: 100%;
+    width: 300px;
     font-size: 18px;
   }
   .socialMedia{

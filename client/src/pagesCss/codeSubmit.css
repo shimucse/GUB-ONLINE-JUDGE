@@ -1,3 +1,8 @@
+
+.languageSelect{
+    width: 200px;
+    height: 30px;
+}
 .editor{
     white-space: pre-wrap;
     word-break: normal;
@@ -15,4 +20,17 @@
 .submit_btn{
    width: 100px;
    height: 35px;
+}
+.InputOutput{
+    display: grid;
+    grid-template-columns:50% 50% 1fr 1fr;}
+.output{
+    width: 672px;
+    height: 193px;
+    border: 2px solid;
+    color: black;
+    background-color: white;
+}
+.run_submit_btn{
+    margin-top: 0px;
 }

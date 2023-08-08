@@ -21,7 +21,7 @@ export default function CountdownTimer(props) {
   const [showStartScreen, setShowStartScreen] = useState({
     show: false,
     message: "Happy Coding!!!!",
-    contestName :'contestName'
+    contestName :contestName
   });
   const [remainingDays, setRemainingDays] = useState({
     show: true,
@@ -32,12 +32,14 @@ export default function CountdownTimer(props) {
 
   console.log("Hour_props : "+props.contestdurationHour);
   //console.log("Minutes_props"+props.contestdurationMinutes);
+  console.log("contestName props"+props.contestName);
 
   console.log("hi");
 
   let setTime =()=>{
-    setContestName(contestName);
+    setContestName(props.contestName);
     console.log("contestName"+contestName);
+
 
      let truncNum = Math.trunc(props.day);
      console.log("truncNum"+truncNum);

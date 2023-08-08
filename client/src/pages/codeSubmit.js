@@ -407,13 +407,11 @@ const ProblemSubmit =  (props)=>{
     
       <div className="wrap">
 
-        <h1>Online Code Compiler</h1>
 
         <div className="body_column">
           <div>
-            <h1>input:output</h1>
          
-           <select
+           <select className='languageSelect'
              value={language}
              onChange={
                 (e)=>{
@@ -433,8 +431,8 @@ const ProblemSubmit =  (props)=>{
            </select>
         </div>
         <CodeMirror className="editor"
-             height='400px'
-             width='1500px'
+             height='300px'
+             width='1430px'
              options={{
                theme: 'dracula',
                tabSize: 2,
@@ -453,29 +451,39 @@ const ProblemSubmit =  (props)=>{
         <br/>
        
    
-       
-        <h3>Test against Custom Input</h3>
-        <textarea className='customInput'
-            
-             value={customInputFirst}
-             onChange={(e)=>{setCustomInputFirst(e.target.value)}}
-            
-         >
-         </textarea>
+       <div className='InputOutput'>
+               <div>
+                  <h3>Test against Custom Input</h3>
+                  <textarea className='customInput'
+                        
+                        value={customInputFirst}
+                        onChange={(e)=>{setCustomInputFirst(e.target.value)}}
+                        
+                     >
+                  </textarea>
+               </div>    
+                  
+                  <div className='outputWrap'>
+                     <h3>Output:</h3>
+                        <div className='output'>                        
+                           <p>Execution time:{renderTime}</p>
+                           <p>Result: {output}</p>
+                           <p>Memory space :{jobMemory}MB</p>
+                        </div>
+                  </div>
+        </div>
          <br/><br/>
-   
+        <div className='run_submit_btn'>
          <button className='run_btn' onClick={ ()=>handleSubmit("run")}>Run</button>
          <button className ='submit_btn'onClick={()=>handleSubmit("submit")}>Submit</button> 
-         <button className ='submit_btn'onClick={handleViewProfile}>profile</button> 
+         </div>
 
         
      {/* <p>{customInput}</p>
         <p>{status}</p>
        <p>{jobId && `JobId: ${jobId}`}</p>
         <p>{renderTimeDetailse()}</p> */}
-         <p>Execution time:{renderTime}</p>
-        <p>{output}</p>
-        <p>Memory space :{jobMemory}MB</p>
+          
        </div>
        </div>
    </>
