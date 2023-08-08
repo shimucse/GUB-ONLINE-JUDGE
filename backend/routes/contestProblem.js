@@ -7,12 +7,14 @@ const cors = require("cors");
 const problemDB = require('../models/problem');
 
 router.get('/', async function(req,res){
-    console.log("from problemAdd")
-    res.send('from ProblemAdd ');
+    console.log("from ContestProblem")
+    res.send('from ContestProblem');
 })
 router.post ('/submit',async (req,res)=>{ 
+
+    console.log("hi from submit contestNewProblem");
  
-    const {id,name,description,inputFormat,outputFormat,
+   const {id,name,description,inputFormat,outputFormat,
         firstSampleInput,firstSampleOutput,secondSampleInput,
         secondSampleOutput,
         problemSetterAllInputOutputTestCase,timeLimit,memoryLimit,problemSetterName

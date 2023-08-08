@@ -71,15 +71,13 @@ const ContestCreate = ()=>{
                 <label>Contest Name </label>
                 <input type="text" value={name} onChange={(e)=>setName(e.target.value)}></input><br />
 
-                <button onClick={dateDifferent}>different date</button>
+                <button onClick={dateDifferent}>Submit</button> <br /><be />
+
+                <button onClick={()=>(navigate("/NewProblem"))}>Create New Problem</button>
 
                 <br />      
 
-                  1.Contest start day<br />(done)
-                     .send remaining day to Display contest page 
-                     .convert day to hour minute second <br />(done)
-                  2.contest duration<br />(done)
-                  3.Contest name must be unique 
+                  
                   4.Create new problem   <br />
                      .problem point <br />
                      .Create new database for contest problem <br />
