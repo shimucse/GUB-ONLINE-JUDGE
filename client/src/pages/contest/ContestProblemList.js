@@ -1,6 +1,6 @@
 import React , { useState,useEffect } from "react";
 import Axios from 'axios';
-import problemListCss  from '../pagesCss/ProblemList.module.css'
+import problemListCss  from '../../pagesCss/ProblemList.module.css'
 import { BrowserRouter as Router, Switch, 
   Route, Redirect,} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const ProblemList = ()=>{
+const ContestProblemList = ()=>{
    
   let navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const ProblemList = ()=>{
    
   },[]); 
   const ProblemListCall = async()=>{
-      const data =  Axios.get('http://localhost:5000/problemAdd/read').then((response)=>{
+      const data =  Axios.get('http://localhost:5000/contestProblem/read').then((response)=>{
       setProblemList(response.data); 
       console.log(response.data);
       });
@@ -66,7 +66,7 @@ const ProblemList = ()=>{
 
           <div className   ="wrap">
                 <div className="body_column">
-                
+                 <h1>hello from problem List</h1>
                   <h2 className={problemListCss.problem_archive}>Problem  Archive</h2>
 
                   <table>
@@ -127,4 +127,4 @@ const ProblemList = ()=>{
     
   );
 }
-export default ProblemList;
+export default ContestProblemList;

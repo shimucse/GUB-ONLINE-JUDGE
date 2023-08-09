@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CountdownTimer from './CountdownTimer';
+import ContestProblemList from './ContestProblemList'
 import { useLocation} from "react-router-dom";
 
 const DisplayContest = ()=>{
@@ -23,7 +24,9 @@ const DisplayContest = ()=>{
         
       </div>
       <div className="List_of_problem">
-        
+     <ContestProblemList />
+      
+
       </div>
        </div>      
 
