@@ -75,7 +75,9 @@ const ContestproblemSchema = mongoose.Schema({
    acceptCounter:{
      type:Number
    },
-
+   problemPoint:{
+    type:Number
+   }
 
 
 });
@@ -83,4 +85,4 @@ const ContestproblemSchema = mongoose.Schema({
 const problemDB = new mongoose.model('contestProblem', ContestproblemSchema)
 
 
-module.exports = contestProblem;
+module.exports = problemDB;

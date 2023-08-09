@@ -4,7 +4,7 @@ const mongodb = require('mongodb');
 
 const cors = require("cors");
 
-const problemDB = require('../models/problem');
+const problemDB = require('../models/contestProblem');
 
 router.get('/', async function(req,res){
     console.log("from ContestProblem")
@@ -17,7 +17,7 @@ router.post ('/submit',async (req,res)=>{
    const {id,name,description,inputFormat,outputFormat,
         firstSampleInput,firstSampleOutput,secondSampleInput,
         secondSampleOutput,
-        problemSetterAllInputOutputTestCase,timeLimit,memoryLimit,problemSetterName
+        problemSetterAllInputOutputTestCase,timeLimit,memoryLimit,problemSetterName,problemPoint
         } = req.body;
    
     const acceptCounter=0;
@@ -28,7 +28,7 @@ router.post ('/submit',async (req,res)=>{
         const newProblem = await new problemDB({id,name,description,inputFormat,outputFormat,
             firstSampleInput,firstSampleOutput,secondSampleInput,
             secondSampleOutput,problemSetterAllInputOutputTestCase
-            ,timeLimit,memoryLimit,problemSetterName,acceptCounter
+            ,timeLimit,memoryLimit,problemSetterName,acceptCounter,problemPoint
             }).save();
         //include acceptedList after accepted
         console.log("newProblem:"+newProblem);

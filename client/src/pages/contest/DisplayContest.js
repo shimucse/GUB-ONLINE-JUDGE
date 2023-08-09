@@ -22,6 +22,9 @@ const DisplayContest = ()=>{
          <CountdownTimer day={day} contestdurationHour={contestdurationHour} contestdurationMinutes={contestdurationMinutes} contestName={contestName}/>  <div className="d-flex flex-column">
         
       </div>
+      <div className="List_of_problem">
+        
+      </div>
        </div>      
 
   </>

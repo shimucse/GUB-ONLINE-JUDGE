@@ -25,7 +25,8 @@
     const [problemTimeLimit, setProblemTimeLimit] = useState('');
     const [problemMemoryLimit, setProblemMemoryLimit] = useState('');
     const [problemSetterName, setProblemSetterName] = useState('');
-  
+    const [problemPoint, setProblemPoint]= useState(0);
+
     const token = localStorage.getItem('token');
   
   
@@ -47,7 +48,7 @@
   
         if(problemId.trim().length !== 0 && problemTitle.trim().length!==0 && problemDescription.trim().length!==0 
         && FirstSampleInput.trim().length!==0 && FirstSampleOutput.trim().length!==0 && SecondSampleInput.trim().length!==0 &&
-         SecondSampleOutput.trim().length!==0)
+         SecondSampleOutput.trim().length!==0 && problemPoint.trim().length!==0)
         {
             console.log(problemId);
             console.log(problemTitle);
@@ -79,6 +80,7 @@
                timeLimit:problemTimeLimit,
                memoryLimit:problemMemoryLimit,
                problemSetterName:problemSetterName,
+               problemPoint:problemPoint
             }
               try{
                     const {data} = await Axios.post('http://localhost:5000/ContestProblem/submit', problemDetailse);
@@ -222,7 +224,7 @@
                             type="text"
                             className={NewProblemCss.firstSampleInput}
                             required
-                            placeholder="must fill(each number in seperate line)"
+                            placeholder="same line using space)"
                             onChange={(e)=>{setFirstSampleInput(e.target.value)}}
                       />
                       <textarea
@@ -230,7 +232,7 @@
                             type="text areah"
                             className=""
                             required
-                            placeholder="must fill(each number in seperate line)"
+                            placeholder="same line using space)"
                             onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
                     />
               </div>
@@ -242,7 +244,7 @@
                   type="text"
                   className={NewProblemCss.secondSampleInput}
                   required
-                  placeholder="must fill(each number in seperate line)"
+                  placeholder="same line using space)"
                   onChange={(e)=>{setSecondSampleInput(e.target.value)}}
                 />
                   <textarea
@@ -251,7 +253,7 @@
                   type="text"
                   className=""
                   required
-                  placeholder="must fill(each number in seperate line)"
+                  placeholder="same line using space)"
 
                   onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
                 />
@@ -266,7 +268,7 @@
                             type="text"
                             className={NewProblemCss.setterInput}
                             required
-                            placeholder="must fill(each number in seperate line)"
+                            placeholder="same line using space)"
                             onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
                       />
                     
@@ -275,7 +277,7 @@
                           
                             type="text"
                             required
-                            placeholder="must fill(multiple output will be in same line using space)"
+                            placeholder="same line using space)"
 
                             onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
                       />
@@ -287,7 +289,17 @@
 
              
           </div>               
-  
+          <div className={NewProblemCss.problem_point}>
+              <p className="">Problem point</p>
+              <input
+                value={problemPoint}
+               
+                type=""
+                required
+                placeholder="Must fill and should be unique"
+                onChange={(e)=>{setProblemPoint(e.target.value)}}
+              />
+            </div>
           </div>
            <button className={NewProblemCss.button} onClick={addButtonHandler}>Add Problem</button>
           
