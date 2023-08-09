@@ -31,40 +31,24 @@ function App() {
      
      <BrowserRouter>
         <nav className="nav">
-          <li>
-              <a><Link to={"/"}>Home</Link></a>
-         </li>
-            <br />
-          <li>
-              <a><Link to={"AddNewProblem"}>Add New Problem</Link></a>
-          </li>
-            <br/>
-          <li>
-            <a><Link to={"ProblemList"}>ProblemList</Link></a>
-          </li>
-            <br />
-            <li>
-             <a><Link to={"Contest"}>Contest</Link></a>
-            </li>
-            <br />
-           
-            <li>
-             <a><Link to={"Standing"}>Standing</Link></a>
-            </li>
-            <br />
-            <li>
-             <a><Link to={"...."}>Discussion</Link></a>
-            </li>
-            <br />
-            <li>
-             <a><Link to={"UserProfile"}>Profile</Link></a>
-            </li>
-            <br />
+        
+             <a><Link to={"/"}>Home</Link></a>        
+            
+             <a><Link to={"AddNewProblem"}>Add New Problem</Link></a>
           
-           <li>
+             <a><Link to={"ProblemList"}>ProblemList</Link></a>
+        
+             <a><Link to={"Contest"}>Contest</Link></a>       
+           
+          
+             <a><Link to={"Standing"}>Standing</Link></a>
+            
+             <a><Link to={"...."}>Discussion</Link></a>
+           
+             <a><Link to={"UserProfile"}>Profile</Link></a>
+           
              <a><Link to={"Logout"}>Login/Logout</Link></a>
-            </li>
-            <br />
+            
           
 
         </nav>
