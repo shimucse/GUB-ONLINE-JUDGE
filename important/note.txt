@@ -237,3 +237,19 @@ for ipv4 and ipv6:there is link under submit if click the link it will show ipv4
 
 ifconfig -a
 
+/*****************************after timmer another function will be executed***********************************/
+const [showEndScreen, setShowEndScreen] = useState({
+    show: false,
+    message: "End of Contest",
+    contestName :contestName
+  });
+
+  useEffect(()=>{
+              setShowEndScreen({ ...showEndScreen, show: false });
+              //have to learn more about spreed operator 
+
+  }[]);
+
+////////////////**********************kill event handler************************************
+The button element in the form has a type of submitso every time the user clicks it, the submit event is triggered. We set an onSubmit event handler on the form to
+listen to this event. In this handler, we call preventDefault() on the Event object, to prevent the page from refreshing when the form is submitted

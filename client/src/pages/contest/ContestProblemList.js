@@ -62,9 +62,7 @@ const ContestProblemList = ()=>{
 
     }
   return (
-      
-
-          <div className   ="wrap">
+              <div className   ="wrap">
                 <div className="body_column">
                   <h2 className={problemListCss.problem_archive}>Problem  Archive</h2>
 

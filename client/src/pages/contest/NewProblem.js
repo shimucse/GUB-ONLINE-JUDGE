@@ -302,7 +302,6 @@
             </div>
           </div>
            <button className={NewProblemCss.button} onClick={addButtonHandler}>Add Problem</button>
-          
               </div>
 
           </div>
