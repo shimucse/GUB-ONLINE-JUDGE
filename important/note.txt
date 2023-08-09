@@ -219,4 +219,21 @@ useEffect(()=> {
 
 
 /*****************deploying project **************************/
-npm install gh-pages --save-dev
+https://theboroer.github.io/localtunnel-www/
+Localtunnel allows you to easily share a web service on your local development machine without messing with DNS and firewall settings.
+
+Localtunnel will assign you a unique publicly accessible url that will proxy all requests to your locally running webserver.
+
+
+npm install -g localtunnel
+lt --port 3000
+
+
+if error occur:then
+sudo ufw disable
+
+for endPoint ip : "hostname -I"
+for ipv4 and ipv6:there is link under submit if click the link it will show ipv4 address
+
+ifconfig -a
+

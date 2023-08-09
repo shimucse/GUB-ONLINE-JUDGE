@@ -1,0 +1,47 @@
+
+ .problemh1{
+   margin-top: 0;
+   padding-top: 30px;
+ }
+.formBody input {
+   width: 300px;
+   color: #0d0e10;
+   outline: none;
+   border: none;
+   font-size: 15px;
+   font-weight: 400;
+   text-align: center;
+   padding: 0rem 0.5rem;
+   border-radius: 5px;
+   height: 50px;
+}
+.description,.inputFormat,.outputFormat{
+    height: 250px;
+}
+.userAndsetterInputOutput{
+   margin-top: 0;
+}
+
+.firstSampleInputOutput,.firstSampleInput{
+   margin-right: 20px;
+}
+.secondSampleInputOutput, .secondSampleInput{
+   margin-right: 20px;
+
+}
+.problemSetterAllInputOutput,.setterInput{
+   margin-right: 20px;
+}
+button {
+   margin-top: 20px;
+   border: none;
+   outline: 0;
+   display: inline-block;
+   padding: 8px;
+   color: white;
+   background-color: #676f6a;
+   text-align: center;
+   cursor: pointer;
+   width: 300px;
+   font-size: 18px;
+ }

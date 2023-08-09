@@ -1,8 +1,10 @@
 import MDEditor from "@uiw/react-md-editor";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import Axios from 'axios';
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
-import "../pagesCss/AddProblem.css";
+import AddProblemCss from "../pagesCss/AddProblem.module.css";
 
 
 
@@ -116,18 +118,8 @@ export default function AddProblem() {
                 
         <div class="wrap">
           <div class="body_column">
-            <h1>Setter Input Output List </h1>
-              {
-              problemSetterInputOutput.map((obj,index)=>(
-                 <div key={index}>
-                   <span> input:{obj.setterInput}</span>
-                   <span>output:{obj.setterOutput}</span>
-                 </div>
-              )
-              )
-              }
         
-        <h1 className="">
+        <h1 className={AddProblemCss.problemh1}>
           Problem
         </h1>
 
@@ -136,8 +128,8 @@ export default function AddProblem() {
             problem.
           </p>    
 
-        <div className="">
-          <div className="">
+        <div className={AddProblemCss.formBody}>
+          <div className={AddProblemCss.problem_id}>
             <p className="">Problem Id</p>
             <input
               value={problemId}
@@ -148,7 +140,7 @@ export default function AddProblem() {
               onChange={(e)=>{setProblemId(e.target.value)}}
             />
           </div>
-          <div className="">
+          <div className={AddProblemCss.ProblemName}>
             <p className="">Problem Name</p>
             <input
               value={problemTitle}
@@ -160,7 +152,7 @@ export default function AddProblem() {
               onChange={(e)=>{setProblemTitle(e.target.value)}}
             />
           </div>
-          <div className="">
+          <div className={AddProblemCss.memoryLimit}>
             <p className="">MemoryLimit</p>
             <input
               value={problemMemoryLimit}
@@ -172,7 +164,7 @@ export default function AddProblem() {
               onChange={(e)=>{setProblemMemoryLimit(e.target.value)}}
             />
           </div>
-          <div className="">
+          <div className={AddProblemCss.timeLimit}>
             <p className="">Problem time limit</p>
             <input
               value={problemTimeLimit}
@@ -185,22 +177,24 @@ export default function AddProblem() {
             />
           </div>
 
-          <div className="">
+          <div className={AddProblemCss.description1}>
             <p className="">Description</p>
 
             <MDEditor
+            
               value={problemDescription}
-              
+              className={AddProblemCss.description}
               required
               preview="edit"
               placeholder="must fill"
               onChange={setProblemDescription}
             />
           </div>
-         
+          
             <p className="">Input Format</p>
             <div className="">
               <MDEditor
+              className={AddProblemCss.inputFormat}
                 value={problemInputFormat}
                
                 preview="edit"
@@ -209,83 +203,89 @@ export default function AddProblem() {
             </div>
         
             <p className="">Output Format</p>
-            <div className="">
+            <div className={AddProblemCss.outputFormat}>
               <MDEditor
+                className={AddProblemCss.outputFormat}
                 value={problemOutputFormat}
                 preview="edit"
                 onChange={setProblemOutputFormat}
             
               />
           </div>
-          <div className="">
-            <p className="">First Sample Input Output: </p>
-            <textarea
-              value={FirstSampleInput}
+
+          <div className={AddProblemCss.userAndsetterInputOutput}>
+              <div className={AddProblemCss.firstSampleInputOutput}>
+                <p className="">First Sample Input Output: </p>
+                      <textarea
+                            value={FirstSampleInput}                      
+                            type="text"
+                            className={AddProblemCss.firstSampleInput}
+                            required
+                            placeholder="must fill(each number in seperate line)"
+                            onChange={(e)=>{setFirstSampleInput(e.target.value)}}
+                      />
+                      <textarea
+                            value={FirstSampleOutput}                        
+                            type="text areah"
+                            className=""
+                            required
+                            placeholder="must fill(each number in seperate line)"
+                            onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
+                    />
+              </div>
+              <div className={AddProblemCss.secondSampleInputOutput}>
+                <p className="">Second Sample Input Output : </p>
+                <textarea
+                  value={SecondSampleInput}
+                
+                  type="text"
+                  className={AddProblemCss.secondSampleInput}
+                  required
+                  placeholder="must fill(each number in seperate line)"
+                  onChange={(e)=>{setSecondSampleInput(e.target.value)}}
+                />
+                  <textarea
+                  value={SecondSampleOutput}
+                
+                  type="text"
+                  className=""
+                  required
+                  placeholder="must fill(each number in seperate line)"
+
+                  onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
+                />
+              </div>            
+        
+              <div className="">
+                <p className="">Setter  Input Output : </p>
+                <div className={AddProblemCss.problemSetterAllInputOutput}>
+                      <textarea
+                            value={problemSetterAllInputTestCase}
+                          
+                            type="text"
+                            className={AddProblemCss.setterInput}
+                            required
+                            placeholder="must fill(each number in seperate line)"
+                            onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
+                      />
+                    
+                        <textarea
+                            value={problemSetterAllOutput}            
+                          
+                            type="text"
+                            required
+                            placeholder="must fill(multiple output will be in same line using space)"
+
+                            onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
+                      />
+                </div>
+                 <br />
+              <button className={AddProblemCss.button} onClick={addTestCase}>Add test case</button>
              
-              type="text"
-              className=""
-              required
-              placeholder="must fill(each number in seperate line)"
-              onChange={(e)=>{setFirstSampleInput(e.target.value)}}
-            />{console.log(FirstSampleInput)}
-              <textarea
-              value={FirstSampleOutput}
-             
-              type="text areah"
-              className=""
-              required
-              placeholder="must fill(each number in seperate line)"
-              onChange={(e)=>{setFirstSampleOutput(e.target.value)}}
-            />
+
+              </div>
           </div>
-          <div className="">
-            <p className="">Second Sample Input Output : </p>
-            <textarea
-              value={SecondSampleInput}
-             
-              type="text"
-              className=""
-              required
-              placeholder="must fill(each number in seperate line)"
-              onChange={(e)=>{setSecondSampleInput(e.target.value)}}
-            />
-              <textarea
-              value={SecondSampleOutput}
-             
-              type="text"
-              className=""
-              required
-              placeholder="must fill(each number in seperate line)"
-
-              onChange={(e)=>{setSecondSampleOutput(e.target.value)}}
-            />
-          </div>       
-          //setter INput output
-          <div className="">
-            <p className="">Setter  Input Output : </p>
-            <textarea
-              value={problemSetterAllInputTestCase}
-             
-              type="text"
-              className=""
-              required
-              placeholder="must fill(each number in seperate line)"
-              onChange={(e)=>{setProblemSetterAllInputTestCse(e.target.value)}}
-            />
-              <textarea
-              value={problemSetterAllOutput}            
-             
-              type="text"
-              className=""
-              required
-              placeholder="must fill(multiple output will be in same line using space)"
-
-              onChange={(e)=>{setProblemSetterAllOutput(e.target.value)}}
-            />
-           <button onClick={addTestCase}>Add test case</button>
-
-          </div>
-         <button onClick={addButtonHandler}>Add Problem</button>
+         <button className={AddProblemCss.button} onClick={addButtonHandler}>Add Problem</button>
         
 
         </div>

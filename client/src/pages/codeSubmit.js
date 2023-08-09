@@ -13,8 +13,7 @@ import "codemirror/addon/edit/closebrackets";
 import { useNavigate } from "react-router-dom";
 
 import { useLocation} from "react-router-dom";
-
-import "../pagesCss/codeSubmit.css";
+import codeSumitCss from "../pagesCss/codeSubmit.module.css"
 import Update_user_problem_DB_after_accepted from './Update_user_problem_DB_after_accepted'
 
 const ProblemSubmit =  (props)=>{
@@ -411,7 +410,7 @@ const ProblemSubmit =  (props)=>{
         <div className="body_column">
           <div>
          
-           <select className='languageSelect'
+           <select className= {codeSumitCss.languageSelect}
              value={language}
              onChange={
                 (e)=>{
@@ -430,7 +429,7 @@ const ProblemSubmit =  (props)=>{
                <option value="py">Python</option>
            </select>
         </div>
-        <CodeMirror className="editor"
+        <CodeMirror className={codeSumitCss.editor}
              height='300px'
              width='1430px'
              options={{
@@ -451,10 +450,10 @@ const ProblemSubmit =  (props)=>{
         <br/>
        
    
-       <div className='InputOutput'>
+       <div className={codeSumitCss.InputOutput}>
                <div>
                   <h3>Test against Custom Input</h3>
-                  <textarea className='customInput'
+                  <textarea className={codeSumitCss.customInput}
                         
                         value={customInputFirst}
                         onChange={(e)=>{setCustomInputFirst(e.target.value)}}
@@ -465,7 +464,7 @@ const ProblemSubmit =  (props)=>{
                   
                   <div className='outputWrap'>
                      <h3>Output:</h3>
-                        <div className='output'>                        
+                        <div className={codeSumitCss.output}>                        
                            <p>Execution time:{renderTime}</p>
                            <p>Result: {output}</p>
                            <p>Memory space :{jobMemory}MB</p>
@@ -473,9 +472,9 @@ const ProblemSubmit =  (props)=>{
                   </div>
         </div>
          <br/><br/>
-        <div className='run_submit_btn'>
-         <button className='run_btn' onClick={ ()=>handleSubmit("run")}>Run</button>
-         <button className ='submit_btn'onClick={()=>handleSubmit("submit")}>Submit</button> 
+        <div className={codeSumitCss.run_submit_btn}>
+         <button className={codeSumitCss.run_btn} onClick={ ()=>handleSubmit("run")}>Run</button>
+         <button className ={codeSumitCss.submit_btn} onClick={()=>handleSubmit("submit")}>Submit</button> 
          </div>
 
         
