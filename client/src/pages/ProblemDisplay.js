@@ -17,8 +17,9 @@ const ProblemDisplay = (props)=>{
 
    useEffect(()=>{
 
-      let id = location.state.id
-      const data =  Axios.get(`http://localhost:5000/problemAdd/fetch/${id}`).then((response)=>{
+      let id = location.state.id;
+      let dbName = location.state.DBName;
+      const data =  Axios.get(`http://localhost:5000/${dbName}/fetch/${id}`).then((response)=>{
         setProblemDes(response.data); 
             console.log( "dilsplayed problem detailse:"+response.data);
       });
@@ -36,7 +37,7 @@ const ProblemDisplay = (props)=>{
 
       <div className="wrap">
           <div class="body_column">
-
+              
                 {Array.isArray(problemDes)
                   ? problemDes.map((val, key)  => {
                       return(

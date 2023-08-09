@@ -58,7 +58,9 @@ const ProblemList = ()=>{
 
   const HandleLoadProblemPage = (id)=>{
       setProblemId(id);
-      navigate("/ProblemDisplay",{state:{id:id}});
+      navigate("/ProblemDisplay",{state:{id:id,DBName:"problemAdd"}});
+
+
 
     }
   return (

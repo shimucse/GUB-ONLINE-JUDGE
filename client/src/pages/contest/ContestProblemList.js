@@ -58,7 +58,7 @@ const ContestProblemList = ()=>{
 
   const HandleLoadProblemPage = (id)=>{
       setProblemId(id);
-      navigate("/ProblemDisplay",{state:{id:id}});
+      navigate(".././ProblemDisplay",{state:{id:id , DBName:"contestProblem"}});
 
     }
   return (
@@ -66,7 +66,6 @@ const ContestProblemList = ()=>{
 
           <div className   ="wrap">
                 <div className="body_column">
-                 <h1>hello from problem List</h1>
                   <h2 className={problemListCss.problem_archive}>Problem  Archive</h2>
 
                   <table>
@@ -114,10 +113,7 @@ const ContestProblemList = ()=>{
                               }          
                         )}                   
                   </table>
-                  <div className={problemListCss.next_previou_button}>
-                    <button href={"" }className={problemListCss.previous}><a>&laquo; Previous</a></button>
-                    <button href={""} className={problemListCss.next}><a>Next &raquo;</a></button>
-                </div>  
+                   
             </div>
           
           <p>{problemId}</p>
