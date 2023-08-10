@@ -1,0 +1,118 @@
+const express = require('express');
+const router = express.Router();
+const mongodb = require('mongodb');
+
+const cors = require("cors");
+
+const problemDB = require('../models/contestInput');
+
+router.get('/', async function(req,res){
+    console.log("from contestRawInput");
+    res.send('from contestRawInput');
+})
+router.post ('/submit',async (req,res)=>{ 
+
+   console.log("hi from submit contestRawProblem");
+ 
+   const {daysRemaining, contestdurationHour,contestdurationMinutes,name,problemIdList} = req.body;
+   console.log("daysRemaining"+daysRemaining);
+   
+     try{
+
+            console.log('newProblem');
+            //add to database;
+            const newProblem = await new problemDB({daysRemaining, contestdurationHour,contestdurationMinutes,name,problemIdList}).save();
+            //include acceptedList after accepted
+            console.log("contest Raw data:"+newProblem);
+            res.status(201).json({success:true});
+        
+         
+     }catch(err){
+        return res.status(500).json({success:false, err: JSON.stringify(err)});
+     }
+        
+ });
+
+ router.get('/fetch/:id',async function(req,res){
+      fetchid = req.params.id;
+      console.log("fetchid "+ fetchid);
+
+
+
+      try{
+        const data = await problemDB.find({name:fetchid})
+        console.log('data'+data);
+        res.send(data);
+
+    }catch(err){
+         console.log(err);
+         res.status(500).json({ error: 'server error' });
+
+    }
+
+ });
+ router.get ('/problemDetailse',async (req,res)=>{ 
+    
+    
+    let id = req.headers.id;
+    //console.log("id from problemDetailse:"+id);
+     try{
+             const user = await problemDB.findOne({id:id});
+             //console.log("userFirstName"+ user.firstName);
+
+              
+            return res.status(201).json({success:true, acceptCounter:user.acceptCounter, acceptedList:user.acceptedList,
+                name:user.name,})
+
+         
+     }catch(error){
+        return res.status(500).json({status:'error', error:'invalid token'})
+
+     }
+        
+ });
+ router.get('/read', async(req,res)=>{
+    console.log("read from ProblemAdd");
+    try{
+        const listOfProblem = await problemDB.find();
+        res.send(listOfProblem);
+
+    }catch(err){
+         console.log(err);
+         res.status(500).json({ error: 'server error' });
+
+    }
+  
+ })
+ router.put('/updateProblem',async(req,res)=>{
+
+    console.log("update problem from problemAdd");
+     
+    const {acceptCounter,acceptedList,id}=req.body;
+     
+    console.log ("problemId : "+id 
+    + "acceptCounter"+acceptCounter+"acceptedList:"+acceptedList);
+    try{
+        await problemDB.updateOne
+            (
+                {id:id},
+                { $set: 
+                    {
+                        acceptCounter:acceptCounter,
+                        acceptedList:acceptedList
+                   
+                    }
+            }
+            )
+            return res.status(201).json({success:true,user:true});
+
+    }catch(err){
+        return res.json({status:'error', user:false})
+
+    }
+    
+   
+})
+
+ 
+module.exports=  router;

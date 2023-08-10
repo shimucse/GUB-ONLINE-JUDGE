@@ -43,23 +43,22 @@ const ProblemDisplay = (props)=>{
                       return(
                         <>
                                   
-                        <div className="left_column">
-                        
+                        <div className="left_column">                     
                           
 
                         <button className="problemSubmit_btn"onClick=
-                        {()=>{ 
-                            if(token)
-                            {
-                               navigate("/ProblemSubmit",
-                              {state:{id:val.id, problemSetterAllInputOutputTestCase:val.problemSetterAllInputOutputTestCase}
-                               });
-                                
-                             }
-                             else{
-                                window.alert("You have to login ");
-                             }
-                        }}>Solve Problem
+                            {()=>{ 
+                                if(token)
+                                {
+                                  navigate("/ProblemSubmit",
+                                    {state:{id:val.id, problemSetterAllInputOutputTestCase:val.problemSetterAllInputOutputTestCase}
+                                    });
+                                    
+                                }
+                                else{
+                                    window.alert("You have to login ");
+                                }
+                            }}>Solve Problem
                         </button>
                             <div className="problem_header">
                               <span className="problem_id">{val.id}.<span className ="problem_name">{val.name}</span></span>

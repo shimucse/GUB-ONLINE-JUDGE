@@ -13,6 +13,9 @@ const contestInputSchema = mongoose.Schema({
     name:{
          type:String,
          unique:true
+    },
+    problemIdList:{
+        type:[]
     }
 
 });

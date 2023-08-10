@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import addDays from 'date-fns/addDays'  
 import "react-datepicker/dist/react-datepicker.css";  
 import { useNavigate } from "react-router-dom";
+import Axios from 'axios';
 
 
 const ContestCreate = ()=>{    
@@ -29,21 +30,55 @@ const ContestCreate = ()=>{
   }
 
 
-  let dateDifferent = ()=>{
+  let dateDifferent = ()=>{           
 
-         console.log("new Date "+new Date());
+     navigate("/DisplayContest",{state:{name:name}});
+     
+  }
+
+  const addButtonHandler = async()=>{
+    
+     /*     if(RemainingDays.trim().length !== 0 && contestdurationHour.trim().length!==0 && contestdurationMinutes.trim().length!==0 
+          && name.trim().length!==0 && problemIdList.trim().length!==0)
+          {*/
+
+          console.log("new Date "+new Date());
          console.log("new Date "+ startDate);
          const timeDifference = Math.abs(startDate-new Date());
          let daysRemaining =(timeDifference / (1000 * 60 * 60 * 24));
          console.log("daysRemaining"+daysRemaining);
          setRemainingDays(daysRemaining);        
 
-         console.log("Hour :",contestdurationHour+"Minutes : ",contestdurationMinutes);
-        
+              console.log(RemainingDays);
+              console.log(contestdurationHour);
+              console.log(contestdurationMinutes);
+              console.log(name);
+              console.log(problemIdList);       
+                
+              const problemDetailse = {
+                  daysRemaining: RemainingDays,
+                  contestdurationHour:contestdurationHour,
+                  contestdurationMinutes:contestdurationMinutes,
+                  name:name,
+                  problemIdList:problemIdList,
 
-         navigate("/DisplayContest",{state:{daysRemaining:daysRemaining, contestdurationHour:contestdurationHour, contestdurationMinutes:contestdurationMinutes,name:name}});
-     
-  }
+              }
+                try{
+                      const {data} = await Axios.post('http://localhost:5000/contestRawInput/submit', problemDetailse);
+                      console.log("data from problem add"+data);
+                      window.confirm(' contestCreatedSuccessfully');
+
+                }
+                catch(errMsg){
+                  // window.confirm(' Error : id should be unique');
+                  window.confirm("error : "+errMsg);
+                }
+         /* }
+          else{
+            window.confirm("WARNING:Fill the  all field 'must include' ");
+          }*/
+
+}
     return (
       <>
                
@@ -94,11 +129,13 @@ const ContestCreate = ()=>{
                 <button onClick={addProblemId}>add problem Id </button>
                 <br />
                 
+                <button onClick={addButtonHandler}>saveToDB</button> <br /><br />      
 
                 <button onClick={dateDifferent}>Submit</button> <br /><br />      
 
                   
                   6.Save everyThing to Database
+                  5.before submit problemIdList should be more then 1;have to check
                                        
              
 
