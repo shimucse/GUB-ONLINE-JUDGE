@@ -253,3 +253,21 @@ const [showEndScreen, setShowEndScreen] = useState({
 ////////////////**********************kill event handler************************************
 The button element in the form has a type of submitso every time the user clicks it, the submit event is triggered. We set an onSubmit event handler on the form to
 listen to this event. In this handler, we call preventDefault() on the Event object, to prevent the page from refreshing when the form is submitted
+/*router.get('/fetch/:id',async function(req,res){
+      fetchid = req.params.id;
+      console.log("fetchid "+ fetchid);
+
+
+
+      try{
+        const data = await problemDB.find({id:fetchid})
+        console.log('data'+data);
+        res.send(data);
+
+    }catch(err){
+         console.log(err);
+         res.status(500).json({ error: 'server error' });
+
+    }
+
+ });*/ // it take too long to response 

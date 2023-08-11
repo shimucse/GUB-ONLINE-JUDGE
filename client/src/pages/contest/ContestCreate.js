@@ -13,7 +13,7 @@ const ContestCreate = ()=>{
   
   
   const [startDate, setStartDate] = useState(new Date());  
-  const [ RemainingDays, setRemainingDays] = useState(' ');
+  const [day, setDay] = useState(0);
 
   const [contestdurationHour, setContestdurationHour] = useState(0);
   const [contestdurationMinutes, setContestdurationMinutes] = useState(0);
@@ -38,7 +38,7 @@ const ContestCreate = ()=>{
 
   const addButtonHandler = async()=>{
     
-     /*     if(RemainingDays.trim().length !== 0 && contestdurationHour.trim().length!==0 && contestdurationMinutes.trim().length!==0 
+     /*     if(day.trim().length !== 0 && contestdurationHour.trim().length!==0 && contestdurationMinutes.trim().length!==0 
           && name.trim().length!==0 && problemIdList.trim().length!==0)
           {*/
 
@@ -46,17 +46,17 @@ const ContestCreate = ()=>{
          console.log("new Date "+ startDate);
          const timeDifference = Math.abs(startDate-new Date());
          let daysRemaining =(timeDifference / (1000 * 60 * 60 * 24));
-         console.log("daysRemaining"+daysRemaining);
-         setRemainingDays(daysRemaining);        
+         console.log('daysRemaining'+daysRemaining);
+         setDay(daysRemaining);        
 
-              console.log(RemainingDays);
+              console.log("day inside addButton : "+day);
               console.log(contestdurationHour);
               console.log(contestdurationMinutes);
               console.log(name);
               console.log(problemIdList);       
                 
               const problemDetailse = {
-                  daysRemaining: RemainingDays,
+                  day: daysRemaining,
                   contestdurationHour:contestdurationHour,
                   contestdurationMinutes:contestdurationMinutes,
                   name:name,
@@ -65,6 +65,7 @@ const ContestCreate = ()=>{
               }
                 try{
                       const {data} = await Axios.post('http://localhost:5000/contestRawInput/submit', problemDetailse);
+                     // const data = await Axios.delete('http://localhost:5000/contestRawInput/delete');
                       console.log("data from problem add"+data);
                       window.confirm(' contestCreatedSuccessfully');
 
@@ -134,8 +135,7 @@ const ContestCreate = ()=>{
                 <button onClick={dateDifferent}>Submit</button> <br /><br />      
 
                   
-                  6.Save everyThing to Database
-                  5.before submit problemIdList should be more then 1;have to check
+                 
                                        
              
 

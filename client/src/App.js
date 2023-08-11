@@ -16,7 +16,7 @@ import Dashboard from './pages/UserProfile';
 import Logout from './pages/Logout';
 import UserProfile from './pages/UserProfile';
 import Contest from './pages/contest/Contest';
-import Standing from './pages/Standing';
+import Standing from './pages/contest/Standing';
 import Submission from './pages/Submission'
 import AcceptedProblem from './pages/AcceptedProblem';
 import ContestCreate from './pages/contest/ContestCreate';

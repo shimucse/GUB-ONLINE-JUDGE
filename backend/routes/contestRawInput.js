@@ -14,14 +14,14 @@ router.post ('/submit',async (req,res)=>{
 
    console.log("hi from submit contestRawProblem");
  
-   const {daysRemaining, contestdurationHour,contestdurationMinutes,name,problemIdList} = req.body;
-   console.log("daysRemaining"+daysRemaining);
+   const {day, contestdurationHour,contestdurationMinutes,name,problemIdList} = req.body;
+   console.log("daysRemaining from db:"+day);
    
      try{
 
             console.log('newProblem');
             //add to database;
-            const newProblem = await new problemDB({daysRemaining, contestdurationHour,contestdurationMinutes,name,problemIdList}).save();
+            const newProblem = await new problemDB({day, contestdurationHour,contestdurationMinutes,name,problemIdList}).save();
             //include acceptedList after accepted
             console.log("contest Raw data:"+newProblem);
             res.status(201).json({success:true});
@@ -32,37 +32,20 @@ router.post ('/submit',async (req,res)=>{
      }
         
  });
-
- router.get('/fetch/:id',async function(req,res){
-      fetchid = req.params.id;
-      console.log("fetchid "+ fetchid);
-
-
-
-      try{
-        const data = await problemDB.find({name:fetchid})
-        console.log('data'+data);
-        res.send(data);
-
-    }catch(err){
-         console.log(err);
-         res.status(500).json({ error: 'server error' });
-
-    }
-
- });
- router.get ('/problemDetailse',async (req,res)=>{ 
+ 
+ 
+ router.get ('/contestDetailse',async (req,res)=>{ 
     
     
     let id = req.headers.id;
-    //console.log("id from problemDetailse:"+id);
-     try{
-             const user = await problemDB.findOne({id:id});
-             //console.log("userFirstName"+ user.firstName);
+    console.log("id from contestDetailse:"+id);
+    try{
+             const user = await problemDB.findOne({name:id});
+             console.log("days remaining "+ user.day);
 
               
-            return res.status(201).json({success:true, acceptCounter:user.acceptCounter, acceptedList:user.acceptedList,
-                name:user.name,})
+            return res.status(201).json({success:true, day:user.day,contestdurationMinutes:user.contestdurationMinutes, problemIdList:user.problemIdList,
+                name:user.name})
 
          
      }catch(error){
@@ -84,35 +67,20 @@ router.post ('/submit',async (req,res)=>{
     }
   
  })
- router.put('/updateProblem',async(req,res)=>{
+ router.delete('/delete', async(req,res)=>{
 
-    console.log("update problem from problemAdd");
-     
-    const {acceptCounter,acceptedList,id}=req.body;
-     
-    console.log ("problemId : "+id 
-    + "acceptCounter"+acceptCounter+"acceptedList:"+acceptedList);
-    try{
-        await problemDB.updateOne
-            (
-                {id:id},
-                { $set: 
-                    {
-                        acceptCounter:acceptCounter,
-                        acceptedList:acceptedList
-                   
-                    }
-            }
-            )
-            return res.status(201).json({success:true,user:true});
+    try{  
+             await problemDB.deleteMany({});
+             console.log('deleted all data')
+          
+         }         
+      catch(err){
+        console.log('could not deleted all data')
 
-    }catch(err){
-        return res.json({status:'error', user:false})
-
-    }
-    
-   
-})
+      //return res.status(400).json({success:false, error:JSON.stringify(err)});
+   }
+ 
+ });
 
  
 module.exports=  router;

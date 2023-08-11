@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 
 const contestInputSchema = mongoose.Schema({
-    daysRemaining:{
+    day:{
         type:Number
     },
     contestdurationHour:{

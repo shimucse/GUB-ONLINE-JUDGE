@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Timer from "./Timer";
+import ContestProblemList from './ContestProblemList'
 
 
 export default function CountdownTimer(props) {
@@ -31,7 +32,7 @@ export default function CountdownTimer(props) {
   console.log("Days_props : "+props.day);
 
   console.log("Hour_props : "+props.contestdurationHour);
-  //console.log("Minutes_props"+props.contestdurationMinutes);
+  console.log("Minutes_props"+props.contestdurationMinutes);
   console.log("contestName props"+props.contestName);
 
   console.log("hi");
@@ -183,7 +184,9 @@ export default function CountdownTimer(props) {
        
       <div>
         <div>{showStartScreen.show && (
-        <h1 className="title  text-light">{showStartScreen.message}<span>{showStartScreen.contestName}</span></h1>
+        <h1 className="title  text-light">{showStartScreen.message}<span>{showStartScreen.contestName}</span>
+            <span> <ContestProblemList /></span>
+        </h1>
 
       )}</div>
         <div>{remainingDays.show && (

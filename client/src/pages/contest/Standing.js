@@ -1,5 +1,5 @@
 import React from "react";
-import '../pagesCss/Standing.css'
+import './css/Standing.css'
 
 const Standing = ()=>{
     return(
@@ -92,10 +92,7 @@ const Standing = ()=>{
                          </tr>
                        
               </table>
-              <div class="next_previou_button">
-              <a href="#" class="previous">&laquo; Previous</a>
-              <a href="#" class="next">Next &raquo;</a>
-            </div>  
+             
         </div>
 
 

@@ -4,7 +4,7 @@ import ContestProblemList from './ContestProblemList'
 import { useLocation} from "react-router-dom";
 import Axios from 'axios';
 
-const DisplayContest = ()=>{
+const DisplayContest = (props)=>{
 
   const [day, setDay]=useState(0);
   const [contestdurationHour, setcontestdurationHour]=useState(0);
@@ -18,30 +18,31 @@ const DisplayContest = ()=>{
 
   
   let location = useLocation();
+
+  const callServer = async()=>{
+    let id = location.state.name;
+
+    const {data} = await Axios.get("http://localhost:5000/contestRawInput/contestDetailse",{
+           headers:{
+               'id':id
+            } 
+      }) 
+   //   const data = await Axios.get("http://localhost:5000/contestRawInput/read");
+   if(data.success === true){
+    setDay(data.day);
+    setcontestdurationHour(data.contestdurationHour);
+    setcontestdurationMinutes(data.contestdurationMinutes);
+    setcontestName(data.name);
+    setproblemIdList(data.problemIdList);
+   }
+
+  }
  
   useEffect(()=>{
 
-      let id = location.state.name;
-      let dbName = location.state.DBName;
-      const data =  Axios.get(`http://localhost:5000/contestRawInput/fetch/${id}`).then((response)=>{
-        setContestDes(response.data); 
-            console.log( "displayed contest detailse:"+response.data);
-      });
-      Array.isArray(contestDes)
-        ? contestDes.map((val, index)  => {
-            return(
-              setcontestName(val.name),
-              setDay(val.daysRemaining),
-              setcontestdurationHour(val.contestdurationHour),
-              setcontestdurationMinutes(val.contestdurationMinutes),
-              setproblemIdList(val.problemIdList)
-
-            )
-                    
-            
-        }
-        ):console.log("problemDes is empty"+contestDes)
-      
+    callServer();
+           
+     
       
  },[]);
 
@@ -51,19 +52,21 @@ const DisplayContest = ()=>{
       <>
       <div className="wrap">
             <div className="body_column">
+             {/* <h1>problemDisplay</h1>
+              <h1>day:{day}</h1>
+              <h1>minute:{contestdurationMinutes}</h1>
+  <h1>contestName:{contestName}</h1>*/}
 
-                  <div>
+
+                <div>
                     <CountdownTimer 
                             day={day}
                             contestdurationHour={contestdurationHour} 
                             contestdurationMinutes={contestdurationMinutes}
                             contestName={contestName}
                     />          
-                    <div className="List_of_problem">
-                          <ContestProblemList />         
-
-                    </div>
-                  </div>      
+                    
+               </div>  
 
             </div>
        </div>
