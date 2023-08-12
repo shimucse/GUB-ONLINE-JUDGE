@@ -55,10 +55,10 @@ router.post ('/submit',async (req,res)=>{
         
  });
  router.get('/read', async(req,res)=>{
-    console.log("read from ProblemAdd");
+    console.log("read from contest list");
     try{
-        const listOfProblem = await problemDB.find();
-        res.send(listOfProblem);
+        const listOfContest = await problemDB.find();
+        res.send(listOfContest);
 
     }catch(err){
          console.log(err);

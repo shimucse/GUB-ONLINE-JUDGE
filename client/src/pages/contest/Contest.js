@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import './css/Contest.css'
+import Axios from 'axios';
 
 const Contest =()=>{
+
+  const [currentContestList, setCurrentContestList]=useState(['']);
+
+
+  let listOfCurrentContest= async()=>{
+      let data = await Axios.get("http://localhost:5000/contestRawInput/read").then((response)=>{
+        setCurrentContestList(response.data); 
+        console.log("contest list"+response.data);
+        });
+
+       
+    }
+    Array.isArray(currentContestList)
+            ? currentContestList.map((obj, key)  => {
+                console.log("name:"+obj.name);
+                console.log("day:"+obj.day);
+
+            }):console.log("problemSetterInputOutput is empty") 
+  
   let navigate = useNavigate();
+  useEffect(
+     ()=>{
+
+      listOfCurrentContest();
+
+     },[]);
 
     return(
         <>
         <div className="wrap">
             <div className="body_column">
               <div className="ManueOfContest">
-              <button onClick={()=>{navigate("/ContestCreate")}}>Create a Contest</button>
+               <button onClick={()=>{navigate("/ContestCreate")}}>Create a Contest</button>
               
               </div>
               
@@ -26,34 +52,24 @@ const Contest =()=>{
                                  <th></th>
  
                              </tr>
-                             <tr>
-                                 <td>Gub Round #813 (Div 2)</td>
-                                 <td><a href={""}>Igorfardoc Vladithur</a> </td>
-                                 <td>Aug/13/2022</td>
-                                 <td>2:15</td>
-                                 <td>Before start <span>2days</span> </td>
-                                 <td>Before Registration <span>9:00 hour</span> </td>
- 
-                             </tr>
-                             <tr>
-                               <td>Gub Round  (Div 2)</td>
-                               <td><a href={""}>Ragia Akter</a> </td>
-                               <td>Aug/20/2022</td>
-                               <td>2:00</td>
-                               <td>Before start <span>9 days</span> </td>
-                               <td>Before Registration <span>7 days</span> </td>
- 
-                           </tr>
-                           <tr>
-                             <td>Gub Round  (Div 2)</td>
-                             <td><a href={""}>FairyWinx</a> </td>
-                             <td>Sep/02/2022</td>
-                             <td>2:00</td>
-                             <td>Before start <span>3 weeks</span> </td>
-                             <td>Before Registration <span>3 2 weeks</span> </td>
- 
-                         </tr>
+                             
                            
+                         {
+                            Array.isArray(currentContestList)
+                            ? currentContestList.map((obj, index)  => {
+                              return (
+                               
+                                   <tr key={index}>
+                                      <td>
+                                        <button onClick={()=>(navigate("/DisplayContest",{state:{name:obj.name}}))}>{obj.name}</button>
+                                      </td>
+                                   </tr>
+                                  
+                              )
+                
+                            }):console.log("problemSetterInputOutput is empty") 
+                        }    
+                       
                                
                        </table>
                        <table className="notice_table">

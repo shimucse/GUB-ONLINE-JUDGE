@@ -52,11 +52,10 @@ const DisplayContest = (props)=>{
       <>
       <div className="wrap">
             <div className="body_column">
-             {/* <h1>problemDisplay</h1>
+              <h1>problemDisplay</h1>
               <h1>day:{day}</h1>
               <h1>minute:{contestdurationMinutes}</h1>
-  <h1>contestName:{contestName}</h1>*/}
-
+  <h1>contestName:{contestName}</h1>
 
                 <div>
                     <CountdownTimer 
