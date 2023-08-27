@@ -425,13 +425,14 @@ const ProblemSubmit =  (props)=>{
              }
            >
                <label>language</label>
-               <option value="cpp">C++</option>
-               <option value="py">Python</option>
+                  <option value="cpp">C++</option>
+                  <option value="cpp">C</option>
+                  <option value="py">Python</option>
            </select>
         </div>
         <CodeMirror className={codeSumitCss.editor}
              height='300px'
-             width='1430px'
+             width='1100px'
              options={{
                theme: 'dracula',
                tabSize: 2,
@@ -462,19 +463,19 @@ const ProblemSubmit =  (props)=>{
                   </textarea>
                </div>    
                   
-                  <div className='outputWrap'>
+                { /* <div className='outputWrap'>
                      <h3>Output:</h3>
                         <div className={codeSumitCss.output}>                        
                            <p>Execution time:{renderTime}</p>
                            <p>Result: {output}</p>
                            <p>Memory space :{jobMemory}MB</p>
                         </div>
-                  </div>
+            </div>*/}
         </div>
          <br/><br/>
         <div className={codeSumitCss.run_submit_btn}>
-         <button className={codeSumitCss.run_btn} onClick={ ()=>handleSubmit("run")}>Run</button>
-         <button className ={codeSumitCss.submit_btn} onClick={()=>handleSubmit("submit")}>Submit</button> 
+         <button className="btn btn-warning" style={{marginRight:'30px'}} onClick={ ()=>handleSubmit("run")}>Run</button>
+         <button className ="btn btn-success" onClick={()=>handleSubmit("submit")}>Submit</button> 
          </div>
 
         

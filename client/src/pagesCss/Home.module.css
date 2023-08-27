@@ -16,7 +16,7 @@
     display: grid;
     grid-template-columns: auto;
     row-gap: 5px;
-    grid-template-rows: 300px 300px;
+   
 
 }
 .H_quote{

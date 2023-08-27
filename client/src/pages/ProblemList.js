@@ -59,12 +59,8 @@ const ProblemList = ()=>{
   const HandleLoadProblemPage = (id)=>{
       setProblemId(id);
       navigate("/ProblemDisplay",{state:{id:id,DBName:"problemAdd"}});
-
-
-
     }
-  return (
-      
+  return (      
 
           <div className   ="wrap">
                 <div className="body_column">
@@ -76,7 +72,7 @@ const ProblemList = ()=>{
                             <th><a>Id</a></th>
                             <th><a>Problem Name</a></th>
                             <th><a>Status</a></th>
-                            <th><a>Acceptance</a></th>
+                             <th><a>Acceptance</a></th>
                             <th><a>Problem Setter</a></th>
                         </tr>
                         {problemList.map((val, key) =>{
@@ -86,15 +82,15 @@ const ProblemList = ()=>{
                                         <tr>
                                             <td><a>{val.id}</a></td>
                                             <td>
-                                              <button className={problemListCss.problemName} onClick={()=>HandleLoadProblemPage(val.id)}><a>{val.name}</a></button>
+                                              <button className={problemListCss.problemName} onClick={()=>HandleLoadProblemPage(val.id)} ><a style={{color:"black"}}>{val.name}</a></button>
                                             </td>
                                             <td>
                                             
                                               {
                                               
-                                                Array.isArray( val.acceptedList)
-                                                ?val.acceptedList.map((value,key)=>{
-                                                // return(<a> {typeof(userEmail)}-{typeof(value.userEmail)}</a>)
+                                                  Array.isArray( val.acceptedList)
+                                                  ?val.acceptedList.map((value,key)=>{
+                                                  // return(<a> {typeof(userEmail)}-{typeof(value.userEmail)}</a>)
                                                     if(userEmail === value.userEmail)
                                                     {
                                                       return(

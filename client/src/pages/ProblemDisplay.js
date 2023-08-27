@@ -46,7 +46,7 @@ const ProblemDisplay = (props)=>{
                         <div className="left_column">                     
                           
 
-                        <button className="problemSubmit_btn"onClick=
+                        <button ty className="btn btn-secondary btn-lg"onClick=
                             {()=>{ 
                                 if(token)
                                 {

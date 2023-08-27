@@ -36,7 +36,7 @@ const Contest =()=>{
         <div className="wrap">
             <div className="body_column">
               <div className="ManueOfContest">
-               <button onClick={()=>{navigate("/ContestCreate")}}>Create a Contest</button>
+               <button className="btn btn-outline-warning" onClick={()=>{navigate("/ContestCreate")}}>Create a Contest</button>
               
               </div>
               
@@ -52,9 +52,17 @@ const Contest =()=>{
                                  <th></th>
  
                              </tr>
-                             
+                             <tr>
+                       <td>September contest (Div 1)</td>
+                       <td><a href={""}>Rabia Akter</a> </td>
+                       <td>08/09/2023</td>
+                       <td>10:15</td>
+                       <td>Before start <span>11 days</span> </td>
+                       <td>Before Registration <span>11 days & 9:00 hour</span> </td>
+ 
+                   </tr>
                            
-                         {
+                         {/*
                             Array.isArray(currentContestList)
                             ? currentContestList.map((obj, index)  => {
                               return (
@@ -68,18 +76,18 @@ const Contest =()=>{
                               )
                 
                             }):console.log("problemSetterInputOutput is empty") 
-                        }    
+                          */}    
                        
                                
-                       </table>
-                       <table className="notice_table">
+                      </table>
+                       {/* <table className="notice_table">
                          <tr><th className="pay_attention">Pay attention</th></tr>
                          <tr><td>
                            <span>before contest</span> 
                            <a href={""}>GUB Div 2</a>
  
                          </td></tr>
-                       </table>
+                        </table>*/}
                  </div>
                  <table className="old_contest">
                    <tr><th  className="old_contest_name" colspan="6">Past contests</th></tr>
@@ -88,17 +96,14 @@ const Contest =()=>{
                        <th>Writers</th>
                        <th>Start</th>
                        <th>Length</th>
-                       <th></th> 
-                       <th></th>
- 
+                       
                    </tr>
                    <tr>
                        <td>Gub Round #813 (Div 2)</td>
-                       <td><a href={""}>Igorfardoc Vladithur</a> </td>
+                       <td><a href={""}>Fairooz Nawer</a> </td>
                        <td>Aug/13/2022</td>
                        <td>2:15</td>
-                       <td>Before start <span>2days</span> </td>
-                       <td>Before Registration <span>9:00 hour</span> </td>
+                     
  
                    </tr>
                    <tr>
@@ -106,53 +111,47 @@ const Contest =()=>{
                      <td><a href={""}>Ragia Akter</a> </td>
                      <td>Aug/20/2022</td>
                      <td>2:00</td>
-                     <td>Before start <span>9 days</span> </td>
-                     <td>Before Registration <span>7 days</span> </td>
+                     
  
                  </tr>
                  <tr>
                    <td>Gub Round  (Div 2)</td>
-                   <td><a href={""}>FairyWinx</a> </td>
+                   <td><a href={""}>Supti </a> </td>
                    <td>Sep/02/2022</td>
-                   <td>2:00</td>
-                   <td>Before start <span>3 weeks</span> </td>
-                   <td>Before Registration <span>3 2 weeks</span> </td>
+                   <td>3:00</td>
+                  
  
                </tr>
                <tr>
                  <td>Gub Round  (Div 2)</td>
-                 <td><a href={""}>FairyWinx</a> </td>
-                 <td>Sep/02/2022</td>
+                 <td><a href={""}>Namee</a> </td>
+                 <td>Oct/02/2022</td>
                  <td>2:00</td>
-                 <td>Before start <span>3 weeks</span> </td>
-                 <td>Before Registration <span>3 2 weeks</span> </td>
+                 
  
              </tr>
              <tr>
                <td>Gub Round  (Div 2)</td>
-               <td><a href={""}>FairyWinx</a> </td>
-               <td>Sep/02/2022</td>
+               <td><a href={""}>Rijwan</a> </td>
+               <td>Nov/02/2022</td>
                <td>2:00</td>
-               <td>Before start <span>3 weeks</span> </td>
-               <td>Before Registration <span>3 2 weeks</span> </td>
+               
  
            </tr>
            <tr>
              <td>Gub Round  (Div 2)</td>
-             <td><a href={""}>FairyWinx</a> </td>
+             <td><a href={""}>Saju</a> </td>
              <td>Sep/02/2022</td>
-             <td>2:00</td>
-             <td>Before start <span>3 weeks</span> </td>
-             <td>Before Registration <span>3 2 weeks</span> </td>
+             <td>3:00</td>
+           
  
          </tr>
          <tr>
            <td>Gub Round  (Div 2)</td>
-           <td><a href={""}>FairyWinx</a> </td>
+           <td><a href={""}>Khaled</a> </td>
            <td>Sep/02/2022</td>
-           <td>2:00</td>
-           <td>Before start <span>3 weeks</span> </td>
-           <td>Before Registration <span>3 2 weeks</span> </td>
+           <td>4:00</td>
+           
  
        </tr>
                   

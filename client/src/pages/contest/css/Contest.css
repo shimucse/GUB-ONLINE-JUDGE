@@ -4,6 +4,7 @@
  .ManueOfContest{
    height: 50px;
    width:  200px;
+   margin-bottom: 50px;
  }
   .recent_notice_table{
      display: grid;
@@ -24,7 +25,7 @@
         font-family: arial, sans-serif;
         border-collapse: collapse;
         height: 250px;
-        width: 900px;
+        width: 1110px;
         font-size: 15px;
   
       }
@@ -68,9 +69,10 @@
       }
       
       .old_contest {
+        margin-top: 100px;
         font-family: arial, sans-serif;
         border-collapse: collapse;
-        width: 900px;
+        width: 1110px;
         height: 500px;
         font-size: 15px;
   

@@ -52,10 +52,27 @@ const DisplayContest = (props)=>{
       <>
       <div className="wrap">
             <div className="body_column">
-              <h1>problemDisplay</h1>
-              <h1>day:{day}</h1>
-              <h1>minute:{contestdurationMinutes}</h1>
-  <h1>contestName:{contestName}</h1>
+
+            <div class="card" style={{"width": "22rem", "marginLeft":'400px'}}>
+              <img class="card-img-top" src={require("../../public/rsz_contest1.png")} alt="Card image cap"/>
+
+              <div class="card-body">
+                <h1 class="card-title">{contestName}September ICPC</h1>
+                <p class="card-text">Remaining Time </p>
+                <dl >
+              <dt className="text-warning">Day:</dt>
+              <dd className="text-success"> --{day} </dd>
+              </dl>
+              <dl >
+              <dt className="text-warning">minute:</dt>
+              <dd className="text-success">--{contestdurationMinutes} </dd>
+              </dl>
+              </div>
+            </div>
+              <h1 className="text-danger"></h1>
+
+          
+            
 
                 <div>
                     <CountdownTimer 

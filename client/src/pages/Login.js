@@ -75,15 +75,15 @@ const Login = ()=>{
                 <div className="wrap">
                     <div className="body_column">
                         
-                            <h1>Login Form</h1>
                         
 
 
-                            <div className="login_form">
+                            <div className="login_form" style={{'marginTop':'200px'}}>
                                 <span className="login_page_header">Login into GUB Online Judge</span>
                                 <form onSubmit={loginUser} >
                                             <label for="email">Email:</label>
                                             <input 
+                                                style={{'width':'250px'}}
                                                 type="email" 
                                                 id="email" 
                                                 name="email"
@@ -94,6 +94,7 @@ const Login = ()=>{
                                             <br/><br/>
                                             <label for="pwd">Password:</label>
                                             <input
+                                                style={{'width':'250px'}}
                                                 type="password" 
                                                 id="pwd" name="pwd"
                                                 minlength="7"
@@ -111,6 +112,20 @@ const Login = ()=>{
                                     </form> 
 
                             </div>
+                    </div>
+                    <div style={{'color':'white'}}>
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
+                    <h1>Login login</h1>
                     </div>
                 </div>
                 }

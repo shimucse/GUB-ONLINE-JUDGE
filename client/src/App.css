@@ -6,38 +6,10 @@
 
 
 }
-.nav {
- 
- 
-  overflow: hidden;
-  background-color:rgb(75, 128, 115) ;
-  position: fixed;
-  top:0;
-  width: 100%;
-}
 
-.nav a {
-  float: left;
 
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 30px;
-
-}
-
- a:hover:not(.active) {
-  background-color: rgb(171, 206, 195);
-}
-
-.container {
-
-}
 .wrap{
   background-color: rgb(246, 251, 244);
-  width: 75%;
   height: 100%;
   margin-left: 12.5%;
   margin-top: 50px;
@@ -50,7 +22,5 @@
   text-align: left;
 
 }
-.HomePage{
-  text-size-adjust: 45px;
-}
+
 

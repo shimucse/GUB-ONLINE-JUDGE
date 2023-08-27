@@ -83,13 +83,13 @@ const ContestCreate = ()=>{
     return (
       <>
                
-      <div className="wrap">
-          <div className="body_column">  
-            <div className="myContainter">
-               <label className="dateTimeSelector">Select Date and Time </label>
+      {/*<div classNameName="wrap">
+          <div classNameName="body_column">  
+            <div classNameName="myContainter">
+               <label classNameName="dateTimeSelector">Select Date and Time </label>
                 <DatePicker  
 
-                     className="myDatePicker"
+                     classNameName="myDatePicker"
                      selected={ startDate}  
                      onChange={(date) =>   
                      setStartDate(date)} 
@@ -141,7 +141,97 @@ const ContestCreate = ()=>{
 
          </div>       
 
+                </div>*/}
+<html>
+<head>
+  <title>Create a new contest </title>
+ 
+  
+</head>
+<body>
+  <main className="page payment-page">
+    <section className="payment-form dark">
+      <div className="container">
+        <div className="block-heading">
+          <h2>Create New Contest</h2>
+          <p>For making a new contest, you have to add few problems, have to fix a  date and also have to set duration </p>
+        </div>
+        <form>
+          <div className="products">
+            <h3 className="title">Checkout</h3>
+            <div className="item">         
+               <div classNameName="myContainter">
+
+
+              <p className="item-name"><label classNameName="dateTimeSelector">Select Date and Time </label>
+                <DatePicker  
+
+                     classNameName="myDatePicker"
+                     selected={ startDate}  
+                     onChange={(date) =>   
+                     setStartDate(date)} 
+                     showTimeSelect  
+                     timeFormat="HH:mm"  
+                     timeIntervals={20}  
+                     timeCaption="time"  
+                     dateFormat="MMMM d, yyyy h:mm aa"  
+                     minDate={new Date()}  
+                     maxDate={addDays(new Date(), 7)}  
+               />  </p>
+               </div>
+            </div>
+            <div className="item">
+            </div>
+          </div>
+          <div className="card-details">
+            <h3 className="title">Give the time duration of contest:</h3>
+            <div className="row">
+              <div className="form-group col-sm-7">
+                <label for="card-holder">Hour :</label>
+                <input id="card-holder" type="text" className="form-control" placeholder="Hour Holder" aria-label="Card Holder" aria-describedby="basic-addon1"/>
+              </div>
+              <div className="form-group col-sm-5">
+                <label for="">Minute :</label>
+                <div className="input-group expiration-date">
+                  <input type="text" className="form-control" placeholder="Minute Holder" aria-label="MM" aria-describedby="basic-addon1"/>
+                  <span className="date-separator">Contest Name</span>
+                  <input type="text" className="form-control" placeholder="Name Holder" aria-label="YY" aria-describedby="basic-addon1"/>
+                </div>
+              </div>
+              <div className="form-group col-sm-8">
+                <label for="card-number">Problem Id : </label>
+                <input id="card-number" type="text" className="form-control" placeholder="Problem Id Holder" aria-label="Card Holder" aria-describedby="basic-addon1"/>
+              </div>
+              <input type="text" value={problemId} placeholder="unique" onChange={(e)=>setProblemId(e.target.value)}></input><br />
+                 {                 
+
+                      problemIdList.map(function(item, i){
+                        return <span key={i}>{item}</span>
+                      })
+                 }      
+                
+                <button className="btn btn-outline-success" onClick={()=>(navigate("/NewProblem",{state:{problemId:problemId}}))}>Create New Problem</button>
+               
+                <br />
+                <button className = "btn btn-outline-danger" onClick={addProblemId}>add problem Id </button>
+                <br />
+                
+                <button  className = "btn btn-outline-warning" onClick={addButtonHandler}>saveToDB</button> <br /><br />      
+                <div className="form-group col-sm-12">
+
+                <button className="btn btn-dark" onClick={dateDifferent}>Show contest</button> <br /><br /> 
+                </div>
+             
+            </div>
+          </div>
+        </form>
       </div>
+    </section>
+  </main>
+</body>
+
+</html>
+
   </>
     
   );

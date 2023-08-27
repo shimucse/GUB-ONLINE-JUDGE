@@ -173,7 +173,6 @@ const addJobToQueue = async(jobId, filePath) =>{
     });
 
 };
-
 module.exports = {
 
     addJobToQueue

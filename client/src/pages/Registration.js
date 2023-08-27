@@ -93,7 +93,6 @@ const Registration = ()=>{
                     <div class="wrap">
 
                         <div className="body_column">  
-                                <h1>Register</h1>      
                                 <div className="registraion_form">
                                     <span className="signup_page_header">Signup into GUB Online Judge</span>
 
@@ -101,6 +100,7 @@ const Registration = ()=>{
                                     <form onSubmit={registerUser} >
                                         <label for="firstName">First Name:</label>
                                         <input
+                                        style ={{width:'200px'}}
                                             type="text" 
                                             id="first_name" 
                                             name="firstName"
@@ -111,6 +111,7 @@ const Registration = ()=>{
 
                                         <label for="email">LastName:</label>
                                             <input 
+                                            style ={{width:'200px'}}
                                                 type="text" 
                                                 id="lastName" 
                                                 name="lastName"
@@ -120,6 +121,7 @@ const Registration = ()=>{
 
                                             <label for="email">Email:</label>
                                             <input 
+                                            style ={{width:'200px'}}
                                                 type="email"
                                                 id="email" 
                                                 name="email"
@@ -129,6 +131,7 @@ const Registration = ()=>{
 
                                             <label for="pwd">Password:</label>
                                             <input 
+                                            style ={{width:'200px'}}
                                                 type="password"
                                                 id="pwd"
                                                 name="pwd"
@@ -139,6 +142,7 @@ const Registration = ()=>{
                                         <label for="pwd">Country:</label>
 
                                             <input 
+                                            style ={{width:'200px'}}
                                                 type="text"
                                                 id="text"
                                                 name="Country"
@@ -149,6 +153,7 @@ const Registration = ()=>{
                                             <label for="pwd">University:</label>
 
                                             <input 
+                                            style ={{width:'200px'}}
                                                 type="text"
                                                 id="text"
                                                 name="University"
@@ -159,6 +164,7 @@ const Registration = ()=>{
                                             <h2>Add Image:</h2>
                                             <input
                                                  type="file"
+                                                 style ={{width:'200px'}}
                                                  label = "Image" 
                                                  name = "myFile"
                                                  id='file-upload'
@@ -169,14 +175,28 @@ const Registration = ()=>{
                                          <img src={img} />
                                             {img?console.log(img):console.log("img not found")}
 
-                                            <input type="submit" value="Signup" /><br/><br/><br/><br/>
+                                            <input style ={{width:'200px'}} type="submit" value="Signup" /><br/>
                                             <label for="text">Already a member? </label>
                                             <a href={""}>Log In </a><br/><br/>
                             
                         
                                     </form> 
+                                  
                                     
                                 </div>
+                                <div style={{'color':'white'}}>
+                                       
+
+                                        <h1>Registration</h1>
+                                        <h1> Registration</h1>
+                                        <h1> Registration</h1>
+                                        <h1> Registration</h1>
+                                        <h1> Registration</h1>
+
+                                        <h1> Registration</h1>
+                                        <h1> Registration</h1>
+                                        <h1> Registration</h1>
+                                    </div>
                         </div>
                 </div>
         }
